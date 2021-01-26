@@ -1,0 +1,144 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} Materials {% endblock %}
+    
+
+{% block content %}
+
+<div class="container-fluid background" id="background">
+    <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
+    <div class="container create">
+        <div class="container-fluid subtitle"> Ajouter un matériel</div>
+        <form action="{% url 'material:store_material' %}" class="form" method="post">
+            {% csrf_token %}
+            <table class="table table-bordered table-sm">
+                
+                {% if materials %}
+                    <tr>
+                        <td>
+                            Type : 
+                            <select name="type" class="type">
+                                <option value="new">Nouveau matériel</option>
+                                <option value="old">Matériel existant</option>
+                            </select>
+                        </td>
+                    </tr>
+                {% endif %}
+                    
+                <tr class="old_field ">
+                    <td>Materiel existant:</td>
+                    <td>
+                        <select name="old_product" class="form-control">
+                            <option value="">----------</option>
+                            {% for material in materials %}
+                                <option value="{{ material.id }}">{{ material.title }}</option>                                
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="old_field ">
+                    <td>Notes:</td>
+                    <td>
+                        <textarea name="note" cols="30" class="form-control"></textarea>
+                    </td>
+                </tr>
+                
+                <tr class="new_field">
+                    <td>Nom du produit:</td>
+                    <td>                            
+                        <input type="text" name="title" class="form-control" placeholder="Nom du produit">
+                    </td>
+                </tr>                    
+                <tr class="new_field">
+                    <td>Description:</td><td><textarea type="text" name="description" class="form-control" placeholder="Description du matériel"></textarea></td>
+                </tr>
+                
+                <tr>
+                    <td>Quantité:</td><td><input type="number" name="quantity" class="form-control" placeholder="Nombre du matériel" required></td>
+                </tr>
+                <tr>
+                    <td>Unité:</td>
+                    <td>
+                        <select name="unity" class="form-control">
+                            <option value="pcs">Pièce</option>
+                            <option value="cartoon">Carton</option>
+                            <option value="box">Boite</option>
+                            <option value="kg">Kg</option>
+                            <option value="g">Gramme</option>
+                            <option value="L">Litre</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Etat du matériel:</td>
+                    <td>
+                        <select name="state" class="form-control">
+                            <option value="new">Nouveau</option>
+                            <option value="old">Ancien</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</div>
+
+<div class="container m-0 p-0">
+    <div class="container-fluid sublink">
+        <a href="{% url 'material:history_material' %}" class="btn btn-light history"><i class="bi bi-clock-history"></i> Historique</a>
+        <a class="btn btn-light" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
+        <a href="{% url 'material:get_takeout_material' %}" class="btn btn-light"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
+    </div>
+    <div class="container-fluid subtitle">
+        <div class="row">
+            <div class="col-md-3">
+                Liste matériel
+            </div>
+            <div class="col-md-9">
+                <input type="search" class="form-control" placeholder="Taper votre recheche">
+            </div>
+        </div>
+    </div>
+    
+    <table class='table table-sm table-hovered table-bordered m-0'>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Unité</th>
+                <th>Admnistrateur</th>
+                <th>Date d'entré</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for material in materials %}
+
+                <tr>
+                    <td>{{ material.title }} ({{ material.description }})</td>
+                    <td>{{ material.quantity }}</td>
+                    <td>{{ material.unity }}</td>
+                    <td>{{ material.administrator }}</td>
+                    <td>{{ material.created_at }}</td>
+                </tr>
+
+            {% empty %}
+                <tr>
+                    <td colspan="5">Pas de produit en stock</td>
+                </tr>
+                
+            {% endfor %}
+                
+            
+                        
+        </tbody>
+    </table>
+</div>
+    
+{% endblock %}
+    

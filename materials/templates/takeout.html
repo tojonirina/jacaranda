@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container-fluid subtitle"> Sortir un matériel</div>
+    <form action="{% url 'material:post_takeout_material' %}" class="form" method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-sm">
+                
+            <tr>
+                <td>Materiel:</td>
+                <td>
+                    <select name="material" class="form-control" required>
+                        <option value="">-----Choisissez-----</option>
+                        {% for material in materials %}
+                            <option value="{{ material.id }}">{{ material.title }}</option>                                
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Notes:</td>
+                <td>
+                    <textarea name="note" cols="30" class="form-control"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Quantité:</td><td><input type="number" name="quantity" class="form-control" placeholder="Nombre du matériel" required></td>
+            </tr>
+            <tr>
+                <td>Unité:</td>
+                <td>
+                    <select name="unity" class="form-control">
+                        <option value="pcs">Pièce</option>
+                        <option value="cartoon">Carton</option>
+                        <option value="box">Boite</option>
+                        <option value="kg">Kg</option>
+                        <option value="g">Gramme</option>
+                        <option value="L">Litre</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Etat du matériel:</td>
+                <td>
+                    <select name="state" class="form-control">
+                        <option value="new">Nouveau</option>
+                        <option value="old">Ancien</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
+            </tr>
+        </table>
+
+    </form>
+{% endblock content %}
+    
