@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<div class="container m-0 p-0">
+<div class="container-fluid m-0 p-0">
     <div class="container-fluid sublink">
         <a href="{% url 'material:history_material' %}" class="btn btn-light history"><i class="bi bi-clock-history"></i> Historique</a>
         <a class="btn btn-light" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
@@ -104,40 +104,45 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid p-0 m-0 lists">
+        <table class='table table-sm table-hovered table-bordered m-0 table-list'>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Unité</th>
+                    <th>Admnistrateur</th>
+                    <th>Date d'entré</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for material in materials %}
     
-    <table class='table table-sm table-hovered table-bordered m-0'>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Quantité</th>
-                <th>Unité</th>
-                <th>Admnistrateur</th>
-                <th>Date d'entré</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for material in materials %}
-
-                <tr>
-                    <td>{{ material.title }} ({{ material.description }})</td>
-                    <td>{{ material.quantity }}</td>
-                    <td>{{ material.unity }}</td>
-                    <td>{{ material.administrator }}</td>
-                    <td>{{ material.created_at }}</td>
-                </tr>
-
-            {% empty %}
-                <tr>
-                    <td colspan="5">Pas de produit en stock</td>
-                </tr>
+                    <tr>
+                        <td>{{ material.title }} ({{ material.description }})</td>
+                        <td>{{ material.quantity }}</td>
+                        <td>{{ material.unity }}</td>
+                        <td>{{ material.administrator }}</td>
+                        <td>{{ material.created_at }}</td>
+                        <td>
+                            <a href="{{ material.id }}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-eye-fill"></i></a>
+                            <a href="{{ material.id }}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Editer"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                    </tr>
+    
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Pas de produit en stock</td>
+                    </tr>
+                    
+                {% endfor %}
+                    
                 
-            {% endfor %}
-                
-            
-                        
-        </tbody>
-    </table>
+                            
+            </tbody>
+        </table>
+    </div>
 </div>
     
 {% endblock %}

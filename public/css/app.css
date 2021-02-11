@@ -100,3 +100,8 @@ ul.leftmenu li a i {
 tr.old_field {
     display: none;
 }
+
+.lists {
+    max-height: 300px;
+    overflow: auto;
+}
