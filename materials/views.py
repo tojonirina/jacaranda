@@ -15,6 +15,17 @@ def home(request):
     
     return render(request, 'material_index.html', {'materials': materials})
 
+def show(request, id): 
+    '''
+    Show all information about a specific material
+    '''
+    try:
+        maretial = Materials.objects.get(id=int(id))
+    except:
+        raise Http404('Page not found')
+
+    return render(request, 'show_material.html', {'material':maretial})
+
 def store(request):
     """
     Store a material in stock
@@ -117,6 +128,12 @@ def edit(request, id):
     """
     Edit a materiel information
     """
+    try:
+        maretial = Materials.objects.get(id=int(id))
+    except:
+        raise Http404('Page not found')
+
+    return render(request, 'edit_material.html', {'material':maretial})
 
 def history(request):
     '''

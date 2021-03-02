@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %} Infos {% endblock %}
+
+{% block content %}
+
+<div class="container m-0 p-0">
+    <div class="container-fluid subtitle">Editer l'information de {{ material.title }} </div>
+    <table class='table table-sm table-hovered table-bordered m-0'>
+        <tbody>
+            <tr>
+                <th>Nom: </th> <td><input type="text" value="{{ material.title }}" class="form-control" /></th>
+            </tr>
+            <tr>
+                <th>Description: </th> <td><textarea class="form-control">{{ material.description }}</textarea></th>
+            </tr>
+            <tr>
+                <th>Quantité: </th> 
+                <th>{{ material.quantity }}</th>
+            </tr>
+            <tr>
+                <th>Unité: </th>
+                <td>
+                    <select name="unity" class="form-control">
+                        <option value="{{ material.unity }} ">{{ material.unity }} </option>
+                        <option value="pcs">Pièce</option>
+                        <option value="cartoon">Carton</option>
+                        <option value="box">Boite</option>
+                        <option value="kg">Kg</option>
+                        <option value="g">Gramme</option>
+                        <option value="L">Litre</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Administrateur: </th> <td>{{ material.administrator }}</th>
+            </tr>
+            <tr>
+                <th>Etat: </th> 
+                <td>
+                    <select name="state" class="form-control">
+                        <option value="{{ material.state }}">{{ material.state }}</option>
+                        <option value="new">Nouveau</option>
+                        <option value="old">Ancien</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Date de création: </th> <td>{{ material.created_at }}</th>
+            </tr>                        
+            <tr>
+                <th>Date de dérnière midification: </th> <td>{{ material.updated_at }}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

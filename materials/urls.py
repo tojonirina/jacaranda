@@ -6,6 +6,7 @@ app_name = 'material'
 urlpatterns = [
     path('', views.home, name='material_home'),
     path('store', views.store, name='store_material'),
+    path('<int:id>', views.show, name='show_material'),
     path('<int:id>/edit', views.edit, name='edit_material'),
     path('<int:id>/update', views.update, name='update_material'),
     path('takeOut', views.getTakeOut, name='get_takeout_material'),

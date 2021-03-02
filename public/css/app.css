@@ -102,6 +102,6 @@ tr.old_field {
 }
 
 .lists {
-    max-height: 300px;
+    max-height: 500px;
     overflow: auto;
 }
