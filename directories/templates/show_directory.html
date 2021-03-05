@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block title %} Annuaires {% endblock %}
+
+{% block content %}
+<div class="container-fluid sublink">
+    <form action="{% url 'directories:delete_directory' directory.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger"></a><i class="bi bi-trash" title="Supprimer"></i></button> <a href="{% url 'directories:edit_directory' directory.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+    </form>
+</div>
+<div class="container-fluid subtitle"> <i class="bi bi-person-lines-fill"></i> Information de {{ directory.full_name }}</div>
+<div class="container-fluid p-0">
+    <table class="table table-sm table-bordered">
+        <tr>
+            <th>Nom complet: </th> 
+            <td>
+                {{ directory.full_name.upper }} - 
+
+                ({% if directory.gender == 'man' %}
+                    Homme
+                {% elif directory.gender == 'woman' %}
+                    Femme
+                {% elif directory.gender == 'other' %}
+                    Autre
+                {% else %}
+                    ErrorGender
+                {% endif %}) - 
+
+                ({% if directory.state == 1 %}
+                    <span class="text-success">En service</span>
+                {% elif directory.state == 2 %}
+                    <span class="text-danger">En pause</span>
+                {% elif directory.state == 3 %}
+                    <span class="text-warning">En permission</span>
+                {% elif directory.state == 4 %}
+                    <span class="text-warning">Cong&eacute;</span>
+                {% elif directory.state == 0 %}
+                    <span class="text-danger">Hors service</span>
+                {% else %}
+                    ErrorState
+                {% endif %})
+                
+            </td>
+            <td rowspan="9">
+                <p class="p-2 text-center mt-5">
+                    <img src="/static/public/img/avatar.png" alt="">
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th>Telephone: </th> <td>{{ directory.phone }}</td> 
+        </tr>
+        <tr>
+            <th>En cas d'urgence: </th> <td>{{ directory.urgent_phone }}</td>
+        </tr>
+        <tr>
+            <th>Email: </th> <td>{{ directory.email }}</td>
+        </tr>
+        <tr>
+            <th>Adresse: </th> <td>{{ directory.address }}</td>
+        </tr>
+        <tr>
+            <th>Fonction : </th> <td>{{ directory.function }}</td>
+        </tr>
+        <tr>
+            <th>Date de debut de service: </th> <td>{{ directory.date_of_service }}</td> 
+        </tr>
+        <tr>
+            <th>Date de fin de service: </th> <td>{{ directory.end_of_service }}</td>
+        </tr>
+        <tr>
+            <th>Notes:</th><td>{{ directory.notes }}</td>
+        </tr>
+
+    </table>
+</div>
+
+
+
+
+{% endblock %}

@@ -40,7 +40,7 @@ def store(request):
     except:
         return HttpResponse('Server error', status=500)
 
-    return redirect('user_home')
+    return redirect('users:user_home')
 
 def show(request, id):
     """
@@ -51,7 +51,7 @@ def show(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'show.html', {'user': user})
+    return render(request, 'show_user.html', {'user': user})
 
 def edit(request, id):
     """
@@ -62,7 +62,7 @@ def edit(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'edit.html', {'user': user})
+    return render(request, 'edit_user.html', {'user': user})
 
 def update(request, id):
     """
@@ -82,7 +82,7 @@ def update(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return redirect('show_user', id)
+    return redirect('users:show_user', id)
 
 def delete(request, id):
     """
@@ -97,7 +97,7 @@ def delete(request, id):
     except:
         raise Http404('Error')
 
-    return redirect('user_home')
+    return redirect('users:user_home')
 
 def block(request, id):
     """
@@ -113,7 +113,7 @@ def block(request, id):
     except:
         raise Http404('Error')
 
-    return redirect('user_home')
+    return redirect('users:user_home')
 
 def unblock(request, id):
     """
@@ -129,4 +129,4 @@ def unblock(request, id):
     except:
         raise Http404('Error')
 
-    return redirect('user_home')
+    return redirect('users:user_home')

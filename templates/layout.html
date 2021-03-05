@@ -13,7 +13,7 @@
 <body>
 
     <header class="container-fluid bg-dark p-3 text-white">
-        <i class="bi bi-app-indicator"></i> &nbsp; Gstock
+        <i class="bi bi-app-indicator"></i> &nbsp; GStock
     </header>
 
     <div class="container-fluid p-0 m-0">
@@ -22,8 +22,8 @@
                 <ul class="leftmenu">
                     <li><a href="#" class="useroption"><span><i class="bi bi-person-square"></i></span>&nbsp; Anonyme</a></li>
                     <hr>
-                    <li><a href="{% url 'user_home' %}" class="menuoption"><i class="bi bi-people"></i>&nbsp; Utilisateurs</a></li>
-                    <li><a href="#" class="menuoption"><i class="bi bi-diagram-3-fill"></i>&nbsp; Annuaires</a></li>
+                    <li><a href="{% url 'users:user_home' %}" class="menuoption"><i class="bi bi-people"></i>&nbsp; Utilisateurs</a></li>
+                    <li><a href="{% url 'directories:directory_home' %}" class="menuoption"><i class="bi bi-diagram-3-fill"></i>&nbsp; Annuaires</a></li>
                     <li><a href="{% url 'material:material_home' %}" class="menuoption"><i class="bi bi-stack"></i>&nbsp; Materiels</a></li>
                     <li><a href="#" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
                     <li><a href="#" class="menuoption"><i class="bi bi-clipboard-data"></i>&nbsp; Stats</a></li>

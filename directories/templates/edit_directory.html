@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block title %} Annuaires {% endblock %}
+
+{% block content %}
+<div class="container-fluid subtitle"> Modifier l'information de {{ directory.full_name }}</div>
+        <form action="{% url 'directories:store_directory' %}" class="form" method="post">
+            {% csrf_token %}
+            <table class="table table-bordered table-sm">
+                <tr>
+                    <td>Nom complet:</td><td colspan="4"><input type="text" name="full_name" class="form-control" value="{{ directory.full_name }}" /></td>
+                </tr>
+                <tr>
+                    <td>Fonction:</td><td><input type="text" name="function" class="form-control" value="{{ directory.function }}" /></td>
+                    <td>Genrer:</td>
+                    <td>
+                        <select name="gender" class="form-control">
+                            <option value="{{ directory.gender }}">{{ directory.gender }}</option>
+                            <option value="man">Homme</option>
+                            <option value="woman">Femme</option>
+                            <option value="other">autre</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T&eacute;l&eacute;phone:</td><td><input type="number" name="phone" class="form-control" value="{{ directory.phone }}" /></td>
+                    <td>Contact urgent:</td><td><input type="number" name="urgent_phone" class="form-control" value="{{ directory.urgent_phone }}" /></td>
+                </tr>
+                <tr>
+                    <td>Email: </td><td><input type="email" name="email" class="form-control" value="{{ directory.email }}" /></td>
+                    <td>Statut:</td>
+                    <td>
+                        <select name="state" class="form-control">
+                            {% if directory.state == 1 %}
+                            <option value="{{ directory.state }}">En service</option>
+                            {% elif directory.state == 2 %}
+                            <option value="{{ directory.state }}">En pause</option>
+                            {% elif directory.state == 3 %}
+                            <option value="{{ directory.state }}">En permission</option>
+                            {% elif directory.state == 4 %}
+                            <option value="{{ directory.state }}">En cong&eacute;</option>
+                            {% elif directory.state == 0 %}
+                            <option value="{{ directory.state }}">Hors service</option>
+                            {% else %}
+                            <span class="text-dark">{ErrorService}</span>
+                            {% endif %}
+                            <option value="1">En service</option>
+                            <option value="2">En pause</option>
+                            <option value="3">En permission</option>
+                            <option value="4">En cong&eacute;</option>
+                            <option value="0">Hors service</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adresse: </td><td><textarea name="address" class="form-control" >{{ directory.address }}</textarea></td>
+                    <td>Notes: </td><td><textarea name="notes" class="form-control">{{ directory.notes }}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Date de service actuelle: </td><td>{{ directory.date_of_service|date }} | <input type="date" name="date_of_service" /></td>
+                    <td>Date fin de service actuelle: </td><td>{{ directory.end_of_service|date }} | <input type="date" name="end_of_service" /></td>
+                </tr>
+                <tr>
+                    <td>Image: </td> <td><input type="file" name="avatar" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><button type="submit" class="btn btn-dark">Valider</button> <a href="{% url 'directories:directory_home' %}" class="btn btn-warning">Retour</a></td>
+                </tr>
+            </table>
+
+        </form>
+
+
+{% endblock %}

@@ -1,19 +1,13 @@
 {% extends "layout.html" %}
 
-{% block title %} Editer {% endblock %}
+{% block title %} Utilisateur {% endblock %}
 
 {% block content %}
 
 <div class="container m-0 p-0">
     <div class="container-fluid subtitle">Editer l'information de {{ user.full_name }} </div>
-    <div class="container-fluid subtitle">
-        <form action="{% url 'delete_user' user.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger pt-0 pr-1 pl-1 pb-0" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur? ')"><i class="bi bi-person-dash-fill" title="Supprimer l'utilisateur"></i></button>
-        </form>
-    </div> 
     <table class='table table-sm table-hovered table-bordered m-0'>
-        <form action="{% url 'update_user' user.id %}" method="post">
+        <form action="{% url 'users:update_user' user.id %}" method="post">
             {% csrf_token %}
             <tbody>
                 <tr>
@@ -27,11 +21,13 @@
                     <td>
                         <select name="type" class="form-control">
                             <option value="{{ user.type }}">{{ user.type }}</option>
+                            <option value="user">Utilisateur</option>
+                            <option value="administrator">Administrateur</option>
                         </select>
                     </th>
                 </tr>                      
                 <tr>
-                    <td colspan="2"><button type="submit" class="btn btn-success pt-1 pr-2 pl-2 pb-1"><i class="bi bi-save"></i> Enregister</button> <a href="{% url 'user_home' %}" class="btn btn-warning pt-1 pr-2 pl-2 pb-1"> Annuler </a> </th> 
+                    <td colspan="2"><button type="submit" class="btn btn-success pt-1 pr-2 pl-2 pb-1">Enregister</button> <a href="{% url 'users:show_user' user.id %}" class="btn btn-light pt-1 pr-2 pl-2 pb-1"> Annuler </a> </th> 
                 </tr>
             </tbody>
         </form>

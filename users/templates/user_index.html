@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %} Users {% endblock %}
+{% block title %} Utiliateur {% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
     <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
     <div class="container create">
         <div class="container-fluid subtitle"> Créer un nouveau utilisateur</div>
-        <form action="{% url 'store_user' %}" class="form" method="post">
+        <form action="{% url 'users:store_user' %}" class="form" method="post">
             {% csrf_token %}
             <table class="table table-bordered table-sm">
                 <tr>
@@ -22,8 +22,8 @@
                     <td>Type de l'utilisateur:</td>
                     <td>
                         <select name="type" class="form-control">
-                            <option value="user">User</option>
-                            <option value="administrator">Administrator</option>
+                            <option value="user">Utilisateur</option>
+                            <option value="administrator">Administrateur</option>
                         </select>
                     </td>
                 </tr>
@@ -91,17 +91,15 @@
                 </td>
                 <td>{{ user.administrator }}</td>
                 <td>{{ user.created_at }}</td>
-                <td>
-                    
+                <td class="text-center">
                     {% if user.status == 1 %}
-                        <form action="{% url 'block_user' user.id %}" method="POST">
+                        <form action="{% url 'users:block_user' user.id %}" method="POST">
                     {% elif user.status == 0 %}
-                        <form action="{% url 'unblock_user' user.id %}" method="POST">
+                        <form action="{% url 'users:unblock_user' user.id %}" method="POST">
                     {% endif %}
                         
                             {% csrf_token %}                        
-                            <a href="{% url 'show_user' user.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-person-lines-fill"></i></a>
-                            <a href="{% url 'edit_user' user.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Editer"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{% url 'users:show_user' user.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-person-lines-fill"></i></a>
                         
                         {% if user.status == 1 %}
                             <button type="submit" name="block" class="btn btn-warning pt-0 pb-0 pl-1 pr-1" title="Bloquer l'utilisateur" onclick="return confirm('Voulez-vous vraiment bloquer l\'utilisateur? ')"><i class="bi bi-person-x-fill"></i></button>

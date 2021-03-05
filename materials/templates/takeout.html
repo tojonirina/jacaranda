@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% block title %} Materiels {% endblock %}
+
 {% block content %}
     <div class="container-fluid subtitle"> Sortir un matériel</div>
     <form action="{% url 'material:post_takeout_material' %}" class="form" method="post">

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     # All external app
     'users',
     'materials',
-    'computers'
+    'computers',
+    'directories'
 ]
 
 MIDDLEWARE = [
