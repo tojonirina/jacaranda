@@ -146,3 +146,6 @@ def history(request):
         
     return render(request, 'history.html', {'history':history}) 
 
+def reporting(request):
+    values = [12, 43, 22, 52, 13, 65]
+    return render(request, 'reporting_material.html', {'values':values})

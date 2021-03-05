@@ -12,4 +12,5 @@ urlpatterns = [
     path('takeOut', views.getTakeOut, name='get_takeout_material'),
     path('takeOut/store', views.postTakeOut, name='post_takeout_material'),
     path('history', views.history, name='history_material'),
+    path('reportings', views.reporting, name='reporting_material'),
 ]

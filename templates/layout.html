@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gstock - {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -26,8 +26,7 @@
                     <li><a href="{% url 'user_home' %}" class="menuoption"><i class="bi bi-people"></i>&nbsp; Utilisateurs</a></li>
                     <li><a href="#" class="menuoption"><i class="bi bi-diagram-3-fill"></i>&nbsp; Annuaires</a></li>
                     <li><a href="{% url 'material:material_home' %}" class="menuoption"><i class="bi bi-stack"></i>&nbsp; Materiels</a></li>
-                    <li><a href="{% url 'computers:computer_home' %}" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
-                    <li><a href="#" class="menuoption"><i class="bi bi-clipboard-data"></i>&nbsp; Stats</a></li>
+                    <li><a href="" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
                 </ul>
             </div>
             <div class="col-md-10 p-1">
@@ -39,9 +38,11 @@
     {% block footer %} {% endblock %}
 
     <footer>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="/static/public/js/bootstrap4-5-2.min.js"></script>
         <script src="/static/public/js/jquery3-5-1.min.js"></script>
         <script src="/static/public/js/app.js"></script>
+        <script src="/static/public/js/chart2-8.js"></script>
+
     </footer>
 </body>
 </html>

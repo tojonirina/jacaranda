@@ -21,5 +21,4 @@ urlpatterns = [
     path('', views.index),
     path('users/', include('users.urls')),
     path('materials/', include('materials.urls')),
-    path('computers/', include('computers.urls')),
 ]
