@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %} Infos {% endblock %}
+
+{% block content %}
+
+<div class="container m-0 p-0">
+    <div class="container-fluid subtitle">Information de {{ material.title }} </div>
+    <table class='table table-sm table-hovered table-bordered m-0'>
+        <tbody>
+            <tr>
+                <th>Nom: </th> <td>{{ material.title }}</th>
+            </tr>
+            <tr>
+                <th>Description: </th> <td>{{ material.description }}</th>
+            </tr>
+            <tr>
+                <th>Quantité: </th> <td>{{ material.quantity }} {{ material.unity }}</th>
+            </tr>
+            <tr>
+                <th>Administrateur: </th> <td>{{ material.administrator }}</th>
+            </tr>
+            <tr>
+                <th>Etat: </th> <td>{{ material.state }}</th>
+            </tr>
+            <tr>
+                <th>Date de création: </th> <td>{{ material.created_at }}</th>
+            </tr>                        
+            <tr>
+                <th>Date de dérnière midification: </th> <td>{{ material.updated_at }}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,5 +1,74 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    history
+    <div class="container-fluid sublink">
+        <table>
+            <tr>
+                <td width="300">
+                    <input type="search" name="" placeholder="Taper votre recherche" class="form-control">
+                </td>
+                <td>
+                    <input type="date" name="" class="form-control"> 
+                </td>    
+                <td>
+                    <input type="date" name="" class="form-control">
+                </td>
+                <td>
+                    <select name="" class="form-control">
+                        <option value="">a-z</option>
+                        <option value="">z-a</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="" class="form-control">
+                        <option value="">Entrée</option>
+                        <option value="">Sortie</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="" class="form-control">
+                        <option value="">Superadmin</option>
+                        <option value="">Admin</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-success"><i class="bi bi-search"></i></button>
+                </td>
+                
+            </tr>
+        </table>
+
+    </div>
+    <div class="container-fluid p-0 lists">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Note</th>
+                    <th>Q/té</th>
+                    <th>U/té</th>
+                    <th>Type</th>
+                    <th>Etat</th>
+                    <th>Admin.</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for histo in history %}
+                    <tr>
+                        <td>{{histo.title}}</td>
+                        <td>{{histo.description}}</td>
+                        <td>{{histo.note}}</td>
+                        <td>{{histo.quantity}}</td>
+                        <td>{{histo.unity}}</td>
+                        <td>{{histo.type}}</td>
+                        <td>{{histo.state}}</td>
+                        <td>{{histo.administrator}}</td>
+                        <td>{{histo.created_at}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

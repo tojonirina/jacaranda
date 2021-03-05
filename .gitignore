@@ -1,3 +1,9 @@
 db.sqlite3
+<<<<<<< HEAD
 __pycache__
 *.pyc
+=======
+merise.asi
+__pycache__
+
+>>>>>>> 9645db1debc91a1aeb1abca33625b2e6d550442f
