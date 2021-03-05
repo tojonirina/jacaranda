@@ -76,6 +76,7 @@ def update(request, id):
 
             directory = Directories.objects.get(id=int(id))
             directory.full_name = request.POST['full_name']
+            directory.function = request.POST['function']
             directory.gender = request.POST['gender']
             directory.phone = request.POST['phone']
             directory.urgent_phone = request.POST['urgent_phone']
@@ -94,7 +95,7 @@ def update(request, id):
     except:
         return HttpResponse('Error', status=500)
 
-    return redirect('directories:directory_home', id)
+    return redirect('directories:show_directory', id)
 
 def delete(request, id):
     """

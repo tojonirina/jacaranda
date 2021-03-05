@@ -6,7 +6,7 @@
 <div class="container-fluid sublink">
     <form action="{% url 'directories:delete_directory' directory.id %}" method="post">
         {% csrf_token %}
-        <button class="btn btn-danger"></a><i class="bi bi-trash" title="Supprimer"></i></button> <a href="{% url 'directories:edit_directory' directory.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+        <button class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer l\'annuaire? ')"><i class="bi bi-trash" title="Supprimer"></i></button> <a href="{% url 'directories:edit_directory' directory.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
     </form>
 </div>
 <div class="container-fluid subtitle"> <i class="bi bi-person-lines-fill"></i> Information de {{ directory.full_name }}</div>

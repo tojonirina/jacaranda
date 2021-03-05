@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container-fluid subtitle"> Modifier l'information de {{ directory.full_name }}</div>
-        <form action="{% url 'directories:store_directory' %}" class="form" method="post">
+        <form action="{% url 'directories:update_directory' directory.id %}" class="form" method="post">
             {% csrf_token %}
             <table class="table table-bordered table-sm">
                 <tr>
@@ -57,8 +57,8 @@
                     <td>Notes: </td><td><textarea name="notes" class="form-control">{{ directory.notes }}</textarea></td>
                 </tr>
                 <tr>
-                    <td>Date de service actuelle: </td><td>{{ directory.date_of_service|date }} | <input type="date" name="date_of_service" /></td>
-                    <td>Date fin de service actuelle: </td><td>{{ directory.end_of_service|date }} | <input type="date" name="end_of_service" /></td>
+                    <td>Date de service actuelle: </td><td><input type="date" name="date_of_service" class="form-control" value='{{ directory.date_of_service|date:"c" }}' /></td>
+                    <td>Date fin de service actuelle: </td><td><input type="date" name="end_of_service" class="form-control" value='{{ directory.end_of_service|date:"c" }}' /></td>
                 </tr>
                 <tr>
                     <td>Image: </td> <td><input type="file" name="avatar" class="form-control" /></td>
