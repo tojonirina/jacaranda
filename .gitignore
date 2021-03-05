@@ -1,5 +1,4 @@
-.gitignore
 db.sqlite3
 merise.asi
-__pycache__/
+__pycache__
 
