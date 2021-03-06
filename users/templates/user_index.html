@@ -83,7 +83,7 @@
                 <td>
                     
                     {% if user.status == 1 %}
-                        <i class="bi bi-person-check"></i> Actif
+                        <span class="text-success"><i class="bi bi-person-check"></i></span> Actif
                     {% elif user.status == 0 %}
                         <span class="text-danger"><i class="bi bi-person-x-fill"></i></span> Bloqué
                     {% endif %}

@@ -21,5 +21,6 @@ urlpatterns = [
     path('', views.index),
     path('users/', include('users.urls')),
     path('materials/', include('materials.urls')),
-    path('directories/', include('directories.urls'))
+    path('directories/', include('directories.urls')),
+    path('computers/', include('computers.urls'))
 ]

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %} Computers {% endblock %}
+{% block content %}
+
+<div class="container-fluid p-0">
+    <div class="container-fluid subtitle"> Information sur {{ computer.name }}</div>
+    <table class="table table-sm table-bordered">
+        <tr>
+            <th>Nom :</th><td>{{ computer.name }}</td>
+        </tr>
+        <tr>
+            <th>R&eacute;f&eacute;rence :</th><td>{{ computer.reference }}</td>
+        </tr>
+        <tr>
+            <th>Etat :</th><td>{{ computer.state }}</td>
+        </tr>
+        <tr>
+            <th>Marque :</th><td>{{ computer.mark }}</td>
+        </tr>
+        <tr>
+            <th>OS :</th><td>{{ computer.os }}</td>
+        </tr>
+        <tr>
+            <th>Cat&eacute;gorie :</th><td>{{ computer.category }}</td>
+        </tr>
+        <tr>
+            <th>Description :</th><td>{{ computer.description }}</td>
+        </tr>
+        <tr>
+            <th>Attribu&eacute; &agrave; :</th><td>{{ computer.assigned_to }}</td>
+        </tr>
+        <tr>
+            <th>Attribu&eacute; le :</th><td>{{ computer.assigned_at }}</td>
+        </tr>
+        <tr>
+            <th>Date d'ajout: </th><td>{{ computer.created_at }}</td>
+        </tr>
+        <tr>
+            <th>Date de derni&egrave;re modification: </th><td>{{ computer.updated_at }}</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

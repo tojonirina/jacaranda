@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %} Computers {% endblock %}
+{% block content %}
+
+<div class="container-fluid p-0">
+    <div class="container-fluid subtitle"> Modifier l'information sur {{ computer.name }}</div>
+    <table class="table table-sm table-bordered">
+        <form action="{% url 'computers:update_computer' computer.id %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <th width="200">Nom :</th><td><input type="text" name="name" class="form-control" value="{{ computer.name }}"/> </td>
+            </tr>
+            <tr>
+                <th>R&eacute;f&eacute;rence :</th><td><input type="text" name="reference" class="form-control" value="{{ computer.reference }}"/></td>
+            </tr>
+            <tr>
+                <th>Etat :</th>
+                <td>
+                    <select name="state" class="form-control">
+                        <option value="{{ computer.mark }}">{{ computer.state }}</option>
+                        <option value="new">Nouveau</option>
+                        <option value="old">Ancien</option>
+    \                        </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Marque :</th><td><input type="text" name="mark" class="form-control" value="{{ computer.mark }}"/></td>
+            </tr>
+            <tr>
+                <th>OS :</th><td><input type="text" name="os" class="form-control" value="{{ computer.os }}"/></td>
+            </tr>
+            <tr>
+                <th>Cat&eacute;gorie :</th>
+                <td>
+                    <select name="category" class="form-control">
+                        <option value="{{ computer.category }}">{{ computer.category }}</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Desktop">Desktop</option>
+                        <option value="Macbook pro">Macbook pro</option>
+                        <option value="Macbook pro retina">Macbook pro retina</option>
+                        <option value="Notebook">Notebook</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Description :</th><td><textarea class="form-control" name="description">{{ computer.description }}</textarea></td>
+            </tr>
+            <tr>
+                <th>Attribu&eacute; &agrave; :</th>
+                <td>
+                    <select name="assigned_to" class="form-control">
+                        <option value="{{ computer.assigned_to }}">{{ computer.assigned_to }}</option>
+                        <option value="Randriamalala tojonirina">Randriamalala tojonirina</option>
+                        <option value="Rakotoson Fancy">Rakotoson Fancy</option>
+                        <option value="Ralay Favoris">Ralay Favoris</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Attribu&eacute; le :</th><td>{{ computer.assigned_at }}</td>
+            </tr>
+            <tr>
+                <th>Date d'ajout: </th><td>{{ computer.created_at }}</td>
+            </tr>
+            <tr>
+                <th>Date de derni&egrave;re modification: </th><td>{{ computer.updated_at }}</td>
+            </tr>
+            <tr><td colspan="2"><button class="btn btn-success">Enregistrer</button> <a href="{% url 'computers:computer_home' %}" class="btn btn-warning">Annuler</a></td></tr>
+        </form>
+    </table>
+</div>
+
+{% endblock %}
