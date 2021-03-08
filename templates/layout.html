@@ -17,7 +17,7 @@
     </header>
 
     <div class="container-fluid p-0 m-0">
-        <div class="row">
+        <div class="row p-0 m-0">
             <div class="col-md-2 m-0 p-0">
                 <ul class="leftmenu">
                     <li><a href="#" class="useroption"><span><i class="bi bi-person-square"></i></span>&nbsp; Anonyme</a></li>
@@ -28,7 +28,7 @@
                     <li><a href="{% url 'computers:computer_home' %}" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
                 </ul>
             </div>
-            <div class="col-md-10 p-1">
+            <div class="col-md-10 p-1 m-0">
                 {% block content %} {% endblock %} 
             </div>
         </div>

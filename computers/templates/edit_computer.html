@@ -56,15 +56,6 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <th>Attribu&eacute; le :</th><td>{{ computer.assigned_at }}</td>
-            </tr>
-            <tr>
-                <th>Date d'ajout: </th><td>{{ computer.created_at }}</td>
-            </tr>
-            <tr>
-                <th>Date de derni&egrave;re modification: </th><td>{{ computer.updated_at }}</td>
-            </tr>
             <tr><td colspan="2"><button class="btn btn-success">Enregistrer</button> <a href="{% url 'computers:computer_home' %}" class="btn btn-warning">Annuler</a></td></tr>
         </form>
     </table>
