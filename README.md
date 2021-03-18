@@ -1,6 +1,6 @@
 # jacarandaV0.1
 
-A web application for stock management
+A simple intranet web application
 
 # Technos
 Framework: 
