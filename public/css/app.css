@@ -8,8 +8,8 @@ body {
     margin: 0px;
 }
 div.subtitle {
-    background-color: beige;
-    color: cadetblue;
+    background-color:rgb(30, 116, 83);
+    color: rgb(252, 252, 252);
     font-weight: bold;
     font-size: 20px;
     padding: 5px;
@@ -27,7 +27,7 @@ div.sublink a {
 ul.leftmenu {
     padding: 0px;
     margin: 0;
-    background-color: beige;
+    background-color: rgb(30, 116, 83);
 
 }
 
@@ -39,7 +39,7 @@ ul.leftmenu li {
 ul.leftmenu li a.menuoption {
     padding: 5px 5px 5px 20px;
     margin: 0px;
-    color: cadetblue;
+    color: rgb(255, 255, 255);
     width: 100%;
     display: block;
     text-decoration: none;
@@ -50,12 +50,12 @@ ul.leftmenu li a.menuoption::after {
     display: block;
     width: 0;
     height: 2px;
-    background: cadetblue;
+    background: rgb(252, 253, 253);
     transition: width .3s;
 }
 
 ul.leftmenu li a.menuoption:hover::after {
-    color: rgb(37, 111, 114);
+    color: rgb(255, 255, 255);
     width: 100%;
     transition: width .3s;
 }
@@ -63,7 +63,7 @@ ul.leftmenu li a.menuoption:hover::after {
 ul.leftmenu li a.useroption{
     margin: 0px;
     padding: 0px;
-    color: cadetblue;
+    color: rgb(255, 255, 255);
     width: 100%;
     display: block;
     text-decoration: none;
