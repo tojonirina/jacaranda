@@ -8,6 +8,17 @@ Django 2.2
 Database:
 SQLite 3
 
+# Features
+- Stock management
+- Directories management
+- Absences management
+- Computers management
+
+# Futures fonctionnalities
+- Tchat system
+- Password management
+- Checking management 
+
 # Installation
 - Install python 3.7 or more, get the python installer here (https://www.python.org/)
 
@@ -21,4 +32,6 @@ SQLite 3
  'cd jacaranda'
 - Run django server:
  'python3 manage.py runserver'
+
+
 
