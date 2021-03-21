@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/public/css/app.css">
+    {% block stylesheets %}{% endblock %}
 </head>
 <body>
 
@@ -26,6 +27,7 @@
                     <li><a href="{% url 'directories:directory_home' %}" class="menuoption"><i class="bi bi-diagram-3-fill"></i>&nbsp; Annuaires</a></li>
                     <li><a href="{% url 'material:material_home' %}" class="menuoption"><i class="bi bi-stack"></i>&nbsp; Materiels</a></li>
                     <li><a href="{% url 'computers:computer_home' %}" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
+                    <li><a href="{% url 'absences:absence_home' %}" class="menuoption"><i class="bi bi-journal-check"></i>&nbsp; Absences</a></li>
                 </ul>
             </div>
             <div class="col-md-10 p-1 m-0">
