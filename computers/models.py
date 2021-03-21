@@ -9,7 +9,6 @@ class Computers(models.Model):
 
     class Meta:
         db_table = 'computers'
-        managed = True
         verbose_name = 'Computers'
         verbose_name_plural = 'Computers'
 

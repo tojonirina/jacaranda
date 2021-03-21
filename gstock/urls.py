@@ -15,12 +15,18 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
 from . import views
+
+handler404 = 'gstock.views.pageNotFound'
+handler403 = 'gstock.views.unauthorizedRequest'
+handler500 = 'gstock.views.serverError'
 
 urlpatterns = [
     path('', views.index),
     path('users/', include('users.urls')),
     path('materials/', include('materials.urls')),
     path('directories/', include('directories.urls')),
-    path('computers/', include('computers.urls'))
+    path('computers/', include('computers.urls')),
+    path('absences/', include('absences.urls'))
 ]
