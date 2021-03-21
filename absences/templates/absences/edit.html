@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %} Absences {% endblock %}
+
+{% block content %}
+
+    <div class="container sublink">
+        <a href="{% url 'absences:show_absence' absence.id %}" class="btn btn-light">Retour</a>
+    </div>
+
+    <form action="{% url 'absences:update_absence' absence.id %}" class="form" method="post">
+        {% csrf_token %}
+        <table class="table table-bordered table-sm">
+            <tr>
+                <td>
+                    Type:
+                </td>
+                <td colspan="4">
+                    <select name="types" class="form-control">
+                        <option value="{{ absence.types }}">{{ absence.get_types_display }} </option>
+                        <option value="MVCT">Conge de maternite</option>
+                        <option value="PVCT">Conge de paternite</option>
+                        <option value="SVCT">Conge maladie</option>
+                        <option value="PRM">Permission</option>
+                        <option value="FRM">Formation</option>
+                        <option value="OTH">Autre</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Debut:</td><td><input type="date" name="begin_date" value="{{ absence.begin_date|date:'c' }}" class="form-control" /></td>
+                <td>Fin:</td><td><input type="date" name="end_date" value="{{ absence.end_date|date:'c' }}"class="form-control" /></td>
+            <tr>
+                    
+                
+            <tr>
+                <td>Interim:</td>
+                <td colspan="3">
+                    <select name="interim" class="form-control">
+                        <option value="{{ absence.interim }} ">{{ absence.interim }} </option>
+                        {% for directory in directories %}
+                            <option value="{{ directory.full_name }}">{{ directory.full_name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Raisons: </td><td colspan="3"><textarea name="reasons" class="form-control">{{ absence.reasons }} </textarea></td>                
+            </tr>
+            <tr>
+                <td>Piece jutificative:</td><td colspan="3"><input type="file" name="justificative" value="{{ absence.justificative }}" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
+            </tr>
+        </table>
+
+    </form>
+
+{% endblock %}
