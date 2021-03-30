@@ -38,10 +38,14 @@ def store(request):
 
                 material = Materials()
                 material.title = request.POST['title']
+                material.serial_number = request.POST['serial_number']
+                material.modele = request.POST['modele']
                 material.description = request.POST['description']
                 material.quantity = fabs(int(request.POST['quantity']))
                 material.unity = request.POST['unity']
                 material.state = request.POST['state']
+                material.fournissor = request.POST['fournissor']
+                material.fournissor_contact = request.POST['fournissor_contact']
                 material.administrator = 'superadmin'
 
                 mouvment = MouvmentHistory()
@@ -51,7 +55,7 @@ def store(request):
                 mouvment.unity = request.POST['unity']
                 mouvment.state = request.POST['state']
                 mouvment.administrator = 'superadmin'
-                mouvment.type = 'entry'
+                mouvment.types = 'entry'
 
                 material.save()
                 mouvment.save()
@@ -67,7 +71,7 @@ def store(request):
                 mouvment.quantity = fabs(int(request.POST['quantity']))
                 mouvment.unity = request.POST['unity']
                 mouvment.state = request.POST['state']
-                mouvment.type = 'entry'
+                mouvment.types = 'entry'
                 mouvment.administrator = 'superadmin'
 
                 material.save()
@@ -113,7 +117,7 @@ def postTakeOut(request):
             mouvment.unity = request.POST['unity']
             mouvment.state = request.POST['state']
             mouvment.administrator = 'superadmin'
-            mouvment.type = 'takeout'
+            mouvment.types = 'takeout'
             mouvment.save()
             
         else:
