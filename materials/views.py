@@ -13,7 +13,7 @@ def home(request):
     except:
         raise Http404('Not found')
     
-    return render(request, 'material_index.html', {'materials': materials})
+    return render(request, 'material/home.html', {'materials': materials})
 
 def show(request, id): 
     '''
@@ -24,7 +24,7 @@ def show(request, id):
     except:
         raise Http404('Page not found')
 
-    return render(request, 'show_material.html', {'material':maretial})
+    return render(request, 'material/show.html', {'material':maretial})
 
 def store(request):
     """
@@ -93,7 +93,7 @@ def getTakeOut(request):
     except:
         raise Http404('Connection error')
 
-    return render(request, 'takeout.html', {'materials':materials})
+    return render(request, 'material/takeout.html', {'materials':materials})
 
 def postTakeOut(request):
     """
@@ -133,7 +133,7 @@ def edit(request, id):
     except:
         raise Http404('Page not found')
 
-    return render(request, 'edit_material.html', {'material':maretial})
+    return render(request, 'material/edit.html', {'material':maretial})
 
 def history(request):
     '''
@@ -144,8 +144,8 @@ def history(request):
     except:
         return HttpResponse('Connection error', status=500)
         
-    return render(request, 'history.html', {'history':history}) 
+    return render(request, 'material/history.html', {'history':history}) 
 
 def reporting(request):
     values = [12, 43, 22, 52, 13, 65]
-    return render(request, 'reporting_material.html', {'values':values})
+    return render(request, 'material/reporting.html', {'values':values})

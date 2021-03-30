@@ -11,7 +11,7 @@ def home(request):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'user_index.html', {'users':users})
+    return render(request, 'user/home.html', {'users':users})
 
 def store(request):
     """
@@ -51,7 +51,7 @@ def show(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'show_user.html', {'user': user})
+    return render(request, 'user/show.html', {'user': user})
 
 def edit(request, id):
     """
@@ -62,7 +62,7 @@ def edit(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'edit_user.html', {'user': user})
+    return render(request, 'user/edit.html', {'user': user})
 
 def update(request, id):
     """

@@ -13,7 +13,7 @@ def home(request):
     except:
         return HttpResponse('Not found', status=500)
 
-    return render(request, 'directory_index.html', {'directories':directories})
+    return render(request, 'directory/home.html', {'directories':directories})
 
 def store(request):
     '''
@@ -54,7 +54,7 @@ def show(request, id):
     except:
         raise Http404('Not found')
 
-    return render(request, 'show_directory.html', {'directory':directory}) 
+    return render(request, 'directory/show.html', {'directory':directory}) 
 
 def edit(request, id):
     '''
@@ -65,7 +65,7 @@ def edit(request, id):
     except:
         raise Http404('Not found')
 
-    return render(request, 'edit_directory.html', {'directory':directory})
+    return render(request, 'directory/edit.html', {'directory':directory})
 
 def update(request, id):
     '''
