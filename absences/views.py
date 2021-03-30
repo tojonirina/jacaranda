@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Absences
 from directories.models import Directories
-import json
 
 class AbsenceView():
 
