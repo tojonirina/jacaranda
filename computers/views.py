@@ -14,7 +14,7 @@ def home(request):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'computers_index.html', {'computers':computers, 'directories':directories})
+    return render(request, 'computer/home.html', {'computers':computers, 'directories':directories})
 
 def store(request):
     """
@@ -62,7 +62,7 @@ def show(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'show_computer.html', {'computer': computer})
+    return render(request, 'computer/show.html', {'computer': computer})
 
 def edit(request, id):
     """
@@ -74,7 +74,7 @@ def edit(request, id):
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'edit_computer.html', {'computer': computer})
+    return render(request, 'computer/edit.html', {'computer': computer})
 
 def update(request, id):
     """

@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import connection
 
 class Absences(models.Model):
 
