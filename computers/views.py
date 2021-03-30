@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Computers
 from datetime import datetime
+from directories.models import Directories
 
 def home(request):
     """
@@ -9,10 +10,11 @@ def home(request):
     """
     try:
         computers = Computers.objects.all()
+        directories = Directories.objects.all()
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'computers_index.html', {'computers':computers})
+    return render(request, 'computers_index.html', {'computers':computers, 'directories':directories})
 
 def store(request):
     """

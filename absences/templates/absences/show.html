@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %} Absences {% endblock %}
+
+{% block content %}
+
+    
+    {% if absence.updated_at == None and absence.status != 3 %}
+        <div class="container sublink">
+            <form action="{% url 'absences:revoke_absence' absence.id %}" method="POST">
+                {% csrf_token %}
+                <a href="{% url 'absences:edit_absence' absence.id %}" class="btn btn-light" title="Modifier la demande"><i class="bi-pencil-square"></i></a>
+                <button class="btn btn-light text-danger" title="Annuler la demande" onclick="return confirm('Vous n\'avez qu\'une seule possibilite de modifier la demande?')"><i class="bi-stop-circle-fill"></i></button>
+            </form>
+        </div>
+    {% elif absence.updated_at != None and absence.status != 3 %}
+        <div class="container sublink">
+            <form action="{% url 'absences:revoke_absence' absence.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-light text-danger" title="Annuler la demande" onclick="return confirm('Vous etes sur?')"><i class="bi-stop-circle-fill"></i></button>
+            </form>
+        </div>
+
+    {% else %}
+        <div class="container sublink">
+            <a href="{% url 'absences:absence_home' %}" class="btn btn-light">Retour</a>
+        </div>
+    {% endif %}
+
+
+    {% if absence.updated_at == None %}
+        <div class="container alert alert-warning">
+            Vous pouvez encore modifier "une seule fois" la demande tant que ce n'est pas encore valid&eacute; par quiconque
+        </div>
+    {% endif %}
+
+    <table class="table table-bordered table-sm">
+        <tr>
+            <th width="150">Type: </th><td>{{ absence.get_types_display }}</td>
+        </tr>
+        <tr>
+            <th width="150">Date de debut: </th><td>{{ absence.begin_date }}</td>
+        </tr>
+        <tr>
+            <th width="150">Date de fin: </th><td>{{ absence.end_date }}</td>
+        </tr>
+        <tr>
+            <th width="150">Interim: </th><td>{{ absence.interim }}</td>
+        </tr>
+        <tr>
+            <th width="150">Raisons: </th><td>{{ absence.reasons }}</td>
+        </tr>
+        <tr>
+            <th width="150">Status: </th><td>{{ absence.get_status_display }}</td>
+        </tr>
+        <tr>
+            <th width="150">1ere validation par: </th><td>{{ absence.checkFirstValidation }}</td>
+        </tr>
+        <tr>
+            <th width="150">2e validation par: </th><td>{{ absence.checkSecondValidation }}</td>
+        </tr>
+        <tr>
+            <th width="150">Piece justificative: </th><td>{{ absence.justificative }}</td>
+        </tr>
+        <tr>
+            <th width="150">Cree le: </th><td>{{ absence.created_at }}</td>
+        </tr>
+        <tr>
+            <th width="150">Derniere MAJ: </th><td>{{ absence.updated_at }}</td>
+        </tr>
+    </table>
+
+    
+
+{% endblock %}

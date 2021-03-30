@@ -25,7 +25,7 @@ SECRET_KEY = '0u_r0zi-u++^eruxsy(*^^o#_n1n+dofryn_sy)sg-q4^*8b2*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'users',
     'materials',
     'computers',
-    'directories'
+    'directories',
+    'absences'
 ]
 
 MIDDLEWARE = [

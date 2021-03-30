@@ -23,9 +23,9 @@
                     <td>
                         <select name="assigned_to" class="form-control">
                             <option></option>
-                            <option value="Randriamalala tojonirina">Randriamalala tojonirina</option>
-                            <option value="Rakotoson Fancy">Rakotoson Fancy</option>
-                            <option value="Ralay Favoris">Ralay Favoris</option>
+                            {% for directory in directories %}
+                            <option value="{{ directory.full_name }}">{{ directory.full_name }}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>OS:</td><td><input type="text" name="os" class="form-control" placeholder="ex: Windows 7, Ubuntu" required /></td>
