@@ -27,10 +27,10 @@ class Users(models.Model):
     class Meta:
         db_table = 'users'
 
-    full_name = models.CharField(max_length=50)
+    directory_id = models.IntegerField()
     login = models.CharField(max_length=50, unique=True)
     password = models.CharField(max_length=100)
-    type = models.CharField(max_length=20)
+    types = models.CharField(max_length=20)
     status = models.IntegerField()
     administrator = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
