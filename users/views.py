@@ -1,17 +1,19 @@
 from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from .models import Users
+from directories.models import Directories
 
 def home(request):
     """
     Display all user
     """
     try:
+        directories = Directories.objects.raw('SELECT * FROM directories d INNER JOIN users u ON d.id <> u.directory_id')
         users = Users.objects.all()
     except:
         return HttpResponse('Server error', status=500)
 
-    return render(request, 'user/home.html', {'users':users})
+    return render(request, 'user/home.html', {'users':users, 'directories':directories})
 
 def store(request):
     """
