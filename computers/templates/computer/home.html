@@ -10,15 +10,43 @@
             {% csrf_token %}
             <table class="table table-bordered table-sm">
                 <tr>
-                    <td>Nom de l'ordinateur:</td><td colspan="4"><input type="text" name="name" class="form-control" placeholder="ex: LPT01-WIN10" required /></td>
+                    <td>Nom de l'ordinateur:</td><td><input type="text" name="name" class="form-control" placeholder="ex: LPT01-WIN10" required /></td>
+                    <td>Numero de serie:</td><td><input type="text" name="serial_number" class="form-control" placeholder="..." required /></td>
                 </tr>
                 <tr>
-                    <td>R&eacute;f&eacute;rence:</td><td><input type="text" name="reference" class="form-control" placeholder="ex: Num&eacute;ro de s&eacute;rie/modele" required /></td>
-                    <td>Marque:</td><td><input type="text" name="mark" class="form-control" placeholder="ex: ASUS A2900" /></td>
-                <tr>
-
+                    <td>Modele:</td><td><input type="text" name="modele" class="form-control" placeholder="..." required /></td>
+                    <td>Marque:</td><td><input type="text" name="mark" class="form-control" placeholder="ex: ASUS A2900" required /></td>
+                </tr>
+                <tr> 
+                    <td>Proc.:</td><td><input type="text" name="processor" class="form-control" placeholder="ex: Core i5" required /></td>
+                    <td>Proc. gen.:</td><td><input type="text" name="processor_genereation" class="form-control" placeholder="ex: 7th" required /></td>
                 </tr>
                 <tr>
+                    <td>RAM:</td><td><input type="number" name="ram" class="form-control" placeholder="ex: 1024 (1Go)" required /></td>
+                    <td>type de RAM:</td><td><input type="text" name="type_of_ram" class="form-control" placeholder="ex: DDR3" required /></td>
+                </tr>
+                <tr>
+                    <td>OS:</td><td><input type="text" name="os" class="form-control" placeholder="ex: Windows 7, Ubuntu" required /></td>
+                    <td>Etat:</td>
+                    <td>
+                        <select name="state" class="form-control" required>
+                            <option value="new">Nouveau</option>
+                            <option value="old">Ancien</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cat&eacute;gorie:</td>
+                    <td>
+                        <select name="category" class="form-control" required>
+                            <option></option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Desktop">Desktop</option>
+                            <option value="Macbook pro">Macbook pro</option>
+                            <option value="Macbook pro retina">Macbook pro retina</option>
+                            <option value="Notebook">Notebook</option>
+                        </select>
+                    </td>
                     <td>Attribuer &agrave;:</td>
                     <td>
                         <select name="assigned_to" class="form-control">
@@ -28,30 +56,13 @@
                             {% endfor %}
                         </select>
                     </td>
-                    <td>OS:</td><td><input type="text" name="os" class="form-control" placeholder="ex: Windows 7, Ubuntu" required /></td>
                 </tr>
                 <tr>
-                    <td>Cat&eacute;gorie:</td>
-                    <td>
-                        <select name="category" class="form-control">
-                            <option></option>
-                            <option value="Laptop">Laptop</option>
-                            <option value="Desktop">Desktop</option>
-                            <option value="Macbook pro">Macbook pro</option>
-                            <option value="Macbook pro retina">Macbook pro retina</option>
-                            <option value="Notebook">Notebook</option>
-                        </select>
-                    </td>
-                    <td>Etat:</td>
-                    <td>
-                        <select name="state" class="form-control">
-                            <option value="new">Nouveau</option>
-                            <option value="old">Ancien</option>
-                        </select>
-                    </td>
+                    <td>Fournisseur:</td><td><input type="number" name="fournissor" class="form-control" placeholder="ex: Hay Tech" /></td>
+                    <td>Contact:</td><td><input type="number" name="fournissor_contact" class="form-control" placeholder="034-23-525-52" /></td>
                 </tr>
                 <tr>
-                    <td>Description: </td><td colspan="4"><textarea name="description" class="form-control" placeholder="ex: 4Go RAM, 250 SSD, Core i5 7e Gth" required></textarea></td>                </tr>
+                    <td>Description: </td><td colspan="4"><textarea name="description" class="form-control" placeholder="..." ></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="4"><button type="submit" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>

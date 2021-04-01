@@ -9,7 +9,7 @@ def home(request):
     """
     try:
         directories = Directories.objects.raw('SELECT * FROM directories d INNER JOIN users u ON d.id <> u.directory_id')
-        users = Users.objects.all()
+        users = Users.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id')
     except:
         return HttpResponse('Server error', status=500)
 

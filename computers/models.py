@@ -12,9 +12,14 @@ class Computers(models.Model):
         verbose_name = 'Computers'
         verbose_name_plural = 'Computers'
 
+    STATE = (
+        ('new','Nouveau'),
+        ('reconditioned','Reconditionne')
+    )
+
     name = models.CharField(max_length=50)
     description = models.CharField("computers description", max_length=50)
-    state = models.CharField(max_length=20)
+    state = models.CharField(max_length=20, choices=STATE)
     serial_number = models.CharField(max_length=30)
     modele = models.CharField("the modele of computer", max_length=30)
     mark = models.CharField(max_length=50)

@@ -44,18 +44,28 @@
                 
                 <tr class="new_field">
                     <td>Nom du produit:</td>
-                    <td>                            
+                    <td colspan="3">                            
                         <input type="text" name="title" class="form-control" placeholder="Nom du produit">
+                    </td>
+                </tr> 
+                <tr class="new_field">
+                    <td>Numero de serie:</td>
+                    <td colspan="3">                            
+                        <input type="text" name="serial_number" class="form-control" placeholder="...">
+                    </td>
+                </tr>
+                <tr class="new_field">
+                    <td>Modele:</td>
+                    <td colspan="3">                            
+                        <input type="text" name="modele" class="form-control" placeholder="...">
                     </td>
                 </tr>                    
                 <tr class="new_field">
-                    <td>Description:</td><td><textarea type="text" name="description" class="form-control" placeholder="Description du matériel"></textarea></td>
+                    <td>Description:</td><td colspan="3"><textarea type="text" name="description" class="form-control" placeholder="Description du matériel"></textarea></td>
                 </tr>
                 
                 <tr>
                     <td>Quantité:</td><td><input type="number" name="quantity" class="form-control" placeholder="Nombre du matériel" required></td>
-                </tr>
-                <tr>
                     <td>Unité:</td>
                     <td>
                         <select name="unity" class="form-control">
@@ -71,15 +81,27 @@
                 </tr>
                 <tr>
                     <td>Etat du matériel:</td>
-                    <td>
+                    <td colspan="3">
                         <select name="state" class="form-control">
                             <option value="new">Nouveau</option>
                             <option value="old">Ancien</option>
                         </select>
                     </td>
                 </tr>
+                <tr class="new_field">
+                    <td>Fournisseur:</td>
+                    <td colspan="3">                            
+                        <input type="text" name="fournissor" class="form-control" placeholder="ex: Blue Market">
+                    </td>
+                </tr>
+                <tr class="new_field">
+                    <td>Contact du fournisseur:</td>
+                    <td colspan="3">                            
+                        <input type="text" name="fournissor_contact" class="form-control" placeholder="032-33-444-55">
+                    </td>
+                </tr> 
                 <tr>
-                    <td colspan="2"><button type="submit" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
+                    <td colspan="2"><button type="button" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
                 </tr>
             </table>
 
@@ -89,21 +111,22 @@
 
 <div class="container-fluid m-0 p-0">
     <div class="container-fluid sublink">
-        <a href="{% url 'material:history_material' %}" class="btn btn-light history"><i class="bi bi-clock-history"></i> Historique</a>
-        <a class="btn btn-light" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
-        <a href="{% url 'material:get_takeout_material' %}" class="btn btn-light"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
-        <a href="{% url 'material:reporting_material' %}" class="btn btn-light"><i class="bi bi-clipboard-data"></i> Reportings</a>
-        
-    </div>
-    <div class="container-fluid subtitle">
         <div class="row">
-            <div class="col-md-3">
-                Liste matériel
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                <a href="{% url 'material:history_material' %}" class="btn btn-light history"><i class="bi bi-clock-history"></i> Historique</a>
+                <a class="btn btn-light" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
+                {% if materials %}
+                <a href="{% url 'material:get_takeout_material' %}" class="btn btn-light"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
+                {% endif %}
+                <a href="{% url 'material:reporting_material' %}" class="btn btn-light"><i class="bi bi-clipboard-data"></i> Reportings</a>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <input type="search" class="form-control" placeholder="Taper votre recheche">
             </div>
         </div>
+    </div>
+    <div class="container-fluid subtitle">
+        Liste matériel
     </div>
     <div class="container-fluid p-0 m-0 lists">
         <table class='table table-sm table-hovered table-bordered m-0 table-list'>
