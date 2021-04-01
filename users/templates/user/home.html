@@ -53,10 +53,10 @@
 <div class="container m-0 p-0">
     <div class="container-fluid sublink">
         <div class="row">
-            <div class="col-md-3 p-0">
-                <a class="btn btn-light" title="Ajouter nouveau utilisateur" id="add"><i class="bi bi-person-plus-fill"></i> </a>
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                <a class="btn btn-light" title="Ajouter nouveau utilisateur" id="add"><i class="bi bi-person-plus-fill"></i> &nbsp; Ajouter nouveau</a>
             </div>
-            <div class="col-md-9 p-0">
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <input type="search" class="form-control" placeholder="Taper votre recheche">
             </div>
         </div>
@@ -64,70 +64,72 @@
     <div class="container-fluid subtitle">
         Liste utilisateur
     </div>
-    <table class='table table-sm table-hovered table-bordered m-0 table-list'>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Nom d'utilisateur</th>
-                <th>Type</th>
-                <th>Statut</th>
-                <th>Admnistrateur</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for user in users %}
-            <tr>
-                <td>{{ user.full_name }}</td>
-                <td>{{ user.login }}</td>
-                <td>
-                    {% if user.type == 'administrator' %}
-                        <i class="bi bi-person-badge"></i> Admin
-                    {% elif user.type == 'user' %}
-                        Utilisateur
-                    {% endif %}
-                </td>
-                <td>
-                    
-                    {% if user.status == 1 %}
-                        <span class="text-success"><i class="bi bi-person-check"></i></span> Actif
-                    {% elif user.status == 0 %}
-                        <span class="text-danger"><i class="bi bi-person-x-fill"></i></span> Bloqué
-                    {% endif %}
+    <div class="container-fluid lists p-0">
+        <table class='table table-sm table-hovered table-bordered m-0 table-list'>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Type</th>
+                    <th>Statut</th>
+                    <th>Admnistrateur</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
                 
-                </td>
-                <td>{{ user.administrator }}</td>
-                <td>{{ user.created_at }}</td>
-                <td class="text-center">
-                    {% if user.status == 1 %}
-                        <form action="{% url 'users:block_user' user.id %}" method="POST">
-                    {% elif user.status == 0 %}
-                        <form action="{% url 'users:unblock_user' user.id %}" method="POST">
-                    {% endif %}
-                        
-                            {% csrf_token %}                        
-                            <a href="{% url 'users:show_user' user.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-person-lines-fill"></i></a>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.full_name }}</td>
+                    <td>{{ user.login }}</td>
+                    <td>
+                        {% if user.type == 'administrator' %}
+                            <i class="bi bi-person-badge"></i> Admin
+                        {% elif user.type == 'user' %}
+                            Utilisateur
+                        {% endif %}
+                    </td>
+                    <td>
                         
                         {% if user.status == 1 %}
-                            <button type="submit" name="block" class="btn btn-warning pt-0 pb-0 pl-1 pr-1" title="Bloquer l'utilisateur" onclick="return confirm('Voulez-vous vraiment bloquer l\'utilisateur? ')"><i class="bi bi-person-x-fill"></i></button>
+                            <span class="text-success"><i class="bi bi-person-check"></i></span> Actif
                         {% elif user.status == 0 %}
-                            <button type="submit" name="unblock" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Debloquer l'utilisateur"  onclick="return confirm('Voulez-vous vraiment debloquer l\'utilisateur? ')"><i class="bi bi-person-check-fill"></i></button>
+                            <span class="text-danger"><i class="bi bi-person-x-fill"></i></span> Bloqué
+                        {% endif %}
+                    
+                    </td>
+                    <td>{{ user.administrator }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td class="text-center">
+                        {% if user.status == 1 %}
+                            <form action="{% url 'users:block_user' user.id %}" method="POST">
+                        {% elif user.status == 0 %}
+                            <form action="{% url 'users:unblock_user' user.id %}" method="POST">
                         {% endif %}
                             
-                        </form>
-                </td>
-            </tr>
-
-            {% empty %}
-                <tr>
-                    <td colspan="6">Pas d'utilisateur enregistré</td>
+                                {% csrf_token %}                        
+                                <a href="{% url 'users:show_user' user.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-person-lines-fill"></i></a>
+                            
+                            {% if user.status == 1 %}
+                                <button type="submit" name="block" class="btn btn-warning pt-0 pb-0 pl-1 pr-1" title="Bloquer l'utilisateur" onclick="return confirm('Voulez-vous vraiment bloquer l\'utilisateur? ')"><i class="bi bi-person-x-fill"></i></button>
+                            {% elif user.status == 0 %}
+                                <button type="submit" name="unblock" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Debloquer l'utilisateur"  onclick="return confirm('Voulez-vous vraiment debloquer l\'utilisateur? ')"><i class="bi bi-person-check-fill"></i></button>
+                            {% endif %}
+                                
+                            </form>
+                    </td>
                 </tr>
-                
-            {% endfor %}
-                        
-        </tbody>
-    </table>
+    
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Pas d'utilisateur enregistré</td>
+                    </tr>
+                    
+                {% endfor %}
+                            
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
