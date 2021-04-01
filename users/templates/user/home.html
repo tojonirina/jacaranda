@@ -13,22 +13,30 @@
             {% csrf_token %}
             <table class="table table-bordered table-sm">
                 <tr>
-                    <td>Nom complet:</td><td><input type="text" name="full_name" class="form-control" placeholder="Votre nom complet" required></td>
+                    <td>Nom complet:</td>
+                    <td>
+                        <select name="directory_id" class="form-control">
+                            {% for d in directories %}
+                                <option value="{{ d.id }}">{{ d.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Nom d'utilisateur:</td><td><input type="text" name="login" class="form-control" placeholder="Votre nom d'utilisateur (login)" required></td>
+                    <td>Nom d'utilisateur:</td><td><input type="text" name="login" class="form-control" placeholder="Votre nom d'utilisateur" required></td>
                 </tr>
                 <tr>
                     <td>Type de l'utilisateur:</td>
                     <td>
                         <select name="type" class="form-control">
-                            <option value="user">Utilisateur</option>
-                            <option value="administrator">Administrateur</option>
+                            <option value="user">Standard User</option>
+                            <option value="administrator">Administrator User</option>
+                            <option value="super_user">Super Administrator User</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Mot de passe: </td><td><input type="password" name="password" class="form-control" placeholder="Votre mot de passe (password)" required></td>
+                    <td>Mot de passe: </td><td><input type="password" name="password" class="form-control" placeholder="Votre mot de passe" required></td>
                 </tr>
                 <tr>
                     <td>Confirmer: </td><td><input type="password" name="confirm_password" class="form-control" placeholder="Confirmer le mot de passe" required></td>
@@ -44,17 +52,17 @@
 
 <div class="container m-0 p-0">
     <div class="container-fluid sublink">
-        <a class="btn btn-light" title="Ajouter nouveau utilisateur" id="add"><i class="bi bi-person-plus-fill"></i> Ajouter utilisateur</a>
-    </div>
-    <div class="container-fluid subtitle">
         <div class="row">
-            <div class="col-md-3">
-                Liste utilisateur
+            <div class="col-md-3 p-0">
+                <a class="btn btn-light" title="Ajouter nouveau utilisateur" id="add"><i class="bi bi-person-plus-fill"></i> </a>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 p-0">
                 <input type="search" class="form-control" placeholder="Taper votre recheche">
             </div>
         </div>
+    </div>
+    <div class="container-fluid subtitle">
+        Liste utilisateur
     </div>
     <table class='table table-sm table-hovered table-bordered m-0 table-list'>
         <thead>
