@@ -21,7 +21,16 @@
                 <th>Nom d'utilisateur: </th> <td>{{ user.login }}</th>
             </tr>
             <tr>
-                <th>Type: </th> <td>{{ user.type }}</th>
+                <th>Type: </th> 
+                <td>
+                    {% if user.types == 'administrator' %}
+                        <i class="bi bi-person-badge"></i> Administrator User
+                    {% elif user.types == 'super_user' %}
+                        <i class="bi bi-person-badge"></i> Super Administrator User
+                    {% elif user.types == 'user' %}
+                        Standard User
+                    {% endif %}
+                </th>
             </tr>
             <tr>
                 <th>Administrateur: </th> <td>{{ user.administrator }}</th>

@@ -26,7 +26,7 @@
                     <tr>
                         <td>Type de l'utilisateur:</td>
                         <td>
-                            <select name="type" class="form-control">
+                            <select name="types" class="form-control">
                                 <option value="user">Standard User</option>
                                 <option value="administrator">Administrator User</option>
                                 <option value="super_user">Super Administrator User</option>
@@ -84,10 +84,12 @@
                     <td>{{ user.full_name }}</td>
                     <td>{{ user.login }}</td>
                     <td>
-                        {% if user.type == 'administrator' %}
-                            <i class="bi bi-person-badge"></i> Admin
-                        {% elif user.type == 'user' %}
-                            Utilisateur
+                        {% if user.types == 'administrator' %}
+                            <i class="bi bi-person-badge"></i> Administrator User
+                        {% elif user.types == 'super_user' %}
+                            <i class="bi bi-person-badge"></i> Super Administrator User
+                        {% elif user.types == 'user' %}
+                            Standard User
                         {% endif %}
                     </td>
                     <td>

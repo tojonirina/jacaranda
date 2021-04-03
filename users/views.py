@@ -8,7 +8,7 @@ def home(request):
     Display all user
     """
     try:
-        directories = Directories.objects.raw('SELECT * FROM directories d INNER JOIN users u ON d.id <> u.directory_id')
+        directories = Directories.objects.raw('SELECT * FROM directories')
         users = Users.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id')
     except:
         return HttpResponse('Server error', status=500)
@@ -26,10 +26,10 @@ def store(request):
             if request.POST['password'] == request.POST['confirm_password']:
 
                 user = Users()
-                user.full_name = request.POST['full_name']
+                user.directory_id = request.POST['directory_id']
                 user.login = request.POST['login']
-                user.password = request.POST['password']
-                user.type = request.POST['type']
+                user.password = request.POST['confirm_password']
+                user.types = request.POST['types']
                 user.administrator = 'superadmin'
                 user.status = 1
                 user.save()
@@ -49,7 +49,7 @@ def show(request, id):
     Show a specific user detail
     """
     try: 
-        user = Users.objects.get(id=id)
+        user = Users.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id AND u.id = %s', [id])[0]
     except:
         return HttpResponse('Server error', status=500)
 
@@ -76,7 +76,7 @@ def update(request, id):
             user = Users.objects.get(id=id)
             user.full_name = request.POST['full_name']
             user.login = request.POST['login']
-            user.type = request.POST['type']
+            user.types = request.POST['types']
             user.save()
 
         else:
