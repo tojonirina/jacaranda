@@ -10,13 +10,28 @@ class Materials(models.Model):
     class Meta:
         db_table = 'materials'
 
+    STATE = (
+        ('new','Nouveau'),
+        ('occasion','Occasion')
+    )
+
+    UNITY = (
+        ('pcs','Piece'),
+        ('cartoon','Carton'),
+        ('box','Boite'),
+        ('kg','Kg'),
+        ('g','Gramme'),
+        ('L','Litre'),
+        ('m','Metre')
+    )
+
     title = models.CharField(max_length=50)
     serial_number = models.CharField(max_length=50)
     modele = models.CharField(max_length=30)
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
-    unity = models.CharField(max_length=50)
-    state = models.CharField(max_length=10)
+    unity = models.CharField(max_length=50, choices= UNITY)
+    state = models.CharField(max_length=10, choices=STATE)
     fournissor = models.CharField(max_length=50, null=True)
     fournissor_contact = models.CharField(max_length=30, blank=True)
     administrator = models.CharField(max_length=50)

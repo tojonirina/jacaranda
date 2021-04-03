@@ -48,34 +48,36 @@ def store(request):
                 material.fournissor_contact = request.POST['fournissor_contact']
                 material.administrator = 'superadmin'
 
-                mouvment = MouvmentHistory()
-                mouvment.title = request.POST['title']
-                mouvment.description = request.POST['description']
-                mouvment.quantity = fabs(int(request.POST['quantity']))
-                mouvment.unity = request.POST['unity']
-                mouvment.state = request.POST['state']
-                mouvment.administrator = 'superadmin'
-                mouvment.types = 'entry'
-
                 material.save()
-                mouvment.save()
+
+                # mouvment = MouvmentHistory()
+                # mouvment.title = request.POST['title']
+                # mouvment.description = request.POST['description']
+                # mouvment.quantity = fabs(int(request.POST['quantity']))
+                # mouvment.unity = request.POST['unity']
+                # mouvment.state = request.POST['state']
+                # mouvment.administrator = 'superadmin'
+                # mouvment.types = 'entry'
+
+                # mouvment.save()
 
             elif request.POST['old_product'] != '':
 
                 material = Materials.objects.get(id=int(request.POST['old_product']))
                 material.quantity += int(request.POST['quantity'])
 
-                mouvment = MouvmentHistory()
-                mouvment.product_id = request.POST['old_product']
-                mouvment.note = request.POST['note']
-                mouvment.quantity = fabs(int(request.POST['quantity']))
-                mouvment.unity = request.POST['unity']
-                mouvment.state = request.POST['state']
-                mouvment.types = 'entry'
-                mouvment.administrator = 'superadmin'
-
                 material.save()
-                mouvment.save()
+                
+                # mouvment = MouvmentHistory()
+                # mouvment.product_id = request.POST['old_product']
+                # mouvment.note = request.POST['note']
+                # mouvment.quantity = fabs(int(request.POST['quantity']))
+                # mouvment.unity = request.POST['unity']
+                # mouvment.state = request.POST['state']
+                # mouvment.types = 'entry'
+                # mouvment.administrator = 'superadmin'
+
+                # mouvment.save()
             else:
                     return HttpResponse('umm error', status=500)
         else:
@@ -90,6 +92,29 @@ def update(request, id):
     """
     Update a materiel information
     """
+    try:
+
+        if request.method == 'POST':
+
+            material = Materials.objects.get(id=int(id))
+            material.title = request.POST['title']
+            material.serial_number = request.POST['serial_number']
+            material.modele = request.POST['modele']
+            material.description = request.POST['description']
+            material.quantity = request.POST['quantity']
+            material.unity = request.POST['unity']
+            material.state = request.POST['state']
+            material.fournissor = request.POST['fournissor']
+            material.fournissor_contact = request.POST['fournissor_contact']
+
+            material.save()
+        else:
+            return HttpResponse('Unauthorized', status=401)
+            
+    except:
+        return HttpResponse('Server error', status=500)
+    
+    return redirect('material:show_material', id)
 
 def getTakeOut(request):
     try: 
