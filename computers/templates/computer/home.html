@@ -2,10 +2,11 @@
 {% block title %} Ordinateurs {% endblock %}
 
 {% block createForm %}
+
     <div class="container-fluid background" id="background">
         <div class="container create">
             <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
-            <div class="container-fluid subtitle"> Enregistrer un nouveau ordinateur</div>
+            <div class="container-fluid form-title"> Enregistrer un nouveau ordinateur</div>
             <form action="{% url 'computers:store_computer' %}" class="form" method="post">
                 {% csrf_token %}
                 <table class="table table-bordered table-sm">
@@ -19,11 +20,12 @@
                     </tr>
                     <tr> 
                         <td>Proc.:</td><td><input type="text" name="processor" class="form-control" placeholder="ex: Core i5" required /></td>
-                        <td>Proc. gen.:</td><td><input type="text" name="processor_genereation" class="form-control" placeholder="ex: 7th" required /></td>
+                        <td>Proc. gen.:</td><td><input type="text" name="processor_generation" class="form-control" placeholder="ex: 7th" required /></td>
                     </tr>
                     <tr>
                         <td>RAM:</td><td><input type="number" name="ram" class="form-control" placeholder="ex: 1024 (1Go)" required /></td>
-                        <td>type de RAM:</td><td><input type="text" name="type_of_ram" class="form-control" placeholder="ex: DDR3" required /></td>
+                        <td>type de RAM:</td>
+                        <td><input type="text" name="type_of_ram" class="form-control" placeholder="ex: DDR3" required /></td>
                     </tr>
                     <tr>
                         <td>OS:</td><td><input type="text" name="os" class="form-control" placeholder="ex: Windows 7, Ubuntu" required /></td>
@@ -40,11 +42,11 @@
                         <td>
                             <select name="category" class="form-control" required>
                                 <option></option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Desktop">Desktop</option>
-                                <option value="Macbook pro">Macbook pro</option>
-                                <option value="Macbook pro retina">Macbook pro retina</option>
-                                <option value="Notebook">Notebook</option>
+                                <option value="laptop">Laptop</option>
+                                <option value="desktop">Desktop</option>
+                                <option value="mbp">Macbook pro</option>
+                                <option value="mbp_retina">Macbook pro retina</option>
+                                <option value="notebook">Notebook</option>
                             </select>
                         </td>
                         <td>Attribuer &agrave;:</td>
@@ -58,85 +60,92 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Fournisseur:</td><td><input type="number" name="fournissor" class="form-control" placeholder="ex: Hay Tech" /></td>
+                        <td>Fournisseur:</td><td><input type="text" name="fournissor" class="form-control" placeholder="ex: Hay Tech" /></td>
                         <td>Contact:</td><td><input type="number" name="fournissor_contact" class="form-control" placeholder="034-23-525-52" /></td>
                     </tr>
                     <tr>
-                        <td>Description: </td><td colspan="4"><textarea name="description" class="form-control" placeholder="..." ></textarea></td>
+                        <td>Statut :</td>
+                        <td>
+                            <select name="status" class="form-control">
+                                <option value="assigned">Assign&eacute;</option>
+                                <option value="not_assigned">Non assign&eacute;</option>
+                                <option value="on_suspens">En suspens</option>
+                                <option value="out_of_service">Hors service</option>
+                            </select>
+                        </td>
+                        <td>Description: </td><td><textarea name="description" class="form-control" placeholder="..." ></textarea></td>
                     </tr>
                     <tr>
-                        <td colspan="4"><button type="submit" class="btn btn-option-submit">Valider</button> <button type="reset" class="btn btn-option-submit">Réinitialiser</button></td>
+                        <td colspan="4" class="text-center" ><button type="submit" class="btn btn-option-submit">Valider</button> <button type="reset" class="btn btn-option-submit">Réinitialiser</button></td>
                     </tr>
                 </table>
 
             </form>
         </div>
     </div>
+
 {% endblock %} 
 {% block content %} 
 
-
-<div class="container m-0 p-0">
-    <div class="container-fluid sublink">
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-                <a class="btn btn-option" id="add"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Ajouter nouveau</a>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-                <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
+    <div class="container m-0 p-0">
+        <div class="container-fluid sublink">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                    <a class="btn btn-option" id="add"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Ajouter nouveau</a>
+                    <a href="{% url 'material:reporting_material' %}" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings</a>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                    <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid subtitle">
-       Liste ordinateur
-    </div>
+        <div class="container-fluid subtitle">
+        Liste ordinateur
+        </div>
 
-    <div class="container-fluid lists p-0">
-        <table class='table table-sm table-hovered table-bordered table-list m-0'>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Status</th>
-                    <th>Reference</th>
-                    <th>Marque</th>
-                    <th>OS</th>
-                    <th>Categorie</th>
-                    <th>Attribu&eacute;</th>
-                    <th>Date d'attribution</th>
-                    <th>Date d'ajout</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                {% for computer in computers %}
+        <div class="container-fluid lists p-0">
+            <table class='table table-sm table-hovered table-bordered table-list m-0'>
+                <thead>
                     <tr>
-                        <td>{{ computer.name }}</td>
-                        <td>{{ computer.state }}</td>
-                        <td>{{ computer.reference }}</td>
-                        <td>{{ computer.mark }}</td>
-                        <td>{{ computer.os }}</td>
-                        <td>{{ computer.category }}</td>
-                        <td>{{ computer.assigned_to }}</td>
-                        <td>{{ computer.assigned_at }}</td>
-                        <td>{{ computer.created_at }}</td>
-                        <td>
-                            <a href="{% url 'computers:show_computer' computer.id %}" title="Voir detail" class="btn btn-light pt-0 pr-1 pb-0 pl-1"> <i class="bi bi-eye-fill"></i> </a>
-                            <a href="{% url 'computers:edit_computer' computer.id %}" title="Editer l'information" class="btn btn-light pt-0 pr-1 pb-0 pl-1"> <i class="bi bi-pencil-square"></i> </a>
-                        </td>
+                        <th>Nom</th>
+                        <th>Categorie</th>
+                        <th>Etat</th>
+                        <th>Statut</th>
+                        <th>OS</th>
+                        <th>Attribu&eacute; &agrave;</th>
+                        <th>D. d'attr.</th>
+                        <th>N. de serie</th>
                     </tr>
-    
-                {% empty %}
-                    <tr>
-                        <td colspan="9">Aucun ordinateur enregistr&eacute;</td>
-                    </tr>
-                {% endfor %}
+                </thead>
+                <tbody>
                     
-                
-                            
-            </tbody>
-        </table>
+                    {% for computer in computers %}
+                        <tr>
+                            <td>{{ computer.name }}</td>
+                            <td>{{ computer.get_category_display }} ({{ computer.description }})</td>
+                            <td>{{ computer.get_state_display }}</td>
+                            <td>{{ computer.get_status_display }}</td>
+                            <td>{{ computer.os }}</td>
+                            <td>{{ computer.assigned_to }}</td>
+                            <td>{{ computer.assigned_at }}</td>
+                            <td>{{ computer.serial_number }}</td>
+                            <td>
+                                <a href="{% url 'computers:show_computer' computer.id %}" title="Voir detail" class="btn btn-light pt-0 pr-1 pb-0 pl-1"> <i class="bi bi-eye-fill"></i> </a>
+                                <a href="{% url 'computers:edit_computer' computer.id %}" title="Editer l'information" class="btn btn-light pt-0 pr-1 pb-0 pl-1"> <i class="bi bi-pencil-square"></i> </a>
+                            </td>
+                        </tr>
+        
+                    {% empty %}
+                        <tr>
+                            <td colspan="9">Aucun ordinateur enregistr&eacute;</td>
+                        </tr>
+                    {% endfor %}
+                        
+                    
+                                
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-
 
 {% endblock %}

@@ -4,59 +4,89 @@
 
 <div class="container-fluid p-0">
     <div class="container-fluid subtitle"> Modifier l'information sur {{ computer.name }}</div>
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered m-0">
         <form action="{% url 'computers:update_computer' computer.id %}" method="post">
             {% csrf_token %}
             <tr>
                 <th width="200">Nom :</th><td><input type="text" name="name" class="form-control" value="{{ computer.name }}"/> </td>
+                <th>Marque :</th><td><input type="text" name="mark" class="form-control" value="{{ computer.mark }}"/></td>
             </tr>
             <tr>
-                <th>R&eacute;f&eacute;rence :</th><td><input type="text" name="reference" class="form-control" value="{{ computer.reference }}"/></td>
+                <th>Numero de serie :</th><td><input type="text" name="serial_number" class="form-control" value="{{ computer.serial_number }}"/> </td> <th>Modele :</th><td><input type="text" name="modele" class="form-control" value="{{ computer.serial_number }}"/> </td>
             </tr>
             <tr>
                 <th>Etat :</th>
                 <td>
                     <select name="state" class="form-control">
-                        <option value="{{ computer.mark }}">{{ computer.state }}</option>
+                        <option value="{{ computer.state }}">{{ computer.get_state_display }}</option>
                         <option value="new">Nouveau</option>
                         <option value="old">Ancien</option>
-    \                        </select>
+    \               </select>
+                </td>
+                <th>Statut :</th>
+                <td>
+                    <select name="status" class="form-control">
+                        <option value="{{ computer.status }}">{{ computer.get_status_display }}</option>
+                        <option value="assigned">Assign&eacute;</option>
+                        <option value="not_assigned">Non assign&eacute;</option>
+                        <option value="on_suspens">En suspens</option>
+                        <option value="out_of_service">Hors service</option>
+                    </select>
+                </td>
+                
+            </tr>
+            <tr>
+                <th>Processeur :</th><td><input type="text" name="processor" class="form-control" value="{{ computer.processor }}"/></td>
+                <th>Gen.:</th><td><input type="text" name="processor_generation" class="form-control" value="{{ computer.processor_generation }}"/></td>
+            </tr>
+            <tr>
+                <th>RAM :</th><td><input type="number" name="ram" class="form-control" value="{{ computer.ram }}"/></td>
+                <th>Type</th><td><input type="text" name="type_of_ram" class="form-control" value="{{ computer.type_of_ram }}"/></td>
+            </tr>
+            <tr>
+                <th>Statut :</th>
+                <td>
+                    <select name="status" class="form-control">
+                        <option value="{{ computer.status }}">{{ computer.get_status_display }}</option>
+                        <option value="assigned">Assign&eacute;</option>
+                        <option value="not_assigned">Non assign&eacute;</option>
+                        <option value="on_suspens">En suspens</option>
+                        <option value="out_of_service">Hors service</option>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <th>Marque :</th><td><input type="text" name="mark" class="form-control" value="{{ computer.mark }}"/></td>
-            </tr>
-            <tr>
                 <th>OS :</th><td><input type="text" name="os" class="form-control" value="{{ computer.os }}"/></td>
-            </tr>
-            <tr>
-                <th>Cat&eacute;gorie :</th>
+                <th>Attribu&eacute; &agrave; :</th>
                 <td>
-                    <select name="category" class="form-control">
-                        <option value="{{ computer.category }}">{{ computer.category }}</option>
-                        <option value="Laptop">Laptop</option>
-                        <option value="Desktop">Desktop</option>
-                        <option value="Macbook pro">Macbook pro</option>
-                        <option value="Macbook pro retina">Macbook pro retina</option>
-                        <option value="Notebook">Notebook</option>
+                    <select name="assigned_to" class="form-control">
+                        <option value="{{ computer.assigned_to }}">{{ computer.assigned_to }}</option>
+                        <option value=""></option>
+                        {% for directory in directories %}
+                            <option value="{{ directory.full_name }}">{{ directory.full_name }}</option>
+                        {% endfor %}
                     </select>
                 </td>
             </tr>
             <tr>
                 <th>Description :</th><td><textarea class="form-control" name="description">{{ computer.description }}</textarea></td>
-            </tr>
-            <tr>
-                <th>Attribu&eacute; &agrave; :</th>
+                <th>Cat&eacute;gorie :</th>
                 <td>
-                    <select name="assigned_to" class="form-control">
-                        <option value="{{ computer.assigned_to }}">{{ computer.assigned_to }}</option>
-                        <option value="Randriamalala tojonirina">Randriamalala tojonirina</option>
-                        <option value="Rakotoson Fancy">Rakotoson Fancy</option>
-                        <option value="Ralay Favoris">Ralay Favoris</option>
+                    <select name="category" class="form-control">
+                        <option value="{{ computer.category }}">{{ computer.get_category_display }}</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="mbp">Macbook pro</option>
+                        <option value="mbp_retina">Macbook pro retina</option>
+                        <option value="notebook">Notebook</option>
                     </select>
                 </td>
             </tr>
-            <tr><td colspan="2"><button class="btn btn-success">Enregistrer</button> <a href="{% url 'computers:computer_home' %}" class="btn btn-warning">Annuler</a></td></tr>
+            <tr>
+                <th>Fournisseur :</th><td><input type="text" name="fournissor" class="form-control" value="{{ computer.fournissor }}"/></td>
+                <th>Contact :</th><td><input type="number" name="fournissor_contact" class="form-control" value="{{ computer.fournissor_contact }}"/></td>
+            </tr>
+            <tr><td colspan="4"><button class="btn btn-option-submit">Enregistrer</button> <a href="{% url 'computers:computer_home' %}" class="btn btn-option-submit">Annuler</a></td></tr>
         </form>
     </table>
 </div>

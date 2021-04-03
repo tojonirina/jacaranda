@@ -110,12 +110,12 @@
     <div class="container-fluid sublink">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-                <a href="{% url 'material:history_material' %}" class="btn btn-option history"><i class="bi bi-clock-history"></i> Historique</a>
                 <a class="btn btn-option" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
                 {% if materials %}
                 <a href="{% url 'material:get_takeout_material' %}" class="btn btn-option"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
                 {% endif %}
                 <a href="{% url 'material:reporting_material' %}" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings</a>
+                <a href="{% url 'material:history_material' %}" class="btn btn-option history"><i class="bi bi-clock-history"></i> Historique</a>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
@@ -142,14 +142,14 @@
                 {% for material in materials %}
     
                     <tr>
-                        <td>{{ material.title }} ({{ material.description|truncatewords:10 }})</td>
+                        <td>{{ material.title }} ({{ material.description|truncatechars:20 }})</td>
                         <td>{{ material.quantity }}</td>
                         <td>{{ material.get_unity_display }}</td>
                         <td>{{ material.get_state_display }}</td>
                         <td>{{ material.administrator }}</td>
                         <td>{{ material.created_at }}</td>
-                        <td>
-                            <a href="{% url 'material:show_material' material.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-eye-fill"></i></a>
+                        <td class="text-center">
+                            <a href="{% url 'material:show_material' material.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Voir"><i class="bi bi-eye-fill"></i></a> &nbsp;
                             <a href="{% url 'material:edit_material' material.id %}" class="btn btn-light pt-0 pb-0 pl-1 pr-1" title="Editer"><i class="bi bi-pencil-square"></i></a>
                         </td>
                     </tr>

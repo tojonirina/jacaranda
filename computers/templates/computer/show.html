@@ -4,15 +4,18 @@
 
 <div class="container-fluid p-0">
     <div class="container-fluid subtitle"> Information sur {{ computer.name }}</div>
-    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered m-0">
         <tr>
-            <th>Nom :</th><td>{{ computer.name }}</td>
+            <th width="200">Nom :</th><td>{{ computer.name }}</td>
         </tr>
         <tr>
-            <th>R&eacute;f&eacute;rence :</th><td>{{ computer.reference }}</td>
+            <th>Numero de serie :</th><td>{{ computer.serial_number }} - Modele : {{ computer.modele }}</td>
         </tr>
         <tr>
-            <th>Etat :</th><td>{{ computer.state }}</td>
+            <th>Etat :</th><td>{{ computer.get_state_display }}</td>
+        </tr>
+        <tr>
+            <th>Statut :</th><td>{{ computer.get_status_display }}</td>
         </tr>
         <tr>
             <th>Marque :</th><td>{{ computer.mark }}</td>
@@ -21,7 +24,16 @@
             <th>OS :</th><td>{{ computer.os }}</td>
         </tr>
         <tr>
-            <th>Cat&eacute;gorie :</th><td>{{ computer.category }}</td>
+            <th>Cat&eacute;gorie :</th><td>{{ computer.get_category_display }}</td>
+        </tr>
+        <tr>
+            <th>RAM :</th><td>{{ computer.ram }} Go - {{ computer.type_of_ram }}</td>
+        </tr>
+        <tr>
+            <th>Processeur :</th><td>{{ computer.processor }} - {{ computer.processor_generation }}</td>
+        </tr>
+        <tr>
+            <th>Fournisseur :</th><td>{{ computer.fournissor }} - Contact : {{ computer.fournissor_contact }}</td>
         </tr>
         <tr>
             <th>Description :</th><td>{{ computer.description }}</td>
@@ -33,7 +45,7 @@
             <th>Attribu&eacute; le :</th><td>{{ computer.assigned_at }}</td>
         </tr>
         <tr>
-            <th>Date d'ajout: </th><td>{{ computer.created_at }}</td>
+            <th>Date d'ajout: </th><td>{{ computer.created_at }} par <i class="bi bi-person-fill"></i>{{ computer.administrator }}</td>
         </tr>
         <tr>
             <th>Date de derni&egrave;re modification: </th><td>{{ computer.updated_at }}</td>

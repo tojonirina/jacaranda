@@ -30,7 +30,7 @@ class Materials(models.Model):
     modele = models.CharField(max_length=30)
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
-    unity = models.CharField(max_length=50, choices= UNITY)
+    unity = models.CharField(max_length=50, choices=UNITY)
     state = models.CharField(max_length=10, choices=STATE)
     fournissor = models.CharField(max_length=50, null=True)
     fournissor_contact = models.CharField(max_length=30, blank=True)

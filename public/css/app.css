@@ -41,7 +41,6 @@ ul.leftmenu {
     padding: 0px;
     margin: 0;
     background-color: #1C1D64;
-    border-radius: 15px;
     box-shadow: 0 0 1.2em rgba(28, 29, 100, .7);
 }
 
@@ -59,9 +58,17 @@ ul.leftmenu li a.menuoption {
     display: block;
     text-decoration: none;
     font-weight: bolder;
+    font-size: 16px;
 }
 
-ul.leftmenu li a.menuoption::after {
+ul.leftmenu li a.menuoption:hover {
+    background-color: rgba(144, 146, 248, 0.418);
+    /* color: #1C1D64; */
+    transition: background-color 0.2s ease-in;
+    color: white;
+}
+
+/* ul.leftmenu li a.menuoption::after {
     content: '';
     display: block;
     width: 0;
@@ -74,7 +81,7 @@ ul.leftmenu li a.menuoption:hover::after {
     color: rgb(255, 255, 255);
     width: 100%;
     transition: width .3s;
-}
+} */
 
 ul.leftmenu li a.useroption{
     margin: 0px;
@@ -98,13 +105,25 @@ ul.leftmenu li a.useroption{
 
 .create {
     background-color: whitesmoke;
-    margin-top: 50px;
+    margin-top: 30px;
     left: 0;
     right: 0;
     padding: 5px;
     width: 70%;
     box-shadow: 0px 0px 2em  rgba(54, 54, 54, 0.3);
     border-radius: 5px;
+}
+
+.form-title {
+    padding: 5px;
+    color: #1C1D64;
+    font-weight: bolder;
+    background-color: white;
+}
+
+.create table {
+    margin: 0;
+    padding: 0;
 }
 
 tr.old_field {
@@ -141,12 +160,19 @@ tr.old_field {
     color: #1C1D64;
     font-size: 18px;
     font-weight: bolder;
-    padding: 10px 15px 10px 15px;
+    padding: 9px 12px 9px 12px;
     border-radius: 20px;
 }
 
 .account-option a:hover {
     background-color: rgba(144, 146, 248, 0.418);
+    transition: background-color 0.3s linear;
+}
+
+.account-option a:last-child:hover {
+    background-color: #E74C3C;
+    color: white;
+    transition: background-color 0.3s linear;
 }
 
 .btn-option {
@@ -156,7 +182,7 @@ tr.old_field {
 }
 
 .btn-option-submit {
-    background-color: rgba(126, 128, 231, 0.5);
+    background-color: #fc897ce0;
     border-radius: 5px;
     color: rgb(28, 29, 100,);
     padding: 5px 10px 5px 10px;
@@ -164,12 +190,13 @@ tr.old_field {
 }
 
 .btn-option-submit:hover {
-    background-color:rgb(28, 29, 100);
+    background-color:#E74C3C;
     color: white;
-    box-shadow: 0 0 1em rgba(106, 109, 247, 0.7);
+    box-shadow: 0 0 1em rgba(255, 124, 124, 0.7);
 }
 
 .btn-option:hover {
     box-shadow: 0 0 1em rgba(250, 68, 68, 0.6);
     color: white;
+    background-color: #ce3b2a;
 }
