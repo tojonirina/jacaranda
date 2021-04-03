@@ -22,21 +22,29 @@ def store(request):
     try:
         if request.method == 'POST':
 
-            newDirectory = Directories()
-            newDirectory.full_name = request.POST['full_name']
-            newDirectory.gender = request.POST['gender']
-            newDirectory.function = request.POST['function']
-            newDirectory.phone = request.POST['phone']
-            newDirectory.urgent_phone = request.POST['urgent_phone']
-            newDirectory.email = request.POST['email']
-            newDirectory.address = request.POST['address']
-            newDirectory.date_of_service = request.POST['date_of_service']
-            newDirectory.end_of_service = request.POST['end_of_service']
-            newDirectory.state = request.POST['state']
-            newDirectory.notes = request.POST['notes']
-            newDirectory.avatar = 'myavatar'
+            directory = Directories()
+            directory.full_name = request.POST['full_name'].upper()
+            directory.gender = request.POST['gender']
+            directory.date_of_birth = request.POST['date_of_birth']
+            directory.place_of_birth = request.POST['place_of_birth']
+            directory.cin = request.POST['cin']
+            directory.delivered_on = request.POST['delivered_on']
+            directory.delivered_at = request.POST['delivered_at']
+            directory.phone = request.POST['phone']
+            directory.urgent_phone = request.POST['urgent_phone']
+            directory.email = request.POST['email']
+            directory.address = request.POST['address']
+            directory.function = request.POST['function']
+            directory.departement = request.POST['departement']
+            directory.date_of_service = request.POST['date_of_service']
+            directory.end_of_service = request.POST['end_of_service']
+            directory.matricule_number = request.POST['matricule_number']
+            directory.state = 1
+            directory.avatar = 'myavatar'
+            directory.notes = request.POST['notes']
+            directory.administrator = 'superadmin'
 
-            newDirectory.save()
+            directory.save()
 
         else:
             return HttpResponse('Unauthorized', status=401)
@@ -75,18 +83,26 @@ def update(request, id):
         if request.method == 'POST':
 
             directory = Directories.objects.get(id=int(id))
-            directory.full_name = request.POST['full_name']
-            directory.function = request.POST['function']
+            directory.full_name = request.POST['full_name'].upper()
             directory.gender = request.POST['gender']
+            directory.date_of_birth = request.POST['date_of_birth']
+            directory.place_of_birth = request.POST['place_of_birth']
+            directory.cin = request.POST['cin']
+            directory.delivered_on = request.POST['delivered_on']
+            directory.delivered_at = request.POST['delivered_at']
             directory.phone = request.POST['phone']
             directory.urgent_phone = request.POST['urgent_phone']
             directory.email = request.POST['email']
             directory.address = request.POST['address']
+            directory.function = request.POST['function']
+            directory.departement = request.POST['departement']
             directory.date_of_service = request.POST['date_of_service']
             directory.end_of_service = request.POST['end_of_service']
+            directory.matricule_number = request.POST['matricule_number']
             directory.state = request.POST['state']
-            directory.avatar = request.POST['avatar']
+            directory.avatar = 'myavatar'
             directory.notes = request.POST['notes']
+            directory.administrator = 'superuser'
 
             directory.save()
 

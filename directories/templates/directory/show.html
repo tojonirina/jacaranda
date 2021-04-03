@@ -6,16 +6,17 @@
 <div class="container-fluid sublink">
     <form action="{% url 'directories:delete_directory' directory.id %}" method="post">
         {% csrf_token %}
-        <button class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer l\'annuaire? ')"><i class="bi bi-trash" title="Supprimer"></i></button> <a href="{% url 'directories:edit_directory' directory.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+        <button class="btn btn-option" onclick="return confirm('Voulez-vous vraiment supprimer l\'annuaire? ')"><i class="bi bi-person-dash" title="Supprimer"></i></button> 
+        <a href="{% url 'directories:edit_directory' directory.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
     </form>
 </div>
-<div class="container-fluid subtitle"> <i class="bi bi-person-lines-fill"></i> Information de {{ directory.full_name }}</div>
+<div class="container-fluid subtitle">Information de {{ directory.full_name }}</div>
 <div class="container-fluid p-0">
     <table class="table table-sm table-bordered">
         <tr>
             <th>Nom complet: </th> 
             <td>
-                {{ directory.full_name.upper }} - 
+                {{ directory.full_name }} - 
 
                 ({% if directory.gender == 'man' %}
                     Homme
@@ -42,17 +43,20 @@
                 {% endif %})
                 
             </td>
-            <td rowspan="9">
+            <td rowspan="12">
                 <p class="p-2 text-center mt-5">
                     <img src="/static/public/img/avatar.png" alt="">
                 </p>
             </td>
         </tr>
         <tr>
-            <th>Telephone: </th> <td>{{ directory.phone }}</td> 
+            <th>Date de naissance: </th> <td>{{ directory.date_of_birth }} a {{ directory.place_of_birth }}</td> 
         </tr>
         <tr>
-            <th>En cas d'urgence: </th> <td>{{ directory.urgent_phone }}</td>
+            <th>C.I.N.: </th> <td>{{ directory.cin }}, Delivre le {{ directory.delivered_on }} a {{ directory.delivered_at }}</td> 
+        </tr>
+        <tr>
+            <th>Telephone: </th> <td>{{ directory.phone }} - En cas d'urgence: {{ directory.urgent_phone }}</td>
         </tr>
         <tr>
             <th>Email: </th> <td>{{ directory.email }}</td>
@@ -61,7 +65,10 @@
             <th>Adresse: </th> <td>{{ directory.address }}</td>
         </tr>
         <tr>
-            <th>Fonction : </th> <td>{{ directory.function }}</td>
+            <th>Fonction : </th> <td>{{ directory.function }}, departement: {{ directory.departement }}</td>
+        </tr>
+        <tr>
+            <th>Matricule : </th> <td>{{ directory.matricule_number }}</td>
         </tr>
         <tr>
             <th>Date de debut de service: </th> <td>{{ directory.date_of_service }}</td> 
@@ -71,6 +78,9 @@
         </tr>
         <tr>
             <th>Notes:</th><td>{{ directory.notes }}</td>
+        </tr>
+        <tr>
+            <th>Ajouter par:</th><td>{{ directory.administrator }}</td>
         </tr>
 
     </table>

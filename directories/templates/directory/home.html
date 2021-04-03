@@ -4,7 +4,7 @@
 
 {% block createForm %} 
     <div class="container-fluid background" id="background">
-        <div class="container create mt-5">
+        <div class="container create">
             <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
             <div class="container-fluid subtitle"> Ajouter un nouveau annuaire</div>
             <form action="{% url 'directories:store_directory' %}" class="form" method="post">

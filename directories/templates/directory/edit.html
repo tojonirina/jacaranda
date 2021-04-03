@@ -8,28 +8,44 @@
             {% csrf_token %}
             <table class="table table-bordered table-sm">
                 <tr>
-                    <td>Nom complet:</td><td colspan="4"><input type="text" name="full_name" class="form-control" value="{{ directory.full_name }}" /></td>
-                </tr>
-                <tr>
-                    <td>Fonction:</td><td><input type="text" name="function" class="form-control" value="{{ directory.function }}" /></td>
-                    <td>Genrer:</td>
-                    <td>
+                    <th>Nom complet:</th><th colspan=""><input type="text" name="full_name" class="form-control" value="{{ directory.full_name }}" /></th>
+                    <th>
                         <select name="gender" class="form-control">
                             <option value="{{ directory.gender }}">{{ directory.gender }}</option>
                             <option value="man">Homme</option>
                             <option value="woman">Femme</option>
                             <option value="other">autre</option>
                         </select>
-                    </td>
+                    </th>
+                    <th>
+                        <input type="text" name="matricule_number" class="form-control" value="{{ directory.matricule_number }}" />
+                    </th>
                 </tr>
                 <tr>
-                    <td>T&eacute;l&eacute;phone:</td><td><input type="number" name="phone" class="form-control" value="{{ directory.phone }}" /></td>
-                    <td>Contact urgent:</td><td><input type="number" name="urgent_phone" class="form-control" value="{{ directory.urgent_phone }}" /></td>
+                    <th>Fonction:</th>
+                    <th>
+                        <input type="text" name="function" class="form-control" value="{{ directory.function }}" />
+                    </th>
+                    <th><input type="text" name="departement" class="form-control" value="{{ directory.departement }}" /></th>
                 </tr>
                 <tr>
-                    <td>Email: </td><td><input type="email" name="email" class="form-control" value="{{ directory.email }}" /></td>
-                    <td>Statut:</td>
-                    <td>
+                    <th>Date de naiss.:</th>
+                    <th><input type="date" name="date_of_birth" class="form-control" value="{{ directory.date_of_birth|date:'c' }}" /></th>
+                    <th><input type="text" name="place_of_birth" class="form-control" value="{{ directory.place_of_birth }}" /></th>
+                </tr>
+                <tr>
+                    <th>C.I.N.:</th>
+                    <th><input type="text" name="cin" class="form-control" value="{{ directory.cin }}" /></th>
+                    <th><input type="date" name="delivered_on" class="form-control" value="{{ directory.delivered_on|date:'c' }}" /></th>
+                    <th><input type="text" name="delivered_at" class="form-control" value="{{ directory.delivered_at }}" /></th>
+                </tr>
+                <tr>
+                    <th>T&eacute;l&eacute;phone:</th><th><input type="number" name="phone" class="form-control" value="{{ directory.phone }}" /></th>
+                    <th><input type="number" name="urgent_phone" class="form-control" value="{{ directory.urgent_phone }}" /></th>
+                </tr>
+                <tr>
+                    <th>Email: </th><th><input type="email" name="email" class="form-control" value="{{ directory.email }}" /></th>
+                    <th>
                         <select name="state" class="form-control">
                             {% if directory.state == 1 %}
                             <option value="{{ directory.state }}">En service</option>
@@ -50,21 +66,19 @@
                             <option value="4">En cong&eacute;</option>
                             <option value="0">Hors service</option>
                         </select>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
-                    <td>Adresse: </td><td><textarea name="address" class="form-control" >{{ directory.address }}</textarea></td>
-                    <td>Notes: </td><td><textarea name="notes" class="form-control">{{ directory.notes }}</textarea></td>
+                    <th>D. de Service: </th><th><input type="date" name="date_of_service" class="form-control" value='{{ directory.date_of_service|date:"c" }}' /></th>
+                    <th>D. Fin de Service: </th><th><input type="date" name="end_of_service" class="form-control" value='{{ directory.end_of_service|date:"c" }}' /></th>
                 </tr>
                 <tr>
-                    <td>Date de service actuelle: </td><td><input type="date" name="date_of_service" class="form-control" value='{{ directory.date_of_service|date:"c" }}' /></td>
-                    <td>Date fin de service actuelle: </td><td><input type="date" name="end_of_service" class="form-control" value='{{ directory.end_of_service|date:"c" }}' /></td>
+                    <th>Adresse: </th><th><textarea name="address" class="form-control" >{{ directory.address }}</textarea></th>
+                    <th><textarea name="notes" class="form-control">{{ directory.notes }}</textarea></th>
+                    <th><input type="file" name="avatar" class="form-control" /></th>
                 </tr>
                 <tr>
-                    <td>Image: </td> <td><input type="file" name="avatar" class="form-control" /></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><button type="submit" class="btn btn-dark">Valider</button> <a href="{% url 'directories:directory_home' %}" class="btn btn-warning">Retour</a></td>
+                    <th colspan="4"><button type="submit" class="btn btn-option-submit">Valider</button> <a href="{% url 'directories:directory_home' %}" class="btn btn-option-submit">Retour</a></th>
                 </tr>
             </table>
 
