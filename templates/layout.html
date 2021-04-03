@@ -13,25 +13,35 @@
 </head>
 <body>
 
-    <header class="container-fluid bg-dark p-3 text-white">
-        <i class="bi bi-app-indicator"></i> &nbsp; GStock
-    </header>
+    
+    {% block createForm %} {% endblock %} 
 
     <div class="container-fluid p-0 m-0">
         <div class="row p-0 m-0">
-            <div class="col-md-2 m-0 p-0">
+            <div class="col-md-2 m-0 p-3">
                 <ul class="leftmenu">
-                    <li><a href="#" class="useroption"><span><i class="bi bi-person-square"></i></span>&nbsp; Anonyme</a></li>
+                    <li><a href="#" class="useroption h4"><i class="bi bi-app-indicator"></i> &nbsp; GStock</a></li>
                     <hr>
                     <li><a href="{% url 'users:user_home' %}" class="menuoption"><i class="bi bi-people"></i>&nbsp; Utilisateurs</a></li>
                     <li><a href="{% url 'directories:directory_home' %}" class="menuoption"><i class="bi bi-diagram-3-fill"></i>&nbsp; Annuaires</a></li>
                     <li><a href="{% url 'material:material_home' %}" class="menuoption"><i class="bi bi-stack"></i>&nbsp; Materiels</a></li>
                     <li><a href="{% url 'computers:computer_home' %}" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; Ordinateurs</a></li>
-                    <li><a href="{% url 'absences:absence_home' %}" class="menuoption"><i class="bi bi-journal-check"></i>&nbsp; Absences</a></li>
+                    <li><a href="{% url 'absences:absence_home' %}" class="menuoption"><i class="bi bi-calendar-week"></i>&nbsp; Absences</a></li>
                 </ul>
             </div>
-            <div class="col-md-10 p-1 m-0">
-                {% block content %} {% endblock %} 
+            <div class="col-md-10 p-3 m-0 p-0">
+                <header class="container-fluid p-0 mb-2">
+                    <div class="container-fluid text-white p-2 header text-right">
+                        <div class="container account-option">
+                            <a href=""><i class="bi bi-sliders"></i></a> &nbsp;
+                            <a href=""><i class="bi bi-bell"></i></a> &nbsp;
+                            <a href=""><i class="bi bi-power"></i></a> &nbsp;
+                        </div>
+                    </div>
+                </header>
+                <div class="container-fluid p-2 content">
+                    {% block content %} {% endblock %} 
+                </div>
             </div>
         </div>
     </div>

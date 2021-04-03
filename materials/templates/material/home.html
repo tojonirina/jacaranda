@@ -2,126 +2,129 @@
 
 {% block title %} Materiels {% endblock %}
 
-{% block content %}
-
-<div class="container-fluid background" id="background">
-    <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
-    <div class="container create">
-        <div class="container-fluid subtitle"> Ajouter un matériel</div>
-        <form action="{% url 'material:store_material' %}" class="form" method="post">
-            {% csrf_token %}
-            <table class="table table-bordered table-sm">
-                
-                {% if materials %}
-                    <tr>
+{% block createForm %} 
+    <div class="container-fluid background" id="background">
+        <div class="container create">
+            <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
+            <div class="container-fluid subtitle"> Ajouter un matériel</div>
+            <form action="{% url 'material:store_material' %}" class="form" method="post">
+                {% csrf_token %}
+                <table class="table table-bordered table-sm">
+                    
+                    {% if materials %}
+                        <tr>
+                            <td>
+                                Type : 
+                                <select name="type" class="type">
+                                    <option value="new">Nouveau matériel</option>
+                                    <option value="old">Matériel existant</option>
+                                </select>
+                            </td>
+                        </tr>
+                    {% endif %}
+                        
+                    <tr class="old_field ">
+                        <td>Materiel existant:</td>
                         <td>
-                            Type : 
-                            <select name="type" class="type">
-                                <option value="new">Nouveau matériel</option>
-                                <option value="old">Matériel existant</option>
+                            <select name="old_product" class="form-control">
+                                <option value="">----------</option>
+                                {% for material in materials %}
+                                    <option value="{{ material.id }}">{{ material.title }}</option>                                
+                                {% endfor %}
                             </select>
                         </td>
                     </tr>
-                {% endif %}
+                    <tr class="old_field ">
+                        <td>Notes:</td>
+                        <td>
+                            <textarea name="note" cols="30" class="form-control"></textarea>
+                        </td>
+                    </tr>
                     
-                <tr class="old_field ">
-                    <td>Materiel existant:</td>
-                    <td>
-                        <select name="old_product" class="form-control">
-                            <option value="">----------</option>
-                            {% for material in materials %}
-                                <option value="{{ material.id }}">{{ material.title }}</option>                                
-                            {% endfor %}
-                        </select>
-                    </td>
-                </tr>
-                <tr class="old_field ">
-                    <td>Notes:</td>
-                    <td>
-                        <textarea name="note" cols="30" class="form-control"></textarea>
-                    </td>
-                </tr>
-                
-                <tr class="new_field">
-                    <td>Nom du produit:</td>
-                    <td colspan="3">                            
-                        <input type="text" name="title" class="form-control" placeholder="Nom du produit">
-                    </td>
-                </tr> 
-                <tr class="new_field">
-                    <td>Numero de serie:</td>
-                    <td colspan="3">                            
-                        <input type="text" name="serial_number" class="form-control" placeholder="...">
-                    </td>
-                </tr>
-                <tr class="new_field">
-                    <td>Modele:</td>
-                    <td colspan="3">                            
-                        <input type="text" name="modele" class="form-control" placeholder="...">
-                    </td>
-                </tr>                    
-                <tr class="new_field">
-                    <td>Description:</td><td colspan="3"><textarea type="text" name="description" class="form-control" placeholder="Description du matériel"></textarea></td>
-                </tr>
-                
-                <tr>
-                    <td>Quantité:</td><td><input type="number" name="quantity" class="form-control" placeholder="Nombre du matériel" required></td>
-                    <td>Unité:</td>
-                    <td>
-                        <select name="unity" class="form-control">
-                            <option value="pcs">Pièce</option>
-                            <option value="cartoon">Carton</option>
-                            <option value="box">Boite</option>
-                            <option value="kg">Kg</option>
-                            <option value="g">Gramme</option>
-                            <option value="L">Litre</option>
-                            <option value="m">M&egrave;tre</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Etat du matériel:</td>
-                    <td colspan="3">
-                        <select name="state" class="form-control">
-                            <option value="new">Nouveau</option>
-                            <option value="old">Ancien</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr class="new_field">
-                    <td>Fournisseur:</td>
-                    <td colspan="3">                            
-                        <input type="text" name="fournissor" class="form-control" placeholder="ex: Blue Market">
-                    </td>
-                </tr>
-                <tr class="new_field">
-                    <td>Contact du fournisseur:</td>
-                    <td colspan="3">                            
-                        <input type="text" name="fournissor_contact" class="form-control" placeholder="032-33-444-55">
-                    </td>
-                </tr> 
-                <tr>
-                    <td colspan="2"><button type="button" class="btn btn-dark">Valider</button> <button type="reset" class="btn btn-warning">Réinitialiser</button></td>
-                </tr>
-            </table>
+                    <tr class="new_field">
+                        <td>Nom du produit:</td>
+                        <td colspan="3">                            
+                            <input type="text" name="title" class="form-control" placeholder="Nom du produit">
+                        </td>
+                    </tr> 
+                    <tr class="new_field">
+                        <td>Numero de serie:</td>
+                        <td colspan="3">                            
+                            <input type="text" name="serial_number" class="form-control" placeholder="...">
+                        </td>
+                    </tr>
+                    <tr class="new_field">
+                        <td>Modele:</td>
+                        <td colspan="3">                            
+                            <input type="text" name="modele" class="form-control" placeholder="...">
+                        </td>
+                    </tr>                    
+                    <tr class="new_field">
+                        <td>Description:</td><td colspan="3"><textarea type="text" name="description" class="form-control" placeholder="Description du matériel"></textarea></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Quantité:</td><td><input type="number" name="quantity" class="form-control" placeholder="Nombre du matériel" required></td>
+                        <td>Unité:</td>
+                        <td>
+                            <select name="unity" class="form-control">
+                                <option value="pcs">Pièce</option>
+                                <option value="cartoon">Carton</option>
+                                <option value="box">Boite</option>
+                                <option value="kg">Kg</option>
+                                <option value="g">Gramme</option>
+                                <option value="L">Litre</option>
+                                <option value="m">M&egrave;tre</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Etat du matériel:</td>
+                        <td colspan="3">
+                            <select name="state" class="form-control">
+                                <option value="new">Nouveau</option>
+                                <option value="old">Ancien</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="new_field">
+                        <td>Fournisseur:</td>
+                        <td colspan="3">                            
+                            <input type="text" name="fournissor" class="form-control" placeholder="ex: Blue Market">
+                        </td>
+                    </tr>
+                    <tr class="new_field">
+                        <td>Contact du fournisseur:</td>
+                        <td colspan="3">                            
+                            <input type="text" name="fournissor_contact" class="form-control" placeholder="032-33-444-55">
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2"><button type="button" class="btn btn-option-submit">Valider</button> <button type="reset" class="btn btn-option-submit">Réinitialiser</button></td>
+                    </tr>
+                </table>
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+{% endblock %} 
+
+{% block content %}
+
 
 <div class="container-fluid m-0 p-0">
     <div class="container-fluid sublink">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-                <a href="{% url 'material:history_material' %}" class="btn btn-light history"><i class="bi bi-clock-history"></i> Historique</a>
-                <a class="btn btn-light" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
+                <a href="{% url 'material:history_material' %}" class="btn btn-option history"><i class="bi bi-clock-history"></i> Historique</a>
+                <a class="btn btn-option" id="add"><i class="bi bi-box-arrow-in-right"></i> Entré matériel</a>
                 {% if materials %}
-                <a href="{% url 'material:get_takeout_material' %}" class="btn btn-light"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
+                <a href="{% url 'material:get_takeout_material' %}" class="btn btn-option"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
                 {% endif %}
-                <a href="{% url 'material:reporting_material' %}" class="btn btn-light"><i class="bi bi-clipboard-data"></i> Reportings</a>
+                <a href="{% url 'material:reporting_material' %}" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings</a>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-                <input type="search" class="form-control" placeholder="Taper votre recheche">
+                <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
             </div>
         </div>
     </div>
