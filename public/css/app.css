@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    font-family: 'Roboto';
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     background-color:#eeeeee;
 }
@@ -87,13 +87,13 @@ ul.leftmenu li a.useroption{
 }
 
 .background {
-    position: absolute;
+    position: fixed;
     display: none;
     z-index: 1000;
     top: 0;
     right: 0;
     height: 100%;
-    border-radius: 15px;
+    background-color: rgba(100, 100, 100, .3);
 }
 
 .create {
@@ -133,6 +133,7 @@ tr.old_field {
 
 #close {
     top: -25px;
+    left: -20px;
     position: relative;
 }
 
