@@ -57,10 +57,10 @@ def show(request, id):
 
 def edit(request, id):
     """
-    Edit an user information
+    Edit an user information 
     """
     try: 
-        user = Users.objects.get(id=id)
+        user = Users.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id AND u.id = %s', [id])[0]
     except:
         return HttpResponse('Server error', status=500)
 

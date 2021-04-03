@@ -20,14 +20,15 @@
                     <th>Type de l'utilisateur: </th> 
                     <td>
                         <select name="types" class="form-control">
-                            <option value="{{ user.types }}">{{ user.types }}</option>
-                            <option value="user">Utilisateur</option>
-                            <option value="administrator">Administrateur</option>
+                            <option value="{{ user.types }}">{{ user.get_types_display }}</option>
+                            <option value="user">Standard User</option>
+                            <option value="administrator">Administrator User</option>
+                            <option value="super_user">Super Administrator User</option>
                         </select>
                     </th>
                 </tr>                      
                 <tr>
-                    <td colspan="2"><button type="submit" class="btn btn-success pt-1 pr-2 pl-2 pb-1">Enregister</button> <a href="{% url 'users:show_user' user.id %}" class="btn btn-light pt-1 pr-2 pl-2 pb-1"> Annuler </a> </th> 
+                    <td colspan="2" class="text-center"><button type="submit" class="btn btn-option-submit">Enregister</button> <a href="{% url 'users:show_user' user.id %}" class="btn btn-option-submit"> Annuler </a> </th> 
                 </tr>
             </tbody>
         </form>

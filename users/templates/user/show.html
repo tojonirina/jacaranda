@@ -8,7 +8,7 @@
     <div class="container-fluid sublink">
         <form action="{% url 'users:delete_user' user.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur? ')"><i class="bi bi-person-dash-fill" title="Supprimer l'utilisateur"></i></button> <a href="{% url 'users:edit_user' user.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+            <button type="submit" class="btn btn-option" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur? ')"><i class="bi bi-person-dash-fill" title="Supprimer l'utilisateur"></i></button> <a href="{% url 'users:edit_user' user.id %}" class="btn btn-light" title="Modifier"><i class="bi bi-pencil-square"></i></a>
         </form>
     </div>
     <div class="container-fluid subtitle">Information de {{ user.full_name }} </div>
@@ -23,13 +23,7 @@
             <tr>
                 <th>Type: </th> 
                 <td>
-                    {% if user.types == 'administrator' %}
-                        <i class="bi bi-person-badge"></i> Administrator User
-                    {% elif user.types == 'super_user' %}
-                        <i class="bi bi-person-badge"></i> Super Administrator User
-                    {% elif user.types == 'user' %}
-                        Standard User
-                    {% endif %}
+                    {{ user.get_types_display }}
                 </th>
             </tr>
             <tr>
