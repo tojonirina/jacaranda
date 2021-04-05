@@ -37,8 +37,13 @@ div.sublink {
 div.sublink a {
     font-size: 14px;
 }
+
+div.sublink select, div.sublink input {
+    border-radius: 10px;
+}
+
 ul.leftmenu {
-    padding: 0px;
+    padding: 0;
     margin: 0;
     background-color: #1C1D64;
     box-shadow: 0 0 1.2em rgba(28, 29, 100, .7);
@@ -51,7 +56,7 @@ ul.leftmenu li {
 }
 
 ul.leftmenu li a.menuoption {
-    padding: 5px 5px 5px 20px;
+    padding: 5px 5px 5px 30px;
     margin: 0px;
     color: #ffffff;
     width: 100%;
@@ -67,21 +72,6 @@ ul.leftmenu li a.menuoption:hover {
     transition: background-color 0.2s ease-in;
     color: white;
 }
-
-/* ul.leftmenu li a.menuoption::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background:#ffffff;
-    transition: width .3s;
-}
-
-ul.leftmenu li a.menuoption:hover::after {
-    color: rgb(255, 255, 255);
-    width: 100%;
-    transition: width .3s;
-} */
 
 ul.leftmenu li a.useroption{
     margin: 0px;
@@ -177,7 +167,7 @@ tr.old_field {
 
 .btn-option {
     background-color: #E74C3C;
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
 }
 

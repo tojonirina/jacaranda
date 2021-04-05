@@ -27,7 +27,7 @@
                         <td>Materiel existant:</td>
                         <td>
                             <select name="old_product" class="form-control">
-                                <option value="">----------</option>
+                                <option value="">-----Choisissez-----</option>
                                 {% for material in materials %}
                                     <option value="{{ material.id }}">{{ material.title }}</option>                                
                                 {% endfor %}

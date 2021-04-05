@@ -39,10 +39,7 @@
             <th>Description :</th><td>{{ computer.description }}</td>
         </tr>
         <tr>
-            <th>Attribu&eacute; &agrave; :</th><td>{{ computer.assigned_to }}</td>
-        </tr>
-        <tr>
-            <th>Attribu&eacute; le :</th><td>{{ computer.assigned_at }}</td>
+            <th>Attribu&eacute; &agrave; :</th><td>{{ computer.assigned_to }} le {{ computer.assigned_at }}</td>
         </tr>
         <tr>
             <th>Date d'ajout: </th><td>{{ computer.created_at }} par <i class="bi bi-person-fill"></i>{{ computer.administrator }}</td>

@@ -44,18 +44,6 @@
                 <th>Type</th><td><input type="text" name="type_of_ram" class="form-control" value="{{ computer.type_of_ram }}"/></td>
             </tr>
             <tr>
-                <th>Statut :</th>
-                <td>
-                    <select name="status" class="form-control">
-                        <option value="{{ computer.status }}">{{ computer.get_status_display }}</option>
-                        <option value="assigned">Assign&eacute;</option>
-                        <option value="not_assigned">Non assign&eacute;</option>
-                        <option value="on_suspens">En suspens</option>
-                        <option value="out_of_service">Hors service</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
                 <th>OS :</th><td><input type="text" name="os" class="form-control" value="{{ computer.os }}"/></td>
                 <th>Attribu&eacute; &agrave; :</th>
                 <td>
