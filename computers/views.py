@@ -59,6 +59,7 @@ def store(request):
                 newComputer.state = request.POST['state']
                 newComputer.status = request.POST['status']
                 newComputer.category = request.POST['category']
+                newComputer.assigned_to = ''
                 newComputer.fournissor = request.POST['fournissor']
                 newComputer.fournissor_contact = request.POST['fournissor_contact']
                 newComputer.description = request.POST['description']
@@ -75,7 +76,7 @@ def store(request):
 def show(request, id):
     """
     Show all information of a specific computer
-    :param id:
+    :param id: integer
     """
     try:
         computer = Computers.objects.get(id=int(id))
@@ -87,7 +88,7 @@ def show(request, id):
 def edit(request, id):
     """
     Get page to edit the information of a specific computer
-    :param id:
+    :param id: integer
     """
     try:
         computer = Computers.objects.get(id=int(id))
@@ -104,44 +105,25 @@ def update(request, id):
     """
     try:
         if request.method == 'POST':
-            if len(request.POST['assigned_to']) > 5:
-                computer = Computers.objects.get(id=int(id))
-                computer.name = request.POST['name']
-                computer.serial_number = request.POST['serial_number']
-                computer.modele = request.POST['modele']
-                computer.mark = request.POST['mark']
-                computer.processor = request.POST['processor']
-                computer.processor_generation = request.POST['processor_generation']
-                computer.ram = request.POST['ram']
-                computer.type_of_ram = request.POST['type_of_ram']
-                computer.os = request.POST['os']
-                computer.state = request.POST['state']
-                computer.status = request.POST['status']
-                computer.category = request.POST['category']
-                computer.assigned_to = request.POST['assigned_to']
-                computer.assigned_at = datetime.now()
-                computer.fournissor = request.POST['fournissor']
-                computer.fournissor_contact = request.POST['fournissor_contact']
-                computer.description = request.POST['description']
-                computer.save()
-            else:
-                computer = Computers.objects.get(id=int(id))
-                computer.name = request.POST['name']
-                computer.serial_number = request.POST['serial_number']
-                computer.modele = request.POST['modele']
-                computer.mark = request.POST['mark']
-                computer.processor = request.POST['processor']
-                computer.processor_generation = request.POST['processor_generation']
-                computer.ram = request.POST['ram']
-                computer.type_of_ram = request.POST['type_of_ram']
-                computer.os = request.POST['os']
-                computer.state = request.POST['state']
-                computer.status = request.POST['status']
-                computer.category = request.POST['category']
-                computer.fournissor = request.POST['fournissor']
-                computer.fournissor_contact = request.POST['fournissor_contact']
-                computer.description = request.POST['description']
-                computer.save()
+            computer = Computers.objects.get(id=int(id))
+            computer.name = request.POST['name']
+            computer.serial_number = request.POST['serial_number']
+            computer.modele = request.POST['modele']
+            computer.mark = request.POST['mark']
+            computer.processor = request.POST['processor']
+            computer.processor_generation = request.POST['processor_generation']
+            computer.ram = request.POST['ram']
+            computer.type_of_ram = request.POST['type_of_ram']
+            computer.os = request.POST['os']
+            computer.state = request.POST['state']
+            computer.status = request.POST['status']
+            computer.category = request.POST['category']
+            computer.assigned_to = request.POST['assigned_to']
+            computer.assigned_at = datetime.now()
+            computer.fournissor = request.POST['fournissor']
+            computer.fournissor_contact = request.POST['fournissor_contact']
+            computer.description = request.POST['description']
+            computer.save()
         else:
             return HttpResponse('Unauthorized', status=401)
     except:

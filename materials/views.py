@@ -176,5 +176,8 @@ def history(request):
     return render(request, 'material/history.html', {'history':history}) 
 
 def reporting(request):
-    values = [12, 43, 22, 52, 13, 65]
+
+    # entryEveryMonth = Materials.objects.raw("SELECT DISTINCT SUM(quantity) FROM materials WHERE created_at BETWEEN '01/01/2021' AND '31/01/2021' GROUP BY title")
+    values = [12, 43, 22, 52, 13, 65, 12, 43, 22, 52, 13, 65]
+
     return render(request, 'material/reporting.html', {'values':values})

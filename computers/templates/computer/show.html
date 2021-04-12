@@ -39,7 +39,21 @@
             <th>Description :</th><td>{{ computer.description }}</td>
         </tr>
         <tr>
-            <th>Attribu&eacute; &agrave; :</th><td>{{ computer.assigned_to }} le {{ computer.assigned_at }}</td>
+            <th>Attribu&eacute; &agrave; :</th><td>
+                {% if computer.assigned_to == None or computer.assigned_to == '' %}
+                -
+                {% else %}
+                    {{ computer.assigned_to }}
+                {% endif %}
+                le 
+                {% if computer.assigned_at == None and computer.assigned_to == None %}
+                -
+                {% elif computer.assigned_at == None or computer.assigned_to == '' %}
+                -
+                {% else %}
+                    {{ computer.assigned_at }}
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Date d'ajout: </th><td>{{ computer.created_at }} par <i class="bi bi-person-fill"></i>{{ computer.administrator }}</td>

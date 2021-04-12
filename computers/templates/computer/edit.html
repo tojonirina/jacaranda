@@ -49,7 +49,7 @@
                 <td>
                     <select name="assigned_to" class="form-control">
                         <option value="{{ computer.assigned_to }}">{{ computer.assigned_to }}</option>
-                        <option value=""></option>
+                        <option></option>
                         {% for directory in directories %}
                             <option value="{{ directory.full_name }}">{{ directory.full_name }}</option>
                         {% endfor %}
