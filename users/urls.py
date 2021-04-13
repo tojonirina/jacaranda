@@ -1,15 +1,15 @@
 from django.urls import path
-from . import views
+from .views import UserView
 
 app_name = 'users'
 
 urlpatterns = [
-    path('', views.home, name='user_home'),
-    path('store', views.store, name='store_user'),
-    path('<int:id>', views.show, name='show_user'),
-    path('<int:id>/edit', views.edit, name='edit_user'),
-    path('<int:id>/update', views.update, name='update_user'),
-    path('<int:id>/delete', views.delete, name='delete_user'),
-    path('<int:id>/block', views.block, name='block_user'),
-    path('<int:id>/unblock', views.unblock, name='unblock_user'),
+    path('', UserView.home, name='user_home'),
+    path('store', UserView.store, name='store_user'),
+    path('<int:id>', UserView.show, name='show_user'),
+    path('<int:id>/edit', UserView.edit, name='edit_user'),
+    path('<int:id>/update', UserView.update, name='update_user'),
+    path('<int:id>/delete', UserView.delete, name='delete_user'),
+    path('<int:id>/block', UserView.block, name='block_user'),
+    path('<int:id>/unblock', UserView.unblock, name='unblock_user'),
 ]
