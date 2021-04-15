@@ -165,12 +165,22 @@ tr.old_field {
     transition: background-color 0.3s linear;
 }
 
+.btn-other {
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
 .btn-option {
     background-color: #E74C3C;
     border-radius: 10px;
     color: white;
 }
 
+.btn-option:hover {
+    box-shadow: 0 0 1em rgba(250, 68, 68, 0.6);
+    color: white;
+    background-color: #ce3b2a;
+}
 .btn-option-submit {
     background-color: #fc897ce0;
     border-radius: 5px;
@@ -183,10 +193,4 @@ tr.old_field {
     background-color:#E74C3C;
     color: white;
     box-shadow: 0 0 1em rgba(255, 124, 124, 0.7);
-}
-
-.btn-option:hover {
-    box-shadow: 0 0 1em rgba(250, 68, 68, 0.6);
-    color: white;
-    background-color: #ce3b2a;
 }
