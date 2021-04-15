@@ -12,7 +12,8 @@ class Materials(models.Model):
 
     STATE = (
         ('new','Nouveau'),
-        ('occasion','Occasion')
+        ('occasion','Occasion'),
+        ('hs','Hors service')
     )
 
     UNITY = (

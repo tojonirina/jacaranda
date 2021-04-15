@@ -13,7 +13,8 @@
                     <tr>
                         <td>Nom complet:</td>
                         <td>
-                            <select name="directory_id" class="form-control">
+                            <select name="directory_id" class="form-control" required>
+                                <option></option>
                                 {% for d in directories %}
                                     <option value="{{ d.id }}">{{ d.full_name }}</option>
                                 {% endfor %}
@@ -136,4 +137,12 @@
 </div>
 
 
+{% endblock %}
+
+{% block javascript %} 
+    <script>
+        $(document).ready(function(){
+            
+        });
+    </script>
 {% endblock %}

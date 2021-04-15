@@ -25,7 +25,7 @@ SECRET_KEY = '0u_r0zi-u++^eruxsy(*^^o#_n1n+dofryn_sy)sg-q4^*8b2*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # All external app
-    'users',
-    'materials',
+    # All external application
+    'users.apps.UsersConfig', # one way to activate an app
+    'materials', # another way to activate app
     'computers',
     'directories',
     'absences'

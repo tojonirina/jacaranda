@@ -112,8 +112,6 @@
                         <th>Etat</th>
                         <th>Statut</th>
                         <th>OS</th>
-                        <th>Attribu&eacute; &agrave;</th>
-                        <th>D. d'attr.</th>
                         <th>N. de serie</th>
                     </tr>
                 </thead>
@@ -123,25 +121,14 @@
                         <tr>
                             <td>{{ computer.name }}</td>
                             <td>{{ computer.get_category_display }} ({{ computer.description }})</td>
-                            <td>{{ computer.get_state_display }}</td>
-                            <td>{{ computer.get_status_display }}</td>
+                            <td>{{ computer.get_state_display }} </td>
+                            <td>
+                                {{ computer.get_status_display }}
+                                {% if computer.status == 'assigned' %}
+                                    <i class="bi bi-person-fill" title="{{ computer.assigned_to }} le {{ computer.assigned_at }}"></i>
+                                {% endif %}
+                            </td>
                             <td>{{ computer.os }}</td>
-                            <td>
-                                {% if computer.assigned_to == None or computer.assigned_to == '' %}
-                                -
-                                {% else %}
-                                    {{ computer.assigned_to }}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if computer.assigned_at == None and computer.assigned_to == None %}
-                                -
-                                {% elif computer.assigned_at == None or computer.assigned_to == '' %}
-                                -
-                                {% else %}
-                                    {{ computer.assigned_at }}
-                                {% endif %}
-                            </td>
                             <td>{{ computer.serial_number }}</td>
                             <td>
                                 <a href="{% url 'computers:show_computer' computer.id %}" title="Voir detail" class="btn btn-light pt-0 pr-1 pb-0 pl-1"> <i class="bi bi-eye-fill"></i> </a>

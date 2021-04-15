@@ -7,14 +7,11 @@
 <div class="container m-0 p-0">
     <div class="container-fluid subtitle">Editer l'information de {{ user.full_name }} </div>
     <table class='table table-sm table-hovered table-bordered m-0'>
-        <form action="{% url 'users:update_user' user.id %}" method="post">
+        <form action="{% url 'users:update_user' user.id %}" method="POST">
             {% csrf_token %}
             <tbody>
                 <tr>
-                    <th>Nom: </th> <td><input type="text" name="full_name" value="{{ user.full_name }}" class="form-control required"></th>
-                </tr>
-                <tr>
-                    <th>Nom d'utilisateur: </th> <td><input type="text" name="login" value="{{ user.login }}" class="form-control required"></th>
+                    <th width="250">Nom d'utilisateur: </th> <td><input type="text" name="login" value="{{ user.login }}" class="form-control required"></th>
                 </tr>
                 <tr>
                     <th>Type de l'utilisateur: </th> 

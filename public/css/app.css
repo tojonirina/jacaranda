@@ -90,7 +90,7 @@ ul.leftmenu li a.useroption{
     top: 0;
     right: 0;
     height: 100%;
-    background-color: rgba(100, 100, 100, .3);
+    background-color: rgba(75, 75, 75, 0.336);
 }
 
 .create {

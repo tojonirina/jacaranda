@@ -16,6 +16,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler404
+from django.contrib import admin
 from . import views
 
 handler404 = 'gstock.views.pageNotFound'
@@ -28,5 +29,6 @@ urlpatterns = [
     path('materials/', include('materials.urls')),
     path('directories/', include('directories.urls')),
     path('computers/', include('computers.urls')),
-    path('absences/', include('absences.urls'))
+    path('absences/', include('absences.urls')),
+    path('admin/', admin.site.urls)
 ]
