@@ -4,7 +4,7 @@ from .views import UserView
 app_name = 'users'
 
 urlpatterns = [
-    path('', UserView.home, name='user_home'),
+    path('', UserView.index, name='user_home'),
     path('store', UserView.store, name='store_user'),
     path('<int:id>', UserView.show, name='show_user'),
     path('<int:id>/edit', UserView.edit, name='edit_user'),
