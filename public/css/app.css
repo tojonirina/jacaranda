@@ -194,3 +194,9 @@ tr.old_field {
     color: white;
     box-shadow: 0 0 1em rgba(255, 124, 124, 0.7);
 }
+
+.login_error_message , .password_error_message, .confirm_password_error_message{
+    font-size: 12px;
+    font-weight: bolder;
+    display: none;
+}
