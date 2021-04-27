@@ -1,17 +1,19 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
+from django.utils.html import escape
 from .models import User
 from directories.models import Directories
 
-class UserView():
+class UserView:
     
-    def home(request):
+    def index(request):
         """
         Display all user
         """
         try:
             directories = Directories.objects.all()
-            users = User.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id')
+            # display 10 last user order by its creation date
+            users = User.objects.raw('SELECT * FROM users u INNER JOIN directories d ON u.directory_id = d.id ORDER BY u.created_at DESC')[:10]
         except Directorie.DoesNotExist:
             return HttpResponse('Directorie does not exist or database connection error', status=500)
         except User.DoesNotExist:
@@ -42,11 +44,11 @@ class UserView():
                                 if checkUserLogin is None:
 
                                     import hashlib # import haslib for hashing
-                                    passwd = bytes(request.POST['confirm_password'], 'ascii') # convert password to bytes for to be readable in sha224() 
+                                    passwd = bytes(escape(request.POST['confirm_password']), 'ascii') # convert password to bytes for to be readable in sha224() 
 
                                     user = User()
                                     user.directory_id = request.POST['directory_id']
-                                    user.login = request.POST['login']
+                                    user.login = escape(request.POST['login'])
                                     user.password = hashlib.sha224(b"%s" % passwd ).hexdigest() # Encrypt password
                                     user.types = request.POST['types']
                                     user.administrator = 'superadmin'
@@ -89,10 +91,7 @@ class UserView():
         """
         Edit an user information 
         """
-        try: 
-            user = User.objects.get(id=int(id))
-        except User.DoesNotExist:
-            return HttpResponse('User does not exist', status=404)
+        user = get_object_or_404(User, pk=int(id))
 
         return render(request, 'user/edit.html', {'user': user})
 
@@ -104,8 +103,12 @@ class UserView():
             if request.method == 'POST':
 
                 user = User.objects.get(id=int(id))
-                user.types = request.POST['types']
-                user.save()
+
+                if user.status != 1:
+                    user.types = escape(request.POST['types'])
+                    user.save()
+                else:
+                    print("You're note authorized to change it")
 
             else:
                 return HttpResponse('Unauthorized', status=401)
