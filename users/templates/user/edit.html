@@ -5,13 +5,14 @@
 {% block content %}
 
 <div class="container m-0 p-0">
-    <div class="container-fluid subtitle">Editer l'information de {{ user.full_name }} </div>
+    <div class="container-fluid subtitle"><i class="bi bi-pencil-square"></i> &nbsp; Editer l'information de {{ user.full_name }} </div>
     <table class='table table-sm table-hovered table-bordered m-0'>
         <form action="{% url 'users:update_user' user.id %}" method="POST">
             {% csrf_token %}
             <tbody>
                 <tr>
-                    <th width="250">Nom d'utilisateur: </th> <td><input type="text" name="login" value="{{ user.login }}" class="form-control required"></th>
+                    <th width="200">Nom d'utilisateur: </th> <td><input type="text" name="login" id="login" value="{{ user.login }}" class="form-control required" disabled></th>
+                        <span class="login_error_message text-danger">Login must between 8 and 15 character (no specials chars like '@/\)(&%$#!'"')</span>
                 </tr>
                 <tr>
                     <th>Type de l'utilisateur: </th> 
@@ -25,7 +26,7 @@
                     </th>
                 </tr>                      
                 <tr>
-                    <td colspan="2" class="text-center"><button type="submit" class="btn btn-option-submit">Enregister</button> <a href="{% url 'users:show_user' user.id %}" class="btn btn-option-submit"> Annuler </a> </th> 
+                    <td colspan="2" class="text-center"><button type="submit" id="submit-form" class="btn btn-option-submit">Enregister</button> <a href="{% url 'users:show_user' user.id %}" id="cancelbutton" class="btn btn-option-submit"> Annuler </a> </th> 
                 </tr>
             </tbody>
         </form>
@@ -33,4 +34,54 @@
 </div>
 
 
+{% endblock %}
+
+{% block javascript %} 
+    <script>
+        $(document).ready(function(){
+
+            let loginInitialValue = $('#login').val();
+
+            let login = $('#login');
+
+            login.blur(function() {
+                
+                if (login.val().length < 8 && loginInitialValue !== login.val()) {
+                    $('.login_error_message').css({'display':'block'});
+                    $('#login').css({'border':'2px solid red'});
+                } 
+
+                if (login.val().length > 8 && loginInitialValue !== login.val()) {
+                    $('.login_error_message').css({'display':'none'});
+                    $('#login').css({'border':'2px solid green'});
+                }
+                
+            });
+
+            $('#submit-form').click(function(){
+
+                if (login.val() === '') {
+                    alert('Please check all required fields!');
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+
+            $('#cancelbutton').click(function(){
+                
+                if (loginInitialValue !== login.val()) {
+
+                    let discard = confirm("Do you want to discard change?");
+
+                    if (discard) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                }
+            });
+        });
+    </script>
 {% endblock %}

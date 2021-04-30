@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 
-class Materials(models.Model):
+class Material(models.Model):
     """
-    Materiel model class
+    Material model class
     """
 
     class Meta:
@@ -37,7 +37,7 @@ class Materials(models.Model):
     fournissor_contact = models.CharField(max_length=30, blank=True)
     administrator = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
 
     def __str__(self) -> str:
         return self.title

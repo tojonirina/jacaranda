@@ -51,22 +51,22 @@
             <th width="150">Raisons: </th><td>{{ absence.reasons }}</td>
         </tr>
         <tr>
-            <th width="150">Status: </th><td>{{ absence.get_status_display }}</td>
+            <th width="150">Statut: </th><td>{{ absence.get_status_display }}</td>
         </tr>
         <tr>
-            <th width="150">1ere validation par: </th><td>{{ absence.checkFirstValidation }}</td>
+            <th width="150">1&egrave;re validation par: </th><td>{{ absence.checkFirstValidation }}</td>
         </tr>
         <tr>
-            <th width="150">2e validation par: </th><td>{{ absence.checkSecondValidation }}</td>
+            <th width="150">2&egrave; validation par: </th><td>{{ absence.checkSecondValidation }}</td>
         </tr>
         <tr>
-            <th width="150">Piece justificative: </th><td>{{ absence.justificative }}</td>
+            <th width="150">Pi&egrave;ce justificative: </th><td>{{ absence.justificative }}</td>
         </tr>
         <tr>
-            <th width="150">Cree le: </th><td>{{ absence.created_at }}</td>
+            <th width="150">Cr&eacute;e le: </th><td>{{ absence.created_at }} ({{ absence.created_at|timesince }})</td>
         </tr>
         <tr>
-            <th width="150">Derniere MAJ: </th><td>{{ absence.updated_at }}</td>
+            <th width="150">Derni&egrave;re MAJ: </th><td>{{ absence.updated_at }} ({{ absence.updated_at|timesince }})</td>
         </tr>
     </table>
 

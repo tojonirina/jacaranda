@@ -1,129 +1,122 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from .models import Directories
+from .models import Directory
+from django.contrib import messages
 
-# Create your views here.
+class DirectoryView:
 
-def home(request):
-    '''
-    Get all directories 
-    '''
-    try:
-        directories = Directories.objects.all()
-    except:
-        return HttpResponse('Not found', status=500)
+    # Get all directories 
+    def index(request):
+        try:
+            directories = Directory.objects.all()
+        except:
+            return HttpResponse('Server or DB error', status=500)
 
-    return render(request, 'directory/home.html', {'directories':directories})
+        return render(request, 'directory/home.html', {'directories':directories})
 
-def store(request):
-    '''
-    Store a directory
-    '''
-    try:
-        if request.method == 'POST':
+    # Store a new directory
+    def store(request):
+        try:
+            if request.method == 'POST':
 
-            directory = Directories()
-            directory.full_name = request.POST['full_name'].upper()
-            directory.gender = request.POST['gender']
-            directory.date_of_birth = request.POST['date_of_birth']
-            directory.place_of_birth = request.POST['place_of_birth']
-            directory.cin = request.POST['cin']
-            directory.delivered_on = request.POST['delivered_on']
-            directory.delivered_at = request.POST['delivered_at']
-            directory.phone = request.POST['phone']
-            directory.urgent_phone = request.POST['urgent_phone']
-            directory.email = request.POST['email']
-            directory.address = request.POST['address']
-            directory.function = request.POST['function']
-            directory.departement = request.POST['departement']
-            directory.date_of_service = request.POST['date_of_service']
-            directory.end_of_service = request.POST['end_of_service']
-            directory.matricule_number = request.POST['matricule_number']
-            directory.state = 1
-            directory.avatar = 'myavatar'
-            directory.notes = request.POST['notes']
-            directory.administrator = 'superadmin'
+                directory = Directory()
+                directory.full_name = request.POST['full_name'].upper()
+                directory.gender = request.POST['gender']
+                directory.date_of_birth = request.POST['date_of_birth']
+                directory.place_of_birth = request.POST['place_of_birth']
+                directory.cin = request.POST['cin']
+                directory.delivered_on = request.POST['delivered_on']
+                directory.delivered_at = request.POST['delivered_at']
+                directory.phone = request.POST['phone']
+                directory.urgent_phone = request.POST['urgent_phone']
+                directory.email = request.POST['email']
+                directory.address = request.POST['address']
+                directory.function = request.POST['function']
+                directory.departement = request.POST['departement']
+                directory.date_of_service = request.POST['date_of_service']
+                directory.end_of_service = request.POST['end_of_service']
+                directory.matricule_number = request.POST['matricule_number']
+                directory.avatar = 'jaca-icon-orange-72x72.png'
+                directory.notes = request.POST['notes']
+                directory.administrator = 'superadmin'
 
-            directory.save()
+                directory.save()
 
-        else:
-            return HttpResponse('Unauthorized', status=401)
-    except:
-        return HttpResponse('Error', status=500)
+                messages.success(request, 'Directory added successfully')
 
-    return redirect('directories:directory_home')
+            else:
+                return HttpResponse('Unauthorized', status=401)
+        except:
+            return HttpResponse('Error', status=500)
 
-def show(request, id):
-    '''
-    Show all information of a specific directory
-    '''
-    try:
-        directory = Directories.objects.get(id=int(id))
-    except:
-        raise Http404('Not found')
+        return redirect('directories:directory_home')
 
-    return render(request, 'directory/show.html', {'directory':directory}) 
+    # Show information of an directory
+    def show(request, id):
+        try:
+            directory = Directory.objects.get(id=int(id))
+        except Directory.DoesNotExist:
+            raise Http404('Not found')
 
-def edit(request, id):
-    '''
-    Edit information about a specific directory
-    '''
-    try:
-        directory = Directories.objects.get(id=int(id))
-    except:
-        raise Http404('Not found')
+        return render(request, 'directory/show.html', {'directory':directory}) 
 
-    return render(request, 'directory/edit.html', {'directory':directory})
+    # Edit information about a specific directory
+    def edit(request, id):
+        try:
+            directory = Directory.objects.get(id=int(id))
+        except Directory.DoesNotExist:
+            raise Http404('Not found')
 
-def update(request, id):
-    '''
-    Update a specific directory
-    '''
-    try:
-        if request.method == 'POST':
+        return render(request, 'directory/edit.html', {'directory':directory})
 
-            directory = Directories.objects.get(id=int(id))
-            directory.full_name = request.POST['full_name'].upper()
-            directory.gender = request.POST['gender']
-            directory.date_of_birth = request.POST['date_of_birth']
-            directory.place_of_birth = request.POST['place_of_birth']
-            directory.cin = request.POST['cin']
-            directory.delivered_on = request.POST['delivered_on']
-            directory.delivered_at = request.POST['delivered_at']
-            directory.phone = request.POST['phone']
-            directory.urgent_phone = request.POST['urgent_phone']
-            directory.email = request.POST['email']
-            directory.address = request.POST['address']
-            directory.function = request.POST['function']
-            directory.departement = request.POST['departement']
-            directory.date_of_service = request.POST['date_of_service']
-            directory.end_of_service = request.POST['end_of_service']
-            directory.matricule_number = request.POST['matricule_number']
-            directory.state = request.POST['state']
-            directory.avatar = 'myavatar'
-            directory.notes = request.POST['notes']
-            directory.administrator = 'superuser'
+    # Update information of a specific directory
+    def update(request, id):
+        try:
+            if request.method == 'POST':
 
-            directory.save()
+                directory = Directory.objects.get(id=int(id))
+                directory.full_name = request.POST['full_name'].upper()
+                directory.gender = request.POST['gender']
+                directory.date_of_birth = request.POST['date_of_birth']
+                directory.place_of_birth = request.POST['place_of_birth']
+                directory.cin = request.POST['cin']
+                directory.delivered_on = request.POST['delivered_on']
+                directory.delivered_at = request.POST['delivered_at']
+                directory.phone = request.POST['phone']
+                directory.urgent_phone = request.POST['urgent_phone']
+                directory.email = request.POST['email']
+                directory.address = request.POST['address']
+                directory.function = request.POST['function']
+                directory.departement = request.POST['departement']
+                directory.date_of_service = request.POST['date_of_service']
+                directory.end_of_service = request.POST['end_of_service']
+                directory.matricule_number = request.POST['matricule_number']
+                directory.state = request.POST['state']
+                directory.avatar = 'myavatar'
+                directory.notes = request.POST['notes']
+                directory.administrator = 'superuser'
 
-        else:
-            return HttpResponse('Unauthorized', status=401)
-    except:
-        return HttpResponse('Error', status=500)
+                directory.save()
 
-    return redirect('directories:show_directory', id)
+                messages.success(request, 'Directory updated successfully')
 
-def delete(request, id):
-    """
-    Delete a specific directory
-    """
-    try:
-        if request.method == 'POST':
-            directory = Directories.objects.get(id=int(id))
-            directory.delete()
-        else:
-            return HttpResponse('Unauthorized', status=401)
-    except:
-        raise Http404('Not found')
+            else:
+                return HttpResponse('Forbidden request', status=403)
+        except:
+            return HttpResponse('Server or DB error', status=500)
 
-    return redirect('directories:directory_home')
+        return redirect('directories:show_directory', id)
+
+    # Delete a directory
+    def delete(request, id):
+        try:
+            if request.method == 'POST':
+                directory = Directory.objects.get(id=int(id))
+                directory.delete()
+                messages.error(request, 'Directory deleted')
+            else:
+                return HttpResponse('Forbidden request', status=403)
+        except Directory.DoesNotExist:
+            raise Http404('Not found')
+
+        return redirect('directories:directory_home')

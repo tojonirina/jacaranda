@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 <div class="container m-0 p-0">
     <div class="container-fluid sublink">            
         <form action="{% url 'users:delete_user' user.id %}" method="post">
@@ -16,7 +17,7 @@
     <table class='table table-sm table-hovered table-bordered m-0'>
         <tbody>
             <tr>
-                <th>Nom: </th> <td>{{ user.full_name }}</th>
+                <th width="200">Nom complet: </th> <td>{{ user.full_name }}</th>
             </tr>
             <tr>
                 <th>Nom d'utilisateur: </th> <td>{{ user.login }}</th>
@@ -31,10 +32,20 @@
                 <th>Administrateur: </th> <td>{{ user.administrator }}</th>
             </tr>
             <tr>
-                <th>Date de création: </th> <td>{{ user.created_at }}</th>
+                <th>Status: </th> 
+                <td>
+                    {% if user.status == 1 %}
+                        <span class="text-success"><i class="bi bi-person-check"></i></span> Actif
+                    {% elif user.status == 0 %}
+                        <span class="text-danger"><i class="bi bi-person-x-fill"></i></span> Bloqué
+                    {% endif %}
+                </th>
+            </tr>
+            <tr>
+                <th>Date de création: </th> <td>{{ user.created_at }} ({{ user.created_at|timesince }})</th>
             </tr>                        
             <tr>
-                <th>Date de dérnière midification: </th> <td>{{ user.updated_at }}</th>
+                <th>Date de dérnière midification: </th> <td>{{ user.updated_at }} ({{ user.updated_at|timesince }})</th>
             </tr>
         </tbody>
     </table>

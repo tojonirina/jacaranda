@@ -1,10 +1,11 @@
 from django.db import models
+# from directories.models import Directorie
 
 class Absences(models.Model):
 
-    class Meta():
+    class Meta:
         db_table = "absences"
-        ordering = ["created_at"]
+        ordering = ["-created_at"]
 
 
     TYPES = (
@@ -24,7 +25,7 @@ class Absences(models.Model):
         (3, 'Abandoned'),
         (4, 'Rejected')
     )
-
+    # directory = models.ForeignKey(Directorie, on_delete = models.CASCADE, help_text="The ID of person who does the request")
     directory_id = models.IntegerField(help_text="The ID of person who does the request")
     types = models.CharField(max_length=20, choices=TYPES, help_text="Type of the absence (vacation|permission|external formation|other)")
     begin_date = models.DateField(help_text="Beginning date of the absence")
@@ -64,4 +65,3 @@ class Absences(models.Model):
 
     def __str__(self):
         return self.type
-

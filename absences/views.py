@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from .models import Absences
-from directories.models import Directories
+from directories.models import Directory
 
 class AbsenceView():
 
@@ -9,7 +9,7 @@ class AbsenceView():
     def home(request):
         try:
             absences = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id')
-            directories = Directories.objects.all()
+            directories = Directory.objects.all()
         except:
             return HttpResponse("Server error", status=500)
 

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Computers
 from datetime import datetime
-from directories.models import Directories
+from directories.models import Directory
 
 def home(request):
     """
@@ -10,7 +10,7 @@ def home(request):
     """
     try:
         computers = Computers.objects.all()
-        directories = Directories.objects.all()
+        directories = Directory.objects.all()
     except:
         return HttpResponse('Server error', status=500)
 
@@ -92,7 +92,7 @@ def edit(request, id):
     """
     try:
         computer = Computers.objects.get(id=int(id))
-        directories = Directories.objects.all()
+        directories = Directory.objects.all()
     except:
         return HttpResponse('Server error', status=500)
 
