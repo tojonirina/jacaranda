@@ -4,7 +4,7 @@ from .views import AbsenceView
 app_name = "absences"
 
 urlpatterns = [
-    path('', AbsenceView.home, name="absence_home"),
+    path('', AbsenceView.index, name="absence_home"),
     path('store/', AbsenceView.store, name="store_absence"),
     path('<int:id>/', AbsenceView.show, name="show_absence"),
     path('edit/<int:id>/', AbsenceView.edit, name="edit_absence"),

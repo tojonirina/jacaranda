@@ -10,6 +10,6 @@ urlpatterns = [
     path('<int:id>/update', MaterialView.update, name='update_material'),
     path('takeOut', MaterialView.getTakeOut, name='get_takeout_material'),
     path('takeOut/store', MaterialView.postTakeOut, name='post_takeout_material'),
-    path('history', MaterialView.history, name='history_material'),
+    path('histories', MaterialView.history, name='history_material'),
     path('reportings', MaterialView.reporting, name='reporting_material'),
 ]

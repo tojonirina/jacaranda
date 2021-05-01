@@ -114,8 +114,8 @@
                 {% if materials %}
                 <a href="{% url 'materials:get_takeout_material' %}" class="btn btn-option"><i class="bi bi-box-arrow-right"></i> Sortie matériel</a>
                 {% endif %}
-                <a href="{% url 'materials:reporting_material' %}" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings</a>
-                <a href="{% url 'materials:history_material' %}" class="btn btn-option history"><i class="bi bi-clock-history"></i> Historique</a>
+                <a href="{% url 'materials:reporting_material' %}" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
+                <a href="{% url 'materials:history_material' %}" class="btn btn-option history"><i class="bi bi-clock-history"></i> Historiques <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
@@ -123,7 +123,7 @@
         </div>
     </div>
     <div class="container-fluid subtitle">
-        <i class="bi bi-list-ul"></i> &nbsp;Liste matériel
+        <i class="bi bi-list-ul"></i> &nbsp;Liste des matériels
     </div>
     <div class="container-fluid p-0 m-0 lists">
         <table class='table table-sm table-hovered table-bordered m-0 table-list'>

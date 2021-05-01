@@ -6,7 +6,7 @@
     <div class="container-fluid background" id="background">
         <div class="container create">
             <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
-            <div class="container-fluid form-title"> Nouvelle demande d'absence</div>
+            <div class="container-fluid form-title"> <i class="bi bi-calendar-plus"></i> Nouvelle demande d'absence</div>
             <form action="{% url 'absences:store_absence' %}" class="form" method="post">
                 {% csrf_token %}
                 <table class="table table-bordered table-sm">
@@ -64,7 +64,8 @@
 <div class="container-fluid sublink">
     <div class="row">
         <div class="col-sm-6 col-md-6 col-lg-6 p-0">
-            <a class="btn btn-option" id="add"><i class="bi bi-calendar-plus"></i> Nouvelle demande</a> <a class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings</a>
+            <a class="btn btn-option" id="add"><i class="bi bi-calendar-plus"></i> Nouvelle demande</a>
+             <a class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6 p-0">
             <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
@@ -72,7 +73,7 @@
     </div>
 </div>
 <div class="container-fluid subtitle">
-    Liste des absences
+    <i class="bi bi-list-ul"></i> Liste des absences
 </div>
 <div class="container-fluid lists p-0">
     <table class="table table-sm table-bordered table-list">

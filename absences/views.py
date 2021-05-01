@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.contrib import messages
+from django.utils import timezone
+
 from .models import Absences
 from directories.models import Directory
 
 class AbsenceView():
 
     # Get the home page of absence
-    def home(request):
+    def index(request):
         try:
             absences = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id')
             directories = Directory.objects.all()
         except:
-            return HttpResponse("Server error", status=500)
+            return HttpResponse("Server or DB error", status=500)
 
         return render(request, "absences/home.html", {'absences':absences, 'directories':directories})
 
@@ -20,8 +23,8 @@ class AbsenceView():
         try: 
             # absence = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id AND a.id = 1')
             absence = Absences.objects.get(id=id)
-        except:
-            return HttpResponse("Page not found", status=404)
+        except Absences.DoesNotExist:
+            return HttpResponse("Absence not found", status=404)
             
         return render(request, "absences/show.html", {'absence':absence})
 
@@ -40,12 +43,14 @@ class AbsenceView():
                 newAbsence.justificative = request.POST['justificative']
 
                 newAbsence.save()
+
+                messages.success(request, 'Your request is sented to your responsable')
                 
             else:
-                return HttpResponse("Uhauthorized", status=403)
+                return HttpResponse("Forbidden request", status=403)
 
         except:
-            return HttpResponse("Server error", status=500)
+            return HttpResponse("Server or DB error", status=500)
         
         return redirect("absences:absence_home")
 
@@ -68,11 +73,14 @@ class AbsenceView():
                 absence.interim = request.POST['interim']
                 absence.reasons = request.POST['reasons']
                 absence.justificative = request.POST['justificative']
+                absence.updated_at = timezone.now()
 
                 absence.save()
 
+                messages.warning(request, 'Your request is updated, you cannot update it')
+
             else:
-                return HttpResponse("Uhauthorized", status=403)
+                return HttpResponse("Forbidden request", status=403)
 
         except:
             return HttpResponse("Server error", status=500)
@@ -88,12 +96,14 @@ class AbsenceView():
                 newAbsence.status = 3
 
                 newAbsence.save()
+
+                messages.error(request, 'Your request is canceled')
                 
             else:
-                return HttpResponse("Uhauthorized", status=403)
+                return HttpResponse("Forbidden request", status=403)
 
         except:
-            return HttpResponse("Server error", status=500)
+            return HttpResponse("Server or DB error", status=500)
         
         return redirect("absences:absence_home")
 

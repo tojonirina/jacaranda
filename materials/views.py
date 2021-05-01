@@ -12,7 +12,7 @@ class MaterialView:
         try: 
             materials = Material.objects.all()
         except:
-            raise Http404('Not found')
+            return HttpResponse('Server or DB error', status=500)
         
         return render(request, 'material/home.html', {'materials': materials})
 
@@ -20,8 +20,8 @@ class MaterialView:
     def show(request, id): 
         try:
             maretial = Material.objects.get(id=int(id))
-        except:
-            raise Http404('Page not found')
+        except Material.DoesNotExist:
+            raise Http404('Material does not found')
 
         return render(request, 'material/show.html', {'material':maretial})
 
@@ -47,7 +47,7 @@ class MaterialView:
 
                     material.save()
 
-                    messages.success(request, 'Product added successfully')
+                    messages.success(request, 'New product added successfully')
 
                     # mouvment = MouvmentHistory()
                     # mouvment.title = request.POST['title']
@@ -66,6 +66,8 @@ class MaterialView:
                     material.quantity += int(request.POST['quantity'])
 
                     material.save()
+
+                    messages.success(request, 'Product added successfully')
                     
                     # mouvment = MouvmentHistory()
                     # mouvment.product_id = request.POST['old_product']
@@ -78,9 +80,9 @@ class MaterialView:
 
                     # mouvment.save()
                 else:
-                        return HttpResponse('umm error', status=500)
+                    messages.error(request, 'Please check all fields')
             else:
-                return HttpResponse('Unauthorized', status=401)
+                return HttpResponse('Forbidden request', status=403)
                 
         except:
             return HttpResponse('Server error', status=500)
@@ -107,11 +109,12 @@ class MaterialView:
                 material.save()
 
                 messages.success(request, 'Product updated successfully')
+
             else:
-                return HttpResponse('Unauthorized', status=401)
+                return HttpResponse('Forbidden request', status=403)
                 
         except:
-            return HttpResponse('Server error', status=500)
+            return HttpResponse('Server or DB error', status=500)
         
         return redirect('materials:show_material', id)
 
@@ -120,7 +123,7 @@ class MaterialView:
         try: 
             materials = Material.objects.all()
         except:
-            raise Http404('Connection error')
+            return HttpResponse('Server or DB error', status=500)
 
         return render(request, 'material/takeout.html', {'materials':materials})
 
@@ -133,23 +136,23 @@ class MaterialView:
                 material.quantity -= fabs(int(request.POST['quantity']))
                 material.save()
 
-                mouvment = MouvmentHistory()
-                mouvment.product_id = int(request.POST['material'])
-                mouvment.note = request.POST['note']
-                mouvment.quantity = fabs(int(request.POST['quantity']))
-                mouvment.unity = request.POST['unity']
-                mouvment.state = request.POST['state']
-                mouvment.administrator = 'superadmin'
-                mouvment.types = 'takeout'
-                mouvment.save()
+                # mouvment = MouvmentHistory()
+                # mouvment.product_id = int(request.POST['material'])
+                # mouvment.note = request.POST['note']
+                # mouvment.quantity = fabs(int(request.POST['quantity']))
+                # mouvment.unity = request.POST['unity']
+                # mouvment.state = request.POST['state']
+                # mouvment.administrator = 'superadmin'
+                # mouvment.types = 'takeout'
+                # mouvment.save()
 
-                messages.success(request, 'Product take out successfully')
+                messages.success(request, 'Product takeouted successfully')
                 
             else:
-                return HttpResponse('unauthorized', status=401)
+                return HttpResponse('Forbidden request', status=403)
                 
         except:
-            return HttpResponse('Server error', status=500)
+            return HttpResponse('Server or DB error', status=500)
         
         return redirect('materials:material_home')
         
@@ -157,8 +160,8 @@ class MaterialView:
     def edit(request, id):
         try:
             maretial = Material.objects.get(id=int(id))
-        except:
-            raise Http404('Page not found')
+        except Material.DoesNotExist:
+            raise Http404('Material does not found')
 
         return render(request, 'material/edit.html', {'material':maretial})
 
@@ -167,7 +170,7 @@ class MaterialView:
         try:
             history = MouvmentHistory.objects.all()
         except:
-            return HttpResponse('Connection error', status=500)
+            return HttpResponse('Server or DB error', status=500)
             
         return render(request, 'material/history.html', {'history':history}) 
 

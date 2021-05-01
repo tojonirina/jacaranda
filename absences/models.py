@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 # from directories.models import Directorie
 
 class Absences(models.Model):
@@ -39,11 +40,11 @@ class Absences(models.Model):
     second_validation_at = models.DateTimeField(null=True, help_text="Date of second validation and the last validation")
     justificative = models.CharField(max_length=50, null=True, help_text="Justivicative piece [optional]")
     created_at = models.DateTimeField(auto_now_add=True, help_text="Date of request")
-    updated_at = models.DateTimeField(auto_now=True, null=True, help_text="Date of last update")
+    updated_at = models.DateTimeField(default=None, blank=True, help_text="Date of last update")
 
     # Calcul date number of absence
     def dateNumber(self):
-        return self.end_date - self.begin_date 
+        return (self.end_date - self.begin_date) + datetime.timedelta(days=1)
 
     # Check if first validation is done
     def checkFirstValidation(self):

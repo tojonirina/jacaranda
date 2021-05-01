@@ -28,8 +28,8 @@
                     <li><a href="{% url 'materials:material_home' %}" class="menuoption"><i class="bi bi-stack"></i>&nbsp; &nbsp; Materiels</a></li>
                     <li><a href="{% url 'computers:computer_home' %}" class="menuoption"><i class="bi bi-laptop"></i>&nbsp; &nbsp; Ordinateurs</a></li>
                     <li><a href="{% url 'absences:absence_home' %}" class="menuoption"><i class="bi bi-calendar-week"></i>&nbsp; &nbsp; Absences</a></li>
-                    <li><a href="" class="menuoption"><i class="bi bi-clock"></i>&nbsp; &nbsp; Historiques</a></li>
-                    <li><a href="" class="menuoption"><i class="bi bi-file-earmark-zip-fill"></i>&nbsp; &nbsp; Archives</a></li>
+                    <li><a href="" class="menuoption"><i class="bi bi-clock"></i>&nbsp; &nbsp; Historiques <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li>
+                    <li><a href="" class="menuoption"><i class="bi bi-file-earmark-zip-fill"></i>&nbsp; &nbsp; Archives  <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-10 p-3 m-0 p-0">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </header>
-                <div class="container">
+                <div class="container w-50 text-center">
                     {% block messageflash %}
 
                         {% if messages %}

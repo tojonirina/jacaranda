@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from .models import Directory
 from django.contrib import messages
+from .models import Directory
 
 class DirectoryView:
 
@@ -45,9 +45,9 @@ class DirectoryView:
                 messages.success(request, 'Directory added successfully')
 
             else:
-                return HttpResponse('Unauthorized', status=401)
+                return HttpResponse('Forbidden request', status=403)
         except:
-            return HttpResponse('Error', status=500)
+            return HttpResponse('Server or DB error', status=500)
 
         return redirect('directories:directory_home')
 
@@ -56,7 +56,7 @@ class DirectoryView:
         try:
             directory = Directory.objects.get(id=int(id))
         except Directory.DoesNotExist:
-            raise Http404('Not found')
+            return HttpResponse('Directory does Not found', status=404)
 
         return render(request, 'directory/show.html', {'directory':directory}) 
 
@@ -65,7 +65,7 @@ class DirectoryView:
         try:
             directory = Directory.objects.get(id=int(id))
         except Directory.DoesNotExist:
-            raise Http404('Not found')
+            return HttpResponse('Directory does Not found', status=404)
 
         return render(request, 'directory/edit.html', {'directory':directory})
 
@@ -92,7 +92,7 @@ class DirectoryView:
                 directory.end_of_service = request.POST['end_of_service']
                 directory.matricule_number = request.POST['matricule_number']
                 directory.state = request.POST['state']
-                directory.avatar = 'myavatar'
+                directory.avatar = 'jaca-icon-orange-72x72.png'
                 directory.notes = request.POST['notes']
                 directory.administrator = 'superuser'
 
@@ -117,6 +117,6 @@ class DirectoryView:
             else:
                 return HttpResponse('Forbidden request', status=403)
         except Directory.DoesNotExist:
-            raise Http404('Not found')
+            return HttpResponse('Directory does Not found', status=404)
 
         return redirect('directories:directory_home')

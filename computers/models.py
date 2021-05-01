@@ -1,11 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
 class Computers(models.Model):
-
-    def __str__(self):
-        return self.description
 
     class Meta:
         db_table = 'computers'
@@ -14,7 +9,7 @@ class Computers(models.Model):
 
     STATE = (
         ('new','Nouveau'),
-        ('reconditioned','Reconditionne')
+        ('old','Ancien')
     )
 
     CATEGORY = (
@@ -52,6 +47,9 @@ class Computers(models.Model):
     assigned_at = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField("date of last update", auto_now=True)
+
+    def __str__(self):
+        return self.description
 
 
 

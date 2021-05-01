@@ -9,8 +9,8 @@
         <div class="container sublink">
             <form action="{% url 'absences:revoke_absence' absence.id %}" method="POST">
                 {% csrf_token %}
+                <button class="btn btn-option text-white" title="Annuler la demande" onclick="return confirm('Vous n\'avez qu\'une seule possibilite de modifier la demande, confirmez-vous l\'annulation?')"><i class="bi-stop-circle-fill"></i></button>
                 <a href="{% url 'absences:edit_absence' absence.id %}" class="btn btn-light" title="Modifier la demande"><i class="bi-pencil-square"></i></a>
-                <button class="btn btn-light text-danger" title="Annuler la demande" onclick="return confirm('Vous n\'avez qu\'une seule possibilite de modifier la demande?')"><i class="bi-stop-circle-fill"></i></button>
             </form>
         </div>
     {% elif absence.updated_at != None and absence.status != 3 %}
@@ -29,12 +29,12 @@
 
 
     {% if absence.updated_at == None %}
-        <div class="container alert alert-warning">
-            Vous pouvez encore modifier "une seule fois" la demande tant que ce n'est pas encore valid&eacute; par quiconque
+        <div class="container alert alert-warning mt-2">
+            Vous pouvez encore modifier "une seule fois" la demande tant que ce n'est pas encore valid&eacute;e par votre responsable
         </div>
     {% endif %}
 
-    <table class="table table-bordered table-sm">
+    <table class="table table-bordered table-sm m-0">
         <tr>
             <th width="150">Type: </th><td>{{ absence.get_types_display }}</td>
         </tr>
@@ -65,9 +65,11 @@
         <tr>
             <th width="150">Cr&eacute;e le: </th><td>{{ absence.created_at }} ({{ absence.created_at|timesince }})</td>
         </tr>
+        {% if absence.updated_at != None %}
         <tr>
             <th width="150">Derni&egrave;re MAJ: </th><td>{{ absence.updated_at }} ({{ absence.updated_at|timesince }})</td>
         </tr>
+        {% endif %}
     </table>
 
     
