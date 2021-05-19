@@ -2,9 +2,30 @@
     box-sizing: border-box;
 }
 body {
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
+    font-family: sans-serif;
     font-size: 14px;
     background-color:#eeeeee;
+}
+
+form.login-form {
+    box-shadow: 0 0 4px rgba(110, 110, 110, 0.6);
+    border-radius: 7px;
+}
+
+form.login-form input {
+    margin-bottom: 5px;
+    border: 1px solid #1C1D64;
+    height: 50px;
+}
+
+div.login-title {
+    background:#1C1D64;
+    color: white;
+    padding: 10px;
+    border-radius: 7px 7px 0px 0px;
+    font-size: 18px;
+    font-weight: bold;
 }
 div.header {
     border-radius: 15px;
@@ -161,7 +182,16 @@ tr.old_field {
     transition: background-color 0.3s linear;
 }
 
-.account-option a:last-child:hover {
+.account-option a:first-of-type {
+    color: #1C1D64;
+    font-weight: bold;
+}
+
+.account-option a:first-of-type:hover {
+    color: #1C1D64;
+}
+
+.account-option button:hover {
     background-color: #E74C3C;
     color: white;
     transition: background-color 0.3s linear;
@@ -189,6 +219,7 @@ tr.old_field {
     color: rgb(28, 29, 100,);
     padding: 5px 10px 5px 10px;
     width: 150px;
+    font-weight: bolder;
 }
 
 .btn-option-submit:hover {
