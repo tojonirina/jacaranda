@@ -188,7 +188,7 @@
 
             password.blur(function() {
                 
-                if (password.val().length < 8 && password.val() !== '') {
+                if (password.val().length < 8 && password.val() !== '' && login.val() !== '') {
                     $('.password_error_message').css({'display':'block'});
                     $('#password').css({'border':'2px solid red'});
                 }

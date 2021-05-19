@@ -1,34 +1,122 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.utils.html import escape
 from django.contrib import messages
 from .models import User
 from directories.models import Directory
-import re
 
 class UserView:
-    
+
+    # Post login
+    def login(request):
+
+        try:
+
+            if request.method == 'POST':
+                    
+                import hashlib # import haslib to hash the password
+
+                login = request.POST['login']
+
+                # cast password to a byte
+                password = bytes(escape(request.POST['password']), 'ascii')
+
+                # encrypt password
+                crypted_password = hashlib.sha224(b"%s" % password ).hexdigest()
+
+                # check login and password
+                user = User.objects.get(login=login, password=crypted_password)
+
+                # Check if the account is not blocked
+                if user.status == 1:
+
+                    request.session['current_user_id'] = user.id
+                    request.session['current_user_login'] = user.login
+                    request.session['current_user_type'] = user.types
+
+                    if user.types == 'user':
+                        return redirect('directories:directory_home')
+                    elif user.types == 'administrator' or user.types == 'super_user':
+                        return redirect('users:user_home')
+                    else:
+                        return redirect('login_page')
+
+                else:
+                    messages.error(request, 'This account is blocked, please contact your administrator')
+                    return redirect('login_page')
+
+            else:
+                return HttpResponse('You are not authorized', status=403)
+
+        except User.DoesNotExist:
+            messages.error(request, 'Login or password invalid')
+            return redirect('login_page')
+
+    # Logout 
+    def logout(request):
+
+        try:
+
+            if request.method == 'POST':
+                    
+                request.session.flush()
+
+                messages.success(request, 'You are disconnected')
+                return redirect('login_page')
+
+            else:
+                return HttpResponse('You are not authorized', status=403)
+
+        except:
+            return HttpResponse('Server or database error ', status=500)
+            
     # Display all user
     def index(request):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+        
         try:
             # Select all directory whose not have an account
-            directories = Directory.objects.raw('SELECT full_name, id FROM directories  WHERE id NOT IN (SELECT directory_id FROM users)')
+            directories = Directory.objects.raw('SELECT d.full_name, d.id , u.directory_id FROM directories d LEFT JOIN users u ON d.id == u.directory_id WHERE u.directory_id IS NULL')
+            # directories = Directory.objects.raw('SELECT full_name, id FROM directories  WHERE id NOT IN (SELECT directory_id FROM users)')
+            
             # display 10 last user order by its creation date
             users = User.objects.raw('SELECT d.full_name, u.id, u.login, u.types, u.status, u.administrator, u.created_at, u.updated_at FROM users u INNER JOIN directories d ON u.directory_id = d.id ORDER BY u.created_at DESC')
         except Directory.DoesNotExist:
             return HttpResponse('Directorie does not exist or database connection error', status=500)
         except User.DoesNotExist:
             return HttpResponse('User does not exist or database connection error', status=500)
-        
-        return render(request, 'user/home.html', {'users':users, 'directories':directories})
+        finally:
+            return render(request, 'user/home.html', {'users':users, 'directories':directories})
 
     # Store a new user
     def store(request):
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+        
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try:
             
             if request.method == 'POST':
 
                 # Check login if it contains a special char or not
+                import re
                 checkCharInLogin = re.search("[()\-\_\\|=+#@!*&%$ ~?{}/<>:;\'\"\[\]]", request.POST['login'])
                 
                 if len(request.POST['login']) >= 8 and checkCharInLogin is None:
@@ -53,7 +141,7 @@ class UserView:
                                     user.login = escape(request.POST['login'])
                                     user.password = hashlib.sha224(b"%s" % password ).hexdigest() # Encrypt password
                                     user.types = request.POST['types']
-                                    user.administrator = 'superadmin'
+                                    user.administrator = request.session.get('current_user_login')
                                     user.save()
 
                                     messages.success(request,'User added successfully')
@@ -82,6 +170,18 @@ class UserView:
 
     # Show a specific user detail
     def show(request, id):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try: 
             user = User.objects.raw('SELECT d.full_name, u.id, u.login, u.types, u.status, u.administrator, u.created_at, u.updated_at FROM users u INNER JOIN directories d ON u.directory_id = d.id AND u.id = %s', [id])[0]
         except:
@@ -91,6 +191,18 @@ class UserView:
 
     # Edit an user information
     def edit(request, id):
+       
+       # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try: 
             user = User.objects.raw('SELECT d.full_name, u.id, u.login, u.types, u.directory_id FROM users u INNER JOIN directories d ON u.directory_id = d.id AND u.id = %s', [id])[0]
         except:
@@ -100,10 +212,22 @@ class UserView:
     
     # Update user information
     def update(request, id):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try:
             if request.method == 'POST':
 
-                user = User.objects.get(id=int(id))
+                user = User.objects.filter(id=int(id)).first()
 
                 # Check if the user is actif
                 if user.status == 1:
@@ -125,6 +249,18 @@ class UserView:
 
     # Delete an user
     def delete(request, id):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try:
             if request.method == 'POST':
 
@@ -142,13 +278,32 @@ class UserView:
 
     # Block user account
     def block(request, id):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try:
             if request.method == 'POST':
                 user = User.objects.get(id=id)
-                user.status = 0
-                user.save()
-                
-                messages.error(request,'User blocked')
+                # Check if not the current user
+                if request.session.get('current_user_id') != int(id):
+                    # Check if the user is admin or super user
+                    if request.session.get('current_user_type') == 'administrator' or request.session.get('current_user_type') == 'super_user':
+                        user.status = 0
+                        user.save()
+                        messages.warning(request,'User blocked')
+                    else:
+                        messages.error(request,'You are not able to block this user')
+                else:
+                    messages.error(request,'You can\'t block this user')
             else:
                 return HttpResponse('Forbidden request', status=403)
         except User.DoesNotExist:
@@ -158,14 +313,24 @@ class UserView:
 
     # Unblock user account
     def unblock(request, id):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
+
         try:
             if request.method == 'POST':
-                
-                user = User.objects.get(id=id)
+                user = User.objects.get(id=int(id))
                 user.status = 1
                 user.save()
-
-                messages.success(request,'User unlocked successfully')  
+                messages.success(request,'User unlocked successfully')
             else:
                 return HttpResponse('Forbidden request', status=403)
         except User.DoesNotExist:
