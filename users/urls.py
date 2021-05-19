@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:id>/delete', UserView.delete, name='delete_user'),
     path('<int:id>/block', UserView.block, name='block_user'),
     path('<int:id>/unblock', UserView.unblock, name='unblock_user'),
+    path('histories', UserView.history, name='history_session'),
 ]

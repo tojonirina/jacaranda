@@ -2,7 +2,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.html import escape
 from django.contrib import messages
-from .models import User
+from .models import User, SessionHistory
 from directories.models import Directory
 
 class UserView:
@@ -33,6 +33,18 @@ class UserView:
                     request.session['current_user_id'] = user.id
                     request.session['current_user_login'] = user.login
                     request.session['current_user_type'] = user.types
+                    request.session['current_user_ua'] = request.headers['user-agent']
+
+                    import os 
+                    import platform
+
+                    newSession = SessionHistory()
+                    newSession.user_id = user.id
+                    newSession.login = user.login
+                    newSession.user_agent = request.headers['user-agent']
+                    newSession.computer_user = os.getlogin()
+                    newSession.computer_name = platform.uname()[1]
+                    newSession.save()
 
                     if user.types == 'user':
                         return redirect('directories:directory_home')
@@ -55,20 +67,20 @@ class UserView:
     # Logout 
     def logout(request):
 
-        try:
+        if request.method == 'POST':
+            
+            # Disconnect all session of the current user in the same browser, computer
+            mysession = SessionHistory.objects.get(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
+            mysession.logged = False
+            mysession.save()
 
-            if request.method == 'POST':
-                    
-                request.session.flush()
+            # Remove all session
+            request.session.flush()
+            messages.success(request, 'You are disconnected')
+            return redirect('login_page')
 
-                messages.success(request, 'You are disconnected')
-                return redirect('login_page')
-
-            else:
-                return HttpResponse('You are not authorized', status=403)
-
-        except:
-            return HttpResponse('Server or database error ', status=500)
+        else:
+            return HttpResponse('You are not authorized', status=403)
             
     # Display all user
     def index(request):
@@ -337,3 +349,13 @@ class UserView:
             return HttpResponse('Server or DB error', status=500)
 
         return redirect('users:user_home')
+
+    # Get all session history
+    def history(request):
+
+        try:
+            sessions = SessionHistory.objects.all()
+        except:
+            return HttpResponse('Server or database error', status=500)
+
+        return render(request, 'user/history.html', {'sessions':sessions})

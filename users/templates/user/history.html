@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block title %} Utiliateur {% endblock %}
+
+{% block content %}
+
+<div class="container m-0 p-0">
+
+    <div class="container-fluid sublink">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                <a class="btn btn-option" title="Statistique de connexion" id="add"><i class="bi bi-clipboard-data"></i> &nbsp; Reportings <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
+            </div>
+            
+            <div class="col-sm-6 col-md-6 col-lg-6 p-0">
+                <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid subtitle">
+        <a href="{% url 'users:user_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp;Historiques des activit&eacute;s des utilisateurs
+    </div>
+    <div class="container-fluid lists p-0">
+        <table class='table table-sm table-hovered table-bordered m-0 table-list'>
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Statut</th>
+                    <th>Appareil</th>
+                    <th>Session</th>
+                    <th>Ordinateur</th>
+                    <th>D/H debut</th>
+                    <th>D/H fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for session in sessions %}
+                <tr>
+                    <td>{{ session.login }}</td>
+                    <td>
+                        {% if session.logged == True %}
+                        <span class="text-success">{{ session.get_logged_display }}</span>
+                        {% else %}
+                        <span class="text-danger">{{ session.get_logged_display }}</span>
+                        {% endif %}
+                    </td>
+                    <td data-toggle="tooltip" data-placement="left" title="{{ session.user_agent }}">{{ session.user_agent|truncatewords:4 }}</td>
+                    <td>{{ session.computer_user }}</td>
+                    <td>{{ session.computer_name }}</td>
+                    <td>{{ session.created_at }}</td>
+                    <td>
+                        {% if session.logged == True %}
+                            -
+                        {% else %}
+                            {{ session.updated_at }}
+                        {% endif %}
+                    </td>
+                </tr>
+    
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Pas d'utilisateur enregistré</td>
+                    </tr>
+                    
+                {% endfor %}
+
+                
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

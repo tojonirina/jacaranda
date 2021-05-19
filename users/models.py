@@ -1,23 +1,30 @@
 from django.db import models
 
-# class SessionHistory(models.Model):
-#     """
-#     Session history class model
-#     """
+class SessionHistory(models.Model):
+    """
+    Session history class model
+    """
 
-#     class Meta:
-#         db_table = 'session_history'
+    class Meta:
+        db_table = 'session_history'
+        ordering = ['-created_at']
 
-#     user_id = models.IntegerField()
-#     login = models.CharField(max_length=50)
-#     logged = models.BooleanField(default=True)
-#     token = models.CharField(max_length=100)
-#     user_agent = models.CharField(max_length=100)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
+    LOG_STATUS = (
+        (True, 'Connected'),
+        (False, 'Disconnected')
+    )
 
-#     def __str__(self):
-#         return self.login 
+    user_id = models.IntegerField()
+    login = models.CharField(max_length=50)
+    logged = models.BooleanField(default=True, choices=LOG_STATUS)
+    user_agent = models.CharField(max_length=100)
+    computer_user = models.CharField(max_length=50)
+    computer_name = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.login 
 
 
 class User(models.Model):
