@@ -5,6 +5,8 @@ app_name = 'users'
 
 urlpatterns = [
     path('', UserView.index, name='user_home'),
+    path('login', UserView.login, name='post_login_user'),
+    path('logout', UserView.logout, name='post_logout_user'),
     path('store', UserView.store, name='store_user'),
     path('<int:id>', UserView.show, name='show_user'),
     path('<int:id>/edit', UserView.edit, name='edit_user'),
