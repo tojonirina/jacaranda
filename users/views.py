@@ -66,13 +66,14 @@ class UserView:
 
     # Logout 
     def logout(request):
-
+        
         if request.method == 'POST':
             
             # Disconnect all session of the current user in the same browser, computer
-            mysession = SessionHistory.objects.get(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
-            mysession.logged = False
-            mysession.save()
+            mysession = SessionHistory.objects.filter(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
+            for ms in mysession:
+                ms.logged = False
+                ms.save()
 
             # Remove all session
             request.session.flush()

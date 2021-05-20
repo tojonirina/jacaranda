@@ -26,7 +26,7 @@
                     </th>
                 </tr>                      
                 <tr>
-                    <td colspan="2" class="text-center"><button type="submit" id="submit-form" class="btn btn-option-submit">Enregister</button> <a href="{% url 'users:show_user' user.id %}" id="cancelbutton" class="btn btn-option-submit"> Annuler </a> </th> 
+                    <td colspan="2" class="text-center"><button type="submit" id="submit-form" class="btn btn-option-submit" onclick="return confirm('Voulez-vous vraiment valider les modifications? ')">Enregister</button> <a href="{% url 'users:show_user' user.id %}" id="cancelbutton" class="btn btn-option-submit"> Annuler </a> </th> 
                 </tr>
             </tbody>
         </form>

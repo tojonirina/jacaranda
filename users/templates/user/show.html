@@ -9,11 +9,11 @@
     <div class="container-fluid sublink">            
         <form action="{% url 'users:delete_user' user.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-option" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur? ')"><i class="bi bi-person-dash-fill" title="Supprimer l'utilisateur"></i></button> 
-            <a href="{% url 'users:edit_user' user.id %}" class="btn btn-light btn-other" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+            <button type="submit" class="btn btn-option" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur? ')" data-toggle="tooltip" data-placement="top" title="Supprimer l'utilisateur"><i class="bi bi-person-dash-fill"></i></button> 
+            <a href="{% url 'users:edit_user' user.id %}" class="btn btn-light btn-other" data-toggle="tooltip" data-placement="right" title="Modifier les parametres"><i class="bi bi-sliders"></i></a>
         </form>
     </div>
-    <div class="container-fluid subtitle"><a href="{% url 'users:user_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Information de {{ user.full_name }} </div>
+    <div class="container-fluid subtitle"><a href="{% url 'users:user_home' %}" class="btn btn-light btn-other"  data-toggle="tooltip" data-placement="left" title="Retour"> <i class="bi bi-arrow-left"></i></a> &nbsp; Information de {{ user.full_name }} </div>
     <table class='table table-sm table-hovered table-bordered m-0'>
         <tbody>
             <tr>
