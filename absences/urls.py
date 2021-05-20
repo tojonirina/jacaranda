@@ -12,3 +12,4 @@ urlpatterns = [
     path('cancel/<int:id>/', AbsenceView.revoke, name="revoke_absence"),
     path('reportings/', AbsenceView.reporting, name="reporting_absence"),
 ]
+

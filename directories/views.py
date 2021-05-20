@@ -7,6 +7,12 @@ class DirectoryView:
 
     # Get all directories 
     def index(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             directories = Directory.objects.all()
         except:
@@ -16,6 +22,12 @@ class DirectoryView:
 
     # Store a new directory
     def store(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -36,7 +48,8 @@ class DirectoryView:
                 directory.date_of_service = request.POST['date_of_service']
                 directory.end_of_service = request.POST['end_of_service']
                 directory.matricule_number = request.POST['matricule_number']
-                directory.avatar = 'jaca-icon-orange-72x72.png'
+                directory.avatar = 'avatar.png'
+                # directory.avatar = 'jaca-icon-orange-72x72.png'
                 directory.notes = request.POST['notes']
                 directory.administrator = 'superadmin'
 
@@ -53,6 +66,12 @@ class DirectoryView:
 
     # Show information of an directory
     def show(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             directory = Directory.objects.get(id=int(id))
         except Directory.DoesNotExist:
@@ -62,6 +81,12 @@ class DirectoryView:
 
     # Edit information about a specific directory
     def edit(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             directory = Directory.objects.get(id=int(id))
         except Directory.DoesNotExist:
@@ -71,6 +96,12 @@ class DirectoryView:
 
     # Update information of a specific directory
     def update(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -109,6 +140,12 @@ class DirectoryView:
 
     # Delete a directory
     def delete(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+            
         try:
             if request.method == 'POST':
                 directory = Directory.objects.get(id=int(id))

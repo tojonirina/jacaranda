@@ -10,6 +10,12 @@ class AbsenceView():
 
     # Get the home page of absence
     def index(request):
+
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             absences = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id')
             directories = Directory.objects.all()
@@ -20,6 +26,12 @@ class AbsenceView():
 
     # Show all information of a specific absence
     def show(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try: 
             # absence = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id AND a.id = 1')
             absence = Absences.objects.get(id=id)
@@ -30,6 +42,12 @@ class AbsenceView():
 
     # Store a new absence request
     def store(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -57,12 +75,23 @@ class AbsenceView():
     # Get the edit page of a specific absence
     def edit(request, id):
 
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         absence = get_object_or_404(Absences, pk=id)
 
         return render(request, "absences/edit.html", {'absence':absence})
 
     # Update a specific absence
     def update(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -89,6 +118,12 @@ class AbsenceView():
         
     # Revoke a specific absence request
     def revoke(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -109,6 +144,12 @@ class AbsenceView():
 
     # Show all stats about all absence
     def reporting(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+            
         try:
             absences = Absences.objects.all()
         except:

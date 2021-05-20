@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var height = $(window).height();
     $('ul.leftmenu').css({'height':height});
+    $('.lists').css({'height':height-230});
 
     // Click on add user
     $('#add').on('click', function () {

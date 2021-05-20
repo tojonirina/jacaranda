@@ -1,10 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def index(request):
     '''
     Get index page or login page
     '''
+    if request.session.get('current_user_id') is not None and request.session.get('current_user_login') is not None and request.session.get('current_user_type') is not None :
+        return redirect('/users')
+
     return render(request, 'login.html')
 
 def pageNotFound(request, exception=None):

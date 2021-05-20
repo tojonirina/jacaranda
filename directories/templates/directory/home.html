@@ -101,7 +101,8 @@
                 {% for directory in directories %}
     
                     <tr>
-                        <th width="34" class="text-center"><img src="/static/public/img/{{ directory.avatar }}" title="{{ directory.full_name }}" width="30" height="30"></th>
+                        <!-- <th width="34" class="text-center"><img src="/static/public/img/{{ directory.avatar }}" title="{{ directory.full_name }}" width="30" height="30"></th> -->
+                        <th class="text-center"><i class="bi bi-person-square"></i></th>
                         <td>{{ directory.full_name }}</td>
                         <td>
                             {% if directory.gender == 'man' %}

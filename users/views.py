@@ -353,6 +353,17 @@ class UserView:
 
     # Get all session history
     def history(request):
+        
+        # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('directories:directory_home')
 
         try:
             sessions = SessionHistory.objects.all()

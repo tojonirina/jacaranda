@@ -9,6 +9,12 @@ class MaterialView:
 
     # Get material home page
     def index(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try: 
             materials = Material.objects.all()
         except:
@@ -17,7 +23,13 @@ class MaterialView:
         return render(request, 'material/home.html', {'materials': materials})
 
     # Show all information about a specific material
-    def show(request, id): 
+    def show(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             maretial = Material.objects.get(id=int(id))
         except Material.DoesNotExist:
@@ -27,6 +39,12 @@ class MaterialView:
 
     # Store a material in stock
     def store(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
 
             if request.method == 'POST':
@@ -91,6 +109,12 @@ class MaterialView:
 
     # Update a materiel information
     def update(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
 
             if request.method == 'POST':
@@ -120,6 +144,12 @@ class MaterialView:
 
     # Show takeout form
     def getTakeOut(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try: 
             materials = Material.objects.all()
         except:
@@ -129,6 +159,12 @@ class MaterialView:
 
     # Take out a materiel in stock
     def postTakeOut(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
                 
@@ -158,6 +194,12 @@ class MaterialView:
         
     #  Edit a materiel information
     def edit(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             maretial = Material.objects.get(id=int(id))
         except Material.DoesNotExist:
@@ -167,6 +209,12 @@ class MaterialView:
 
     #  Get all mouvment history
     def history(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             history = MouvmentHistory.objects.all()
         except:
@@ -175,6 +223,12 @@ class MaterialView:
         return render(request, 'material/history.html', {'history':history}) 
 
     def reporting(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+            
 
         # entryEveryMonth = Materials.objects.raw("SELECT DISTINCT SUM(quantity) FROM materials WHERE created_at BETWEEN '01/01/2021' AND '31/01/2021' GROUP BY title")
         values = [12, 43, 22, 52, 13, 65, 12, 43, 22, 52, 13, 65]

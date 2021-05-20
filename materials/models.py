@@ -9,6 +9,7 @@ class Material(models.Model):
 
     class Meta:
         db_table = 'materials'
+        ordering = ['-created_at']
 
     STATE = (
         ('new','Nouveau'),
@@ -49,6 +50,7 @@ class MouvmentHistory(models.Model):
 
     class Meta:
         db_table = 'mouvment_history'
+        ordering = ['-created_at']
 
     title = models.CharField(max_length=100)
     product_id = models.IntegerField(null=True)

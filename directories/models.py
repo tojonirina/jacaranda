@@ -7,6 +7,7 @@ class Directory(models.Model):
 
     class Meta:
         db_table = 'directories'
+        ordering = ['-created_at']
 
     GENDER = (
         ('man', 'Homme'),

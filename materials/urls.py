@@ -2,6 +2,7 @@ from django.urls import path
 from .views import MaterialView
 
 app_name = 'materials'
+
 urlpatterns = [
     path('', MaterialView.index, name='material_home'),
     path('store', MaterialView.store, name='store_material'),

@@ -7,7 +7,21 @@ body {
     font-size: 14px;
     background-color:#eeeeee;
 }
+::-webkit-scrollbar {
+	width: 8px;
+}
 
+::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+	background: #8b8b8b; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+}
 form.login-form {
     box-shadow: 0 0 4px rgba(110, 110, 110, 0.6);
     border-radius: 7px;
@@ -112,7 +126,7 @@ ul.leftmenu li a.useroption{
     top: 0;
     right: 0;
     height: 100%;
-    background-color: rgba(75, 75, 75, 0.336);
+    background-color: rgba(75, 75, 75, 0.623);
 }
 
 .create {
@@ -122,7 +136,7 @@ ul.leftmenu li a.useroption{
     right: 0;
     padding: 5px;
     width: 70%;
-    box-shadow: 0px 0px 2em  rgba(54, 54, 54, 0.3);
+    box-shadow: 0px 0px 3em  rgba(34, 34, 34, 0.39);
     border-radius: 5px;
 }
 
@@ -144,11 +158,11 @@ tr.old_field {
 }
 
 .lists {
-    max-height: 500px;
     overflow: auto;
     box-shadow: 0 0 4px rgba(145, 144, 144, .4);
     border-radius: 10px;
 }
+
 .table-list {
     border-radius: 15px;
     margin: 0;

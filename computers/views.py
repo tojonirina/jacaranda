@@ -10,6 +10,12 @@ class ComputerView:
 
     # Get computer home page and display all computer
     def index(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             computers = Computers.objects.all()
             directories = Directory.objects.raw('SELECT id, full_name FROM directories WHERE full_name NOT IN (SELECT assigned_to FROM computers)')
@@ -21,6 +27,12 @@ class ComputerView:
 
     # Store a computer
     def store(request):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             if request.method == 'POST':
 
@@ -83,6 +95,12 @@ class ComputerView:
 
     #  Show all information of a specific computer
     def show(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             computer = Computers.objects.get(id=int(id))
         except:
@@ -92,6 +110,12 @@ class ComputerView:
 
     # Get page to edit the information of a specific computer
     def edit(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+
         try:
             computer = Computers.objects.get(id=int(id))
             directories = Directory.objects.raw('SELECT id, full_name FROM directories WHERE full_name NOT IN (SELECT assigned_to FROM computers)')
@@ -102,6 +126,12 @@ class ComputerView:
 
     # Update the information of a computer
     def update(request, id):
+
+         # Check if connected
+        if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
+            messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
+            return redirect('login_page')
+            
         try:
             if request.method == 'POST':
                 computer = Computers.objects.get(id=int(id))
