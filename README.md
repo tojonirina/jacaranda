@@ -1,6 +1,6 @@
 # jacarandaV0.1
 
-A simple intranet web application
+A simple web application to manage stock, staff, absence, computer with Django 2.2 and SQLite3
 
 # Technos
 Framework: 
@@ -9,8 +9,9 @@ Database:
 SQLite 3
 
 # Features
+- Application user management
 - Stock management
-- Directories management
+- Staff management
 - Absences management
 - Computers management
 
