@@ -32,18 +32,18 @@
                     <li><a href="{% url 'materials:material_home' %}" class="menuoption" data-toggle="tooltip" data-placement="right" title="Liste des materiels"><i class="bi bi-stack"></i>&nbsp; &nbsp; Materiels</a></li>
                     <li><a href="{% url 'computers:computer_home' %}" class="menuoption" data-toggle="tooltip" data-placement="right" title="Liste des ordinateurs"><i class="bi bi-laptop"></i>&nbsp; &nbsp; Ordinateurs</a></li>
                     <li><a href="{% url 'absences:absence_home' %}" class="menuoption" data-toggle="tooltip" data-placement="right" title="Liste des absences"><i class="bi bi-calendar-week"></i>&nbsp; &nbsp; Absences</a></li>
-                    <li><a href="#" class="menuoption"><i class="bi bi-clock"></i>&nbsp; &nbsp; Historiques <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li>
-                    <li><a href="#" class="menuoption"><i class="bi bi-file-earmark-zip-fill"></i>&nbsp; &nbsp; Archives  <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li>
+                    <!-- <li><a href="#" class="menuoption"><i class="bi bi-clock"></i>&nbsp; &nbsp; Historiques <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li> -->
+                    <!-- <li><a href="#" class="menuoption"><i class="bi bi-file-earmark-zip-fill"></i>&nbsp; &nbsp; Archives  <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a></li> -->
                 </ul>
             </div>
-            <div class="col-md-10 p-3 m-0 p-0">
+            <div class="col-md-10 p-2 m-0 p-0">
                 <!-- TOP MENU -->
                 <header class="container-fluid p-0 mb-2 mt-0">
                     <div class="container-fluid text-white p-2 header text-right">
                         <div class="container account-option">
                             <form action="{% url 'users:post_logout_user' %}" method="POST">
                                 {% csrf_token %}
-                                <a title="{{ current_user_login }}" data-toggle="tooltip" data-placement="top" title="{{ current_user_login }}"> {{ current_user_initial|upper }}</a> &nbsp;
+                                <a title="{{ current_user_login }}" data-toggle="tooltip" data-placement="top" title="{{ current_user_login }}">{{ current_user_initial|upper }}</a> &nbsp;
                                 <a href="#"><i class="bi bi-bell" data-toggle="tooltip" data-placement="top" title="Les notifications"></i></a> &nbsp;
                                 <button class="btn" data-toggle="tooltip" data-placement="top" title="Se deconnecter"><i class="bi bi-power"></i></button>
                             </form>

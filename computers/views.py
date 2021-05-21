@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib import messages
 
-from .models import Computers
+from .models import Computers, AllocationHistory
 from directories.models import Directory
 
 class ComputerView:
@@ -19,7 +19,6 @@ class ComputerView:
         try:
             computers = Computers.objects.all()
             directories = Directory.objects.raw('SELECT id, full_name FROM directories WHERE full_name NOT IN (SELECT assigned_to FROM computers)')
-
         except:
             return HttpResponse('Serveror DB error', status=500)
 
@@ -37,6 +36,12 @@ class ComputerView:
             if request.method == 'POST':
 
                 if len(request.POST['assigned_to']) > 5:
+
+                    # Check if the user is an simple user or other, only admin or super user can access this page
+                    if request.session.get('current_user_type') != 'administrator':
+                        if request.session.get('current_user_type') != 'super_user':
+                            messages.error(request, 'Sorry, you are not able to do this action')
+                            return redirect('computers:computer_home')
 
                     newComputer = Computers()
                     newComputer.name = request.POST['name']
@@ -56,8 +61,15 @@ class ComputerView:
                     newComputer.fournissor = request.POST['fournissor']
                     newComputer.fournissor_contact = request.POST['fournissor_contact']
                     newComputer.description = request.POST['description']
-                    newComputer.administrator = 'superuser'
+                    newComputer.administrator = request.session.get('current_user_login')
+
+                    allocate = AllocationHistory()
+                    allocate.name = request.POST['name']
+                    allocate.assigned_to = request.POST['assigned_to']
+                    allocate.assigned_by = request.session.get('current_user_login')
+
                     newComputer.save()
+                    allocate.save()
 
                     messages.success(request, 'Computer added successfully and assigned to {}'.format(request.POST['assigned_to']))
 
@@ -80,7 +92,7 @@ class ComputerView:
                     newComputer.fournissor = request.POST['fournissor']
                     newComputer.fournissor_contact = request.POST['fournissor_contact']
                     newComputer.description = request.POST['description']
-                    newComputer.administrator = 'superuser'
+                    newComputer.administrator = request.session.get('current_user_login')
                     newComputer.save()
 
                     messages.success(request, 'Computer added successfully')
@@ -118,7 +130,7 @@ class ComputerView:
 
         try:
             computer = Computers.objects.get(id=int(id))
-            directories = Directory.objects.raw('SELECT id, full_name FROM directories WHERE full_name NOT IN (SELECT assigned_to FROM computers)')
+            directories = Directory.objects.raw('SELECT d.id, d.full_name FROM directories d LEFT JOIN computers c ON d.full_name == c.assigned_to WHERE c.assigned_to IS NULL')
         except Computers.DoesNotExist:
             return HttpResponse('Computer not found', status=404)
 
@@ -134,33 +146,80 @@ class ComputerView:
             
         try:
             if request.method == 'POST':
-                computer = Computers.objects.get(id=int(id))
-                computer.name = request.POST['name']
-                computer.serial_number = request.POST['serial_number']
-                computer.modele = request.POST['modele']
-                computer.mark = request.POST['mark']
-                computer.processor = request.POST['processor']
-                computer.processor_generation = request.POST['processor_generation']
-                computer.ram = request.POST['ram']
-                computer.type_of_ram = request.POST['type_of_ram']
-                computer.os = request.POST['os']
-                computer.state = request.POST['state']
-                computer.status = request.POST['status']
-                computer.category = request.POST['category']
-                computer.assigned_to = request.POST['assigned_to']
-                computer.assigned_at = timezone.now()
-                computer.fournissor = request.POST['fournissor']
-                computer.fournissor_contact = request.POST['fournissor_contact']
-                computer.description = request.POST['description']
-                computer.save()
 
                 if len(request.POST['assigned_to']) > 5:
-                    messages.success(request, 'Computer added successfully and assigned to {}'.format(request.POST['assigned_to']))
+
+                    # Check if the user is an simple user or other, only admin or super user can access this page
+                    if request.session.get('current_user_type') != 'administrator':
+                        if request.session.get('current_user_type') != 'super_user':
+                            messages.error(request, 'Sorry, you are not able to do this action')
+                            return redirect('computers:computer_home')
+
+                    computer = Computers.objects.get(id=int(id))
+                    computer.name = request.POST['name']
+                    computer.serial_number = request.POST['serial_number']
+                    computer.modele = request.POST['modele']
+                    computer.mark = request.POST['mark']
+                    computer.processor = request.POST['processor']
+                    computer.processor_generation = request.POST['processor_generation']
+                    computer.ram = request.POST['ram']
+                    computer.type_of_ram = request.POST['type_of_ram']
+                    computer.os = request.POST['os']
+                    computer.state = request.POST['state']
+                    computer.status = request.POST['status']
+                    computer.category = request.POST['category']
+                    computer.assigned_to = request.POST['assigned_to']
+                    computer.assigned_at = timezone.now()
+                    computer.fournissor = request.POST['fournissor']
+                    computer.fournissor_contact = request.POST['fournissor_contact']
+                    computer.description = request.POST['description']
+                    computer.save()
+
+                    if computer.assigned_to != request.POST['assigned_to']:
+
+                        allocate = AllocationHistory()
+                        allocate.name = request.POST['name']
+                        allocate.assigned_to = request.POST['assigned_to']
+                        allocate.assigned_by = request.session.get('current_user_login')
+                        allocate.save()
+
+
+                    messages.success(request, 'Computer information updated successfully')
+                
                 else:
-                    messages.success(request, 'Computer added successfully')
+
+                    computer = Computers.objects.get(id=int(id))
+                    computer.name = request.POST['name']
+                    computer.serial_number = request.POST['serial_number']
+                    computer.modele = request.POST['modele']
+                    computer.mark = request.POST['mark']
+                    computer.processor = request.POST['processor']
+                    computer.processor_generation = request.POST['processor_generation']
+                    computer.ram = request.POST['ram']
+                    computer.type_of_ram = request.POST['type_of_ram']
+                    computer.os = request.POST['os']
+                    computer.state = request.POST['state']
+                    computer.status = request.POST['status']
+                    computer.category = request.POST['category']
+                    computer.assigned_to = ''
+                    computer.fournissor = request.POST['fournissor']
+                    computer.fournissor_contact = request.POST['fournissor_contact']
+                    computer.description = request.POST['description']
+                    computer.save()
+
+                    messages.success(request, 'Computer information updated successfully')
             else:
                 return HttpResponse('Forbidden request', status=403)
         except:
             return HttpResponse('Server or DB error', status=500)
 
         return redirect('computers:show_computer', id)
+
+    # Get all allocation history of computer
+    def allocationHistory(request):
+        try:
+            allocations = AllocationHistory.objects.all()
+        except:
+            return HttpResponse('Server or database error')
+        
+        return render(request, 'computer/history.html', {'allocations':allocations})

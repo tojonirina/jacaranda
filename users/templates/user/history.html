@@ -19,14 +19,14 @@
     </div>
 
     <div class="container-fluid subtitle">
-        <a href="{% url 'users:user_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp;Historiques des activit&eacute;s des utilisateurs
+        <a href="{% url 'users:user_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp;Historiques de connexion des utilisateurs
     </div>
     <div class="container-fluid lists p-0">
         <table class='table table-sm table-hovered table-bordered m-0 table-list'>
             <thead>
                 <tr>
                     <th>Utilisateur</th>
-                    <th>Statut</th>
+                    <!-- <th>Statut</th> -->
                     <th>Appareil</th>
                     <th>Session</th>
                     <th>Ordinateur</th>
@@ -39,13 +39,13 @@
                 {% for session in sessions %}
                 <tr>
                     <td>{{ session.login }}</td>
-                    <td>
+                    <!-- <td>
                         {% if session.logged == True %}
                         <span class="text-success">{{ session.get_logged_display }}</span>
                         {% else %}
                         <span class="text-danger">{{ session.get_logged_display }}</span>
                         {% endif %}
-                    </td>
+                    </td> -->
                     <td data-toggle="tooltip" data-placement="left" title="{{ session.user_agent }}">{{ session.user_agent|truncatewords:4 }}</td>
                     <td>{{ session.computer_user }}</td>
                     <td>{{ session.computer_name }}</td>

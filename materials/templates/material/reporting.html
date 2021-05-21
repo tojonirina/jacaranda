@@ -3,23 +3,24 @@
 {% block title %} Reportings {% endblock %}
 
 {% block content %}
+<div class="container-fluid subtitle"><a href="{% url 'materials:material_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Rapport sur les matériels</div>
 
-<div class="container m-0 p-0">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-<div class="row">
-    <div class="col-md-4">
-        <canvas id="myChart" width="180" height="120"></canvas>
+<div class="container reporting-content m-0 p-0">
+    
+    <div class="row">
+        <div class="col-md-4">
+            <canvas id="myChart" width="180" height="120"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="myChart2" width="180" height="120"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="myChart3" width="180" height="120"></canvas>
+        </div>
+        
     </div>
-    <div class="col-md-4">
-        <canvas id="myChart2" width="180" height="120"></canvas>
-    </div>
-    <div class="col-md-4">
-        <canvas id="myChart3" width="180" height="120"></canvas>
-    </div>
-
-</div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </div>
 
 {% endblock %}

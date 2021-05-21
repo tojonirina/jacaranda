@@ -157,7 +157,7 @@ tr.old_field {
     display: none;
 }
 
-.lists {
+.lists, .reporting-content {
     overflow: auto;
     box-shadow: 0 0 4px rgba(145, 144, 144, .4);
     border-radius: 10px;

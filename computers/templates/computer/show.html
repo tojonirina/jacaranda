@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container-fluid p-0">
-    <div class="container-fluid subtitle"> <a href="{% url 'computers:computer_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Information sur {{ computer.name }}</div>
+    <div class="container-fluid subtitle p-2"> <a href="{% url 'computers:computer_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Information sur {{ computer.name }}</div>
     <table class="table table-sm table-bordered m-0">
         <tr>
             <th width="200">Nom :</th><td>{{ computer.name }}</td>

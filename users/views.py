@@ -70,10 +70,10 @@ class UserView:
         if request.method == 'POST':
             
             # Disconnect all session of the current user in the same browser, computer
-            mysession = SessionHistory.objects.filter(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
-            for ms in mysession:
-                ms.logged = False
-                ms.save()
+            # mysession = SessionHistory.objects.filter(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
+            # for ms in mysession:
+            #     ms.logged = False
+            #     ms.save()
 
             # Remove all session
             request.session.flush()
@@ -246,6 +246,7 @@ class UserView:
                 if user.status == 1:
 
                     user.types = escape(request.POST['types'])
+                    user.administrator = request.session.get('current_user_login')
                     user.save()
 
                     messages.success(request,'User updated successfully')
@@ -311,6 +312,7 @@ class UserView:
                     # Check if the user is admin or super user
                     if request.session.get('current_user_type') == 'administrator' or request.session.get('current_user_type') == 'super_user':
                         user.status = 0
+                        user.administrator = request.session.get('current_user_login')
                         user.save()
                         messages.warning(request,'User blocked')
                     else:
@@ -342,6 +344,7 @@ class UserView:
             if request.method == 'POST':
                 user = User.objects.get(id=int(id))
                 user.status = 1
+                user.administrator = request.session.get('current_user_login')
                 user.save()
                 messages.success(request,'User unlocked successfully')
             else:

@@ -40,7 +40,7 @@ class MaterialView:
     # Store a material in stock
     def store(request):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -61,42 +61,43 @@ class MaterialView:
                     material.state = request.POST['state']
                     material.fournissor = request.POST['fournissor']
                     material.fournissor_contact = request.POST['fournissor_contact']
-                    material.administrator = 'superadmin'
+                    material.administrator = request.session.get('current_user_login')
 
-                    material.save()
+
+                    mouvment = MouvmentHistory()
+                    mouvment.product_name = request.POST['title']
+                    mouvment.description = request.POST['description']
+                    mouvment.quantity = fabs(int(request.POST['quantity']))
+                    mouvment.unity = request.POST['unity']
+                    mouvment.state = request.POST['state']
+                    mouvment.administrator = request.session.get('current_user_login')
+                    mouvment.types = 'entry'
+
+                    material.save() # save material
+                    mouvment.save() # add an history of the mouvement
 
                     messages.success(request, 'New product added successfully')
 
-                    # mouvment = MouvmentHistory()
-                    # mouvment.title = request.POST['title']
-                    # mouvment.description = request.POST['description']
-                    # mouvment.quantity = fabs(int(request.POST['quantity']))
-                    # mouvment.unity = request.POST['unity']
-                    # mouvment.state = request.POST['state']
-                    # mouvment.administrator = 'superadmin'
-                    # mouvment.types = 'entry'
+                elif int(request.POST['old_product']) > 0:
 
-                    # mouvment.save()
+                    material = Material.objects.get(id=int(request.POST['old_product']))
+                    material.quantity += fabs(int(request.POST['quantity']))
 
-                elif request.POST['old_product'] != '':
+                    
+                    mouvment = MouvmentHistory()
+                    mouvment.product_id = request.POST['old_product']
+                    mouvment.note = request.POST['note']
+                    mouvment.quantity = fabs(int(request.POST['quantity']))
+                    mouvment.unity = request.POST['unity']
+                    mouvment.state = request.POST['state']
+                    mouvment.types = 'entry'
+                    mouvment.administrator = request.session.get('current_user_login')
 
-                    material = Materials.objects.get(id=int(request.POST['old_product']))
-                    material.quantity += int(request.POST['quantity'])
-
-                    material.save()
+                    material.save() # save material
+                    mouvment.save() # add an history of the mouvement
 
                     messages.success(request, 'Product added successfully')
-                    
-                    # mouvment = MouvmentHistory()
-                    # mouvment.product_id = request.POST['old_product']
-                    # mouvment.note = request.POST['note']
-                    # mouvment.quantity = fabs(int(request.POST['quantity']))
-                    # mouvment.unity = request.POST['unity']
-                    # mouvment.state = request.POST['state']
-                    # mouvment.types = 'entry'
-                    # mouvment.administrator = 'superadmin'
 
-                    # mouvment.save()
                 else:
                     messages.error(request, 'Please check all fields')
             else:
@@ -130,7 +131,17 @@ class MaterialView:
                 material.fournissor = request.POST['fournissor']
                 material.fournissor_contact = request.POST['fournissor_contact']
 
+                mouvment = MouvmentHistory()
+                mouvment.product_name = request.POST['title']
+                mouvment.description = request.POST['description']
+                mouvment.quantity = fabs(int(request.POST['quantity']))
+                mouvment.unity = request.POST['unity']
+                mouvment.state = request.POST['state']
+                mouvment.administrator = request.session.get('current_user_login')
+                mouvment.types = 'edit'
+
                 material.save()
+                mouvment.save()
 
                 messages.success(request, 'Product updated successfully')
 
@@ -150,6 +161,12 @@ class MaterialView:
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
 
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to visit this resource')
+                return redirect('materials:material_home')
+
         try: 
             materials = Material.objects.all()
         except:
@@ -165,22 +182,29 @@ class MaterialView:
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
 
+        # Check if the user is an simple user or other, only admin or super user can access this page
+        if request.session.get('current_user_type') != 'administrator':
+            if request.session.get('current_user_type') != 'super_user':
+                messages.error(request, 'Sorry, you are not able to do this action')
+                return redirect('materials:material_home')
+
         try:
             if request.method == 'POST':
                 
                 material = Material.objects.get(id=int(request.POST['material']))
                 material.quantity -= fabs(int(request.POST['quantity']))
-                material.save()
 
-                # mouvment = MouvmentHistory()
-                # mouvment.product_id = int(request.POST['material'])
-                # mouvment.note = request.POST['note']
-                # mouvment.quantity = fabs(int(request.POST['quantity']))
-                # mouvment.unity = request.POST['unity']
-                # mouvment.state = request.POST['state']
-                # mouvment.administrator = 'superadmin'
-                # mouvment.types = 'takeout'
-                # mouvment.save()
+                mouvment = MouvmentHistory()
+                mouvment.product_id = int(request.POST['material'])
+                mouvment.note = request.POST['note']
+                mouvment.quantity = fabs(int(request.POST['quantity']))
+                mouvment.unity = request.POST['unity']
+                mouvment.state = request.POST['state']
+                mouvment.administrator = request.session.get('current_user_login')
+                mouvment.types = 'takeout'
+                
+                material.save()
+                mouvment.save()
 
                 messages.success(request, 'Product takeouted successfully')
                 
@@ -216,7 +240,7 @@ class MaterialView:
             return redirect('login_page')
 
         try:
-            history = MouvmentHistory.objects.all()
+            history = MouvmentHistory.objects.raw('SELECT * FROM mouvment_history h LEFT JOIN materials m ON h.product_id == m.id ORDER BY created_at DESC')
         except:
             return HttpResponse('Server or DB error', status=500)
             

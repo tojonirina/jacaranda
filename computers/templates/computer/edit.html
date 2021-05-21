@@ -27,8 +27,8 @@
                 <td>
                     <select name="status" class="form-control">
                         <option value="{{ computer.status }}">{{ computer.get_status_display }}</option>
-                        <option value="assigned">Assign&eacute;</option>
-                        <option value="not_assigned">Non assign&eacute;</option>
+                        <option value="assigned">Attribu&eacute;</option>
+                        <option value="not_assigned">Non attribu&eacute;</option>
                         <option value="on_suspens">En suspens</option>
                         <option value="out_of_service">Hors service</option>
                     </select>
@@ -49,7 +49,7 @@
                 <td>
                     <select name="assigned_to" class="form-control">
                         <option value="{{ computer.assigned_to }}">{{ computer.assigned_to }}</option>
-                        <option></option>
+                        <option value=""></option>
                         {% for directory in directories %}
                             <option value="{{ directory.full_name }}">{{ directory.full_name }}</option>
                         {% endfor %}

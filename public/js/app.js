@@ -2,8 +2,9 @@ $(document).ready(function () {
 
     var height = $(window).height();
     $('ul.leftmenu').css({'height':height});
-    $('.lists').css({'height':height-230});
-
+    $('.lists').css({'height':height-225});
+    $('.reporting-content').css({'height':height-190});
+    
     // Click on add user
     $('#add').on('click', function () {
         $('#background').css({'display':'block', 'transition':'display 1s linear'});

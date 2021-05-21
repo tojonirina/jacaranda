@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 # from directories.models import Directorie
 
-class Absences(models.Model):
+class Absence(models.Model):
 
     class Meta:
         db_table = "absences"
@@ -32,6 +32,7 @@ class Absences(models.Model):
     begin_date = models.DateField(help_text="Beginning date of the absence")
     end_date = models.DateField(help_text="Ending date of the absence")
     interim = models.CharField(max_length=50, null=True, help_text="The interim person")
+    interim_contact = models.CharField(max_length=50, null=True, help_text="The interim contact")
     reasons = models.TextField(help_text="The reasons of absence")
     status = models.IntegerField(default=0, choices=STATUS, help_text="The status of absence if it is done = 1 or doing = 0 or abandoned = 2")
     validator_1 = models.CharField(null=True, max_length=50, help_text="The first responsible who valide the absence")
@@ -40,7 +41,7 @@ class Absences(models.Model):
     second_validation_at = models.DateTimeField(null=True, help_text="Date of second validation and the last validation")
     justificative = models.CharField(max_length=50, null=True, help_text="Justivicative piece [optional]")
     created_at = models.DateTimeField(auto_now_add=True, help_text="Date of request")
-    updated_at = models.DateTimeField(default=None, blank=True, help_text="Date of last update")
+    updated_at = models.DateTimeField(default=None, null=True, help_text="Date of last update")
 
     # Calcul date number of absence
     def dateNumber(self):

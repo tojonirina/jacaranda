@@ -61,19 +61,19 @@
                     </tr>
                     <tr>
                         <td>Fournisseur:</td><td><input type="text" name="fournissor" class="form-control" placeholder="ex: Hay Tech" /></td>
-                        <td>Contact:</td><td><input type="number" name="fournissor_contact" class="form-control" placeholder="034-23-525-52" /></td>
+                        <td>Contact:</td><td><input type="number" name="fournissor_contact" class="form-control" placeholder="00 00 00 00 00" /></td>
                     </tr>
                     <tr>
                         <td>Statut :</td>
                         <td>
                             <select name="status" class="form-control">
-                                <option value="assigned">Assign&eacute;</option>
                                 <option value="not_assigned">Non assign&eacute;</option>
+                                <option value="assigned">Assign&eacute;</option>
                                 <option value="on_suspens">En suspens</option>
                                 <option value="out_of_service">Hors service</option>
                             </select>
                         </td>
-                        <td>Description: </td><td><textarea name="description" class="form-control" placeholder="..." ></textarea></td>
+                        <td>Description: </td><td><textarea name="description" class="form-control" placeholder="Description de l'ordinateur" ></textarea></td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-center" ><button type="submit" class="btn btn-option-submit">Valider</button> <button type="reset" class="btn btn-option-submit">Réinitialiser</button></td>
@@ -93,6 +93,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                     <a class="btn btn-option" id="add"><i class="bi bi-box-arrow-in-right"></i>&nbsp;Ajouter nouveau</a>
                     <a href="" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
+                    <a href="{% url 'computers:computer_allocation_history' %}" class="btn btn-option"><i class="bi bi-clock"></i> Historique d'attribution </a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                     <input type="search" class="form-control input-search" placeholder="Taper votre recheche">

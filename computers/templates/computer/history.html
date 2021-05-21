@@ -41,40 +41,24 @@
         </table>
 
     </div>
-    <div class="container-fluid subtitle"><a href="{% url 'materials:material_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Historiques des mouvements</div>
+    <div class="container-fluid subtitle"><a href="{% url 'computers:computer_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Historiques des mouvements</div>
     <div class="container-fluid p-0 lists">
         <table class="table table-sm table-bordered">
             <thead>
                 <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Note</th>
-                    <th>Q/té</th>
-                    <th>U/té</th>
-                    <th>Type</th>
-                    <th>Etat</th>
-                    <th>Admin.</th>
+                    <th>Nom de l'ordinateur</th>
+                    <th>Attribu&eacute; &agrave;</th>
+                    <th>Attribu&eacute; par</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                {% for histo in history %}
+                {% for allocation in allocations %}
                     <tr>
-                        <td>
-                            {% if histo.product_name %}
-                                {{ histo.product_name }}
-                            {% else %}
-                                {{ histo.title }}
-                            {% endif %}
-                        </td>
-                        <td>{{histo.description}}</td>
-                        <td>{{histo.note}}</td>
-                        <td>{{histo.quantity}}</td>
-                        <td>{{histo.unity}}</td>
-                        <td>{{histo.get_types_display}}</td>
-                        <td>{{histo.get_state_display}}</td>
-                        <td>{{histo.administrator}}</td>
-                        <td>{{histo.created_at}}</td>
+                        <td>{{allocation.name}}</td>
+                        <td>{{allocation.assigned_to}}</td>
+                        <td>{{allocation.assigned_by}}</td>
+                        <td>{{allocation.created_at}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

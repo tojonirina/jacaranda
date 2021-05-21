@@ -52,14 +52,26 @@ class MouvmentHistory(models.Model):
         db_table = 'mouvment_history'
         ordering = ['-created_at']
 
-    title = models.CharField(max_length=100)
+    TYPES = (
+        ('entry', 'Entree'),
+        ('takeout', 'Sortie'),
+        ('edit', 'Edition')
+    )
+
+    STATE = (
+        ('new','Nouveau'),
+        ('occasion','Occasion'),
+        ('hs','Hors service')
+    )
+
+    product_name = models.CharField(max_length=50, null=True)
     product_id = models.IntegerField(null=True)
     description = models.TextField(null=True)
     note = models.TextField(null=True)
     quantity = models.IntegerField()
     unity = models.CharField(max_length=20)
-    types = models.CharField(max_length=50)
-    state = models.CharField(max_length=10)
+    types = models.CharField(max_length=50, choices=TYPES)
+    state = models.CharField(max_length=10, choices=STATE)
     administrator = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 

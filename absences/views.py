@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.utils import timezone
 
-from .models import Absences
+from .models import Absence
 from directories.models import Directory
 
 class AbsenceView():
@@ -17,7 +17,7 @@ class AbsenceView():
             return redirect('login_page')
 
         try:
-            absences = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id')
+            absences = Absence.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id')
             directories = Directory.objects.all()
         except:
             return HttpResponse("Server or DB error", status=500)
@@ -34,8 +34,8 @@ class AbsenceView():
 
         try: 
             # absence = Absences.objects.raw('SELECT * FROM absences a INNER JOIN directories d ON a.directory_id = d.id AND a.id = 1')
-            absence = Absences.objects.get(id=id)
-        except Absences.DoesNotExist:
+            absence = Absence.objects.get(id=id)
+        except Absence.DoesNotExist:
             return HttpResponse("Absence not found", status=404)
             
         return render(request, "absences/show.html", {'absence':absence})
@@ -51,12 +51,13 @@ class AbsenceView():
         try:
             if request.method == 'POST':
 
-                newAbsence = Absences()
-                newAbsence.directory_id = 1
+                newAbsence = Absence()
+                newAbsence.directory_id = request.session.get('current_user_id')
                 newAbsence.types = request.POST['types']
                 newAbsence.begin_date = request.POST['begin_date']
                 newAbsence.end_date = request.POST['end_date']
                 newAbsence.interim = request.POST['interim']
+                newAbsence.interim_contact = request.POST['interim_contact']
                 newAbsence.reasons = request.POST['reasons']
                 newAbsence.justificative = request.POST['justificative']
 
@@ -80,7 +81,7 @@ class AbsenceView():
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
 
-        absence = get_object_or_404(Absences, pk=id)
+        absence = get_object_or_404(Absence, pk=id)
 
         return render(request, "absences/edit.html", {'absence':absence})
 
@@ -95,11 +96,12 @@ class AbsenceView():
         try:
             if request.method == 'POST':
 
-                absence = Absences.objects.get(id=id)
+                absence = Absence.objects.get(id=id)
                 absence.types = request.POST['types']
                 absence.begin_date = request.POST['begin_date']
                 absence.end_date = request.POST['end_date']
                 absence.interim = request.POST['interim']
+                absence.interim_contact = request.POST['interim_contact']
                 absence.reasons = request.POST['reasons']
                 absence.justificative = request.POST['justificative']
                 absence.updated_at = timezone.now()
@@ -127,7 +129,7 @@ class AbsenceView():
         try:
             if request.method == 'POST':
 
-                newAbsence = Absences.objects.get(id=id)
+                newAbsence = Absence.objects.get(id=id)
                 newAbsence.status = 3
 
                 newAbsence.save()
@@ -151,7 +153,7 @@ class AbsenceView():
             return redirect('login_page')
             
         try:
-            absences = Absences.objects.all()
+            absences = Absence.objects.all()
         except:
             return HttpResponse("Server error", status=500)
         

@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container m-0 p-0">
-    <div class="container-fluid subtitle"><i class="bi bi-pencil-square"></i> &nbsp; Editer l'information de {{ material.title }} </div>
+    <div class="container-fluid subtitle p-2"><a href="{% url 'materials:material_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Editer l'information de {{ material.title }} </div>
     <table class='table table-sm table-hovered table-bordered m-0'>
         <form action="{% url 'materials:update_material' material.id %}" method="post">
             {% csrf_token %}

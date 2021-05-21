@@ -3,7 +3,7 @@
 {% block title %} Materiels {% endblock %}
 
 {% block content %}
-    <div class="container-fluid subtitle"> Sortir un matériel</div>
+    <div class="container-fluid subtitle"><a href="{% url 'materials:material_home' %}" class="btn btn-light btn-other"> <i class="bi bi-arrow-left"></i></a> &nbsp; Sortir un matériel</div>
     <form action="{% url 'materials:post_takeout_material' %}" class="form" method="post">
         {% csrf_token %}
         <table class="table table-bordered table-sm">
@@ -52,7 +52,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit" class="btn btn-option-submit">Valider</button> <a href="{% url 'materials:material_home' %}" class="btn btn-light btn-option-submit"> Annuler </a></td>
+                <td colspan="2" class="text-center"><button type="submit" class="btn btn-option-submit">Valider</button> <a href="{% url 'materials:material_home' %}" class="btn btn-light btn-option-submit"> Annuler </a></td>
             </tr>
         </table>
 

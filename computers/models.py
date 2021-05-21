@@ -4,8 +4,7 @@ class Computers(models.Model):
 
     class Meta:
         db_table = 'computers'
-        verbose_name = 'Computers'
-        verbose_name_plural = 'Computers'
+        ordering: ['name']
 
     STATE = (
         ('new','Nouveau'),
@@ -51,5 +50,18 @@ class Computers(models.Model):
     def __str__(self):
         return self.description
 
+class AllocationHistory(models.Model):
 
+    class Meta:
+        db_table = 'allocation_history'
+        ordering : ['-created_at']
+
+    name = models.CharField(max_length=50)
+    assigned_to = models.CharField("is assigned", max_length=50)
+    assigned_by = models.CharField(max_length=50)
+    note = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 

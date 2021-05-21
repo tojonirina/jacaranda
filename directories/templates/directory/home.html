@@ -8,13 +8,13 @@
     <div class="container-fluid background" id="background">
         <div class="container create">
             <button class="btn btn-danger pt-0 pl-2 pb-0 pr-2 mt-2" title="Fermer" id="close">X</button>
-            <div class="container-fluid form-title"> Ajouter un nouveau annuaire (Seuls les champs "notes" et "image" sont optionnels) </div>
+            <div class="container-fluid form-title"> Ajouter un nouveau annuaire <span class="text-danger">(*) obligatoire</span> </div>
             <form action="{% url 'directories:store_directory' %}" class="form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <table class="table table-bordered table-sm">
                     <tr>
-                        <td>Nom complet:</td><td><input type="text" name="full_name" class="form-control" placeholder="Votre nom complet"  /></td>
-                        <td>Genre:</td>
+                        <td><span class="text-danger">*</span> Nom complet :</td><td><input type="text" name="full_name" class="form-control" placeholder="Nom complet"  /></td>
+                        <td><span class="text-danger">*</span> Genre:</td>
                         <td>
                             <select name="gender" class="form-control">
                                 <option value="man">Homme</option>
@@ -24,36 +24,36 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Date de naiss.:</td><td><input type="date" name="date_of_birth" class="form-control"  /></td>
-                        <td>Lieu de naiss.:</td><td><input type="text" name="place_of_birth" class="form-control" placeholder="..."  /></td>
+                        <td><span class="text-danger">*</span> Date de naiss.:</td><td><input type="date" name="date_of_birth" class="form-control"  /></td>
+                        <td><span class="text-danger">*</span> Lieu de naiss.:</td><td><input type="text" name="place_of_birth" class="form-control" placeholder="..."  /></td>
                     </tr>
                     <tr>
-                        <td>C.I.N.:</td><td><input type="text" name="cin" class="form-control" placeholder="000.000.000.000"  /></td>
-                        <td>Delivre le:</td><td><input type="date" name="delivered_on" class="form-control"  /></td>
+                        <td><span class="text-danger">*</span> C.I.N.:</td><td><input type="text" name="cin" class="form-control" placeholder="000.000.000.000"  /></td>
+                        <td><span class="text-danger">*</span> Delivre le:</td><td><input type="date" name="delivered_on" class="form-control"  /></td>
                     </tr>
                     <tr>
-                        <td>Delivre a:</td><td><input type="text" name="delivered_at" class="form-control" placeholder="..."  /></td>
-                        <td>Email: </td><td><input type="email" name="email" class="form-control" placeholder="fullname@exemple.com" /></td>
+                        <td><span class="text-danger">*</span> Delivre a:</td><td><input type="text" name="delivered_at" class="form-control" placeholder="..."  /></td>
+                        <td><span class="text-danger">*</span> Email: </td><td><input type="email" name="email" class="form-control" placeholder="exemple@domaine.com" /></td>
                     </tr>
                     <tr>
-                        <td>T&eacute;l&eacute;phone:</td><td><input type="number" name="phone" class="form-control" placeholder="032-23-234-23" /></td>
-                        <td>Contact urgent:</td><td><input type="number" name="urgent_phone" class="form-control" placeholder="034-43-345-43"  /></td>
+                        <td><span class="text-danger">*</span> T&eacute;l&eacute;phone:</td><td><input type="number" name="phone" class="form-control" placeholder="00 00 00 00 00" /></td>
+                        <td><span class="text-danger">*</span> Contact urgent:</td><td><input type="number" name="urgent_phone" class="form-control" placeholder="00 00 00 00 00" /></td>
                     </tr>
                     <tr>
-                        <td>Fonction:</td><td><input type="text" name="function" class="form-control" placeholder="ex: Directeur Systeme d'Information (DSI)"  /></td>  
-                        <td>Departement:</td><td><input type="text" name="departement" class="form-control" placeholder="ex: Departement informatique (DI/IT)"  /></td>
+                        <td><span class="text-danger">*</span> Fonction:</td><td><input type="text" name="function" class="form-control" placeholder="ex: Directeur Systeme d'Information (DSI)"  /></td>  
+                        <td><span class="text-danger">*</span> Departement:</td><td><input type="text" name="departement" class="form-control" placeholder="ex: Departement informatique (DI/IT)"  /></td>
                     </tr>
                     <tr>
-                        <td>Matricule:</td><td><input type="text" name="matricule_number" class="form-control" placeholder="..."  /></td>
+                        <td><span class="text-danger">*</span> Matricule:</td><td><input type="text" name="matricule_number" class="form-control" placeholder="..."  /></td>
                         <td>Image: </td> <td><input type="file" name="avatar" class="form-control" /></td>
                     </tr>
                     <tr>
-                        <td>Adresse: </td><td><textarea name="address" class="form-control" placeholder="Adresse postale" ></textarea></td>
+                        <td><span class="text-danger">*</span> Adresse: </td><td><textarea name="address" class="form-control" placeholder="Adresse postale" ></textarea></td>
                         <td>Notes: </td><td><textarea name="notes" class="form-control" placeholder="Notes sur l'annuaire"></textarea></td>
                     </tr>
                     <tr>
-                        <td>Date de service: </td><td><input type="date" name="date_of_service" class="form-control"  /></td>
-                        <td>Date fin de service: </td><td><input type="date" name="end_of_service" class="form-control"  /></td>
+                        <td><span class="text-danger">*</span> Date de service: </td><td><input type="date" name="date_of_service" class="form-control"  /></td>
+                        <td><span class="text-danger">*</span> Date fin de service: </td><td><input type="date" name="end_of_service" class="form-control"  /></td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-center" ><button type="submit" class="btn btn-option-submit">Valider</button> <button type="reset" class="btn btn-option-submit">Réinitialiser</button></td>
@@ -74,7 +74,6 @@
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <a class="btn btn-option" id="add"><i class="bi bi-person-plus-fill"></i> &nbsp; Ajouter nouveau</a>
                 <a href="" class="btn btn-option"><i class="bi bi-clipboard-data"></i> Reportings <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
-                <a class="btn btn-option" title="Voir historique de connexion" id="add"><i class="bi bi-clock"></i> &nbsp; Historique <i class="bi bi-exclamation-triangle-fill" title="Cette fonctionnalite n'est pas encore disponible ou en cours de developpement"></i></a>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 p-0">
                 <input type="search" class="form-control input-search" placeholder="Taper votre recheche">
@@ -91,7 +90,7 @@
                     <th></th>
                     <th>Nom complet</th>
                     <th>Genre</th>
-                    <th>Contact Rapide</th>
+                    <th>Contact rapide</th>
                     <th>E-mail</th>
                     <th>Statut</th>
                 </tr>

@@ -23,7 +23,7 @@ class DirectoryView:
     # Store a new directory
     def store(request):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -49,9 +49,8 @@ class DirectoryView:
                 directory.end_of_service = request.POST['end_of_service']
                 directory.matricule_number = request.POST['matricule_number']
                 directory.avatar = 'avatar.png'
-                # directory.avatar = 'jaca-icon-orange-72x72.png'
                 directory.notes = request.POST['notes']
-                directory.administrator = 'superadmin'
+                directory.administrator = request.session.get('current_user_login')
 
                 directory.save()
 
@@ -67,7 +66,7 @@ class DirectoryView:
     # Show information of an directory
     def show(request, id):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -82,7 +81,7 @@ class DirectoryView:
     # Edit information about a specific directory
     def edit(request, id):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -97,7 +96,7 @@ class DirectoryView:
     # Update information of a specific directory
     def update(request, id):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -123,9 +122,9 @@ class DirectoryView:
                 directory.end_of_service = request.POST['end_of_service']
                 directory.matricule_number = request.POST['matricule_number']
                 directory.state = request.POST['state']
-                directory.avatar = 'jaca-icon-orange-72x72.png'
+                directory.avatar = 'avatar.png'
                 directory.notes = request.POST['notes']
-                directory.administrator = 'superuser'
+                directory.administrator = request.session.get('current_user_login')
 
                 directory.save()
 
@@ -141,7 +140,7 @@ class DirectoryView:
     # Delete a directory
     def delete(request, id):
 
-         # Check if connected
+        # Check if connected
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
@@ -150,7 +149,7 @@ class DirectoryView:
             if request.method == 'POST':
                 directory = Directory.objects.get(id=int(id))
                 directory.delete()
-                messages.error(request, 'Directory deleted')
+                messages.warning(request, 'Directory deleted')
             else:
                 return HttpResponse('Forbidden request', status=403)
         except Directory.DoesNotExist:
