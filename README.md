@@ -1,12 +1,12 @@
 # jacarandaV0.1
 
-A simple web application to manage stock, staff, absence, computer with Django 2.2 and SQLite3
+A simple web application to manage stock, staff, absence, computer with Django 2.2 and Mysql
 
 # Technos
 Framework: 
 Django 2.2
 Database:
-SQLite 3
+Mysql
 
 # Features
 - Application user management
