@@ -44,7 +44,7 @@
                             <form action="{% url 'users:post_logout_user' %}" method="POST">
                                 {% csrf_token %}
                                 <a title="{{ current_user_login }}" data-toggle="tooltip" data-placement="top" title="{{ current_user_login }}">{{ current_user_initial|upper }}</a> &nbsp;
-                                <a href="#"><i class="bi bi-bell" data-toggle="tooltip" data-placement="top" title="Les notifications"></i></a> &nbsp;
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Les notifications"><i class="bi bi-bell"></i></a> &nbsp;
                                 <button class="btn" data-toggle="tooltip" data-placement="top" title="Se deconnecter"><i class="bi bi-power"></i></button>
                             </form>
                         </div>
@@ -98,7 +98,7 @@
 
     
     <footer>
-        <script src="/static/public/js/jquery3-5-1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js        "></script>
         <script src="/static/public/js/app.js"></script>

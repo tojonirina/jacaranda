@@ -6,12 +6,12 @@
     <title>Welcome to Jacaranda</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'img/jaca-icon-orange-72x72.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
 </head>
-<body>
+<body style="background: url({% static 'img/fond-white-1.jpg' %}) no-repeat 100%;">
 
     <div class="container w-25 mt-5 pt-5 pr-0 pl-0 pb-0">
 
@@ -47,8 +47,9 @@
     </div>
     
     <footer>
-        <script src="/static/public/js/jquery3-5-1.min.js"></script>
-        <script src="/static/public/js/bootstrap4-5-2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/public/js/app.js"></script>
     </footer>
 </body>
 </html>
