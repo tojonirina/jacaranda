@@ -26,12 +26,10 @@
             <thead>
                 <tr>
                     <th>Utilisateur</th>
-                    <!-- <th>Statut</th> -->
                     <th>Appareil</th>
                     <th>Session</th>
                     <th>Ordinateur</th>
-                    <th>D/H debut</th>
-                    <th>D/H fin</th>
+                    <th>D/H de connexion</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,31 +37,15 @@
                 {% for session in sessions %}
                 <tr>
                     <td>{{ session.login }}</td>
-                    <!-- <td>
-                        {% if session.logged == True %}
-                        <span class="text-success">{{ session.get_logged_display }}</span>
-                        {% else %}
-                        <span class="text-danger">{{ session.get_logged_display }}</span>
-                        {% endif %}
-                    </td> -->
                     <td data-toggle="tooltip" data-placement="left" title="{{ session.user_agent }}">{{ session.user_agent|truncatewords:4 }}</td>
                     <td>{{ session.computer_user }}</td>
                     <td>{{ session.computer_name }}</td>
                     <td>{{ session.created_at }}</td>
-                    <td>
-                        {% if session.logged == True %}
-                            -
-                        {% else %}
-                            {{ session.updated_at }}
-                        {% endif %}
-                    </td>
                 </tr>
-    
                 {% empty %}
                     <tr>
                         <td colspan="6">Pas d'utilisateur enregistré</td>
-                    </tr>
-                    
+                    </tr> 
                 {% endfor %}
 
                 

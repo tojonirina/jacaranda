@@ -9,15 +9,9 @@ class SessionHistory(models.Model):
         db_table = 'session_history'
         ordering = ['-created_at']
 
-    # LOG_STATUS = (
-    #     (True, 'Connected'),
-    #     (False, 'Disconnected')
-    # )
-
     user_id = models.IntegerField()
     login = models.CharField(max_length=50)
-    # logged = models.BooleanField(default=True, choices=LOG_STATUS)
-    user_agent = models.CharField(max_length=100)
+    user_agent = models.CharField(max_length=255)
     computer_user = models.CharField(max_length=50)
     computer_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)

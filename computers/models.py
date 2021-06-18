@@ -23,7 +23,8 @@ class Computers(models.Model):
         ('assigned','Attribue'),
         ('not_assigned','Non attribue'),
         ('on_suspens','En suspens'),
-        ('out_of_service','Hors service')
+        ('out_of_service','Hors service'),
+        ('out_of_service_reparable','Hors service reparable'),
     )
 
     name = models.CharField(max_length=50)

@@ -2,6 +2,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.html import escape
 from django.contrib import messages
+from datetime import datetime
 from .models import User, SessionHistory
 from directories.models import Directory
 
@@ -16,16 +17,11 @@ class UserView:
                     
                 import hashlib # import haslib to hash the password
 
-                login = request.POST['login']
-
-                # cast password to a byte
-                password = bytes(escape(request.POST['password']), 'ascii')
-
                 # encrypt password
-                crypted_password = hashlib.sha224(b"%s" % password ).hexdigest()
+                crypted_password = hashlib.sha224(request.POST['password'].encode('ascii')).hexdigest()
 
                 # check login and password
-                user = User.objects.get(login=login, password=crypted_password)
+                user = User.objects.get(login=request.POST['login'], password=crypted_password)
 
                 # Check if the account is not blocked
                 if user.status == 1:
@@ -68,12 +64,6 @@ class UserView:
     def logout(request):
         
         if request.method == 'POST':
-            
-            # Disconnect all session of the current user in the same browser, computer
-            # mysession = SessionHistory.objects.filter(login=request.session.get('current_user_login'), user_id=int(request.session.get('current_user_id')), logged=True, user_agent=request.session.get('current_user_ua'))
-            # for ms in mysession:
-            #     ms.logged = False
-            #     ms.save()
 
             # Remove all session
             request.session.flush()
@@ -82,7 +72,7 @@ class UserView:
 
         else:
             return HttpResponse('You are not authorized', status=403)
-            
+                
     # Display all user
     def index(request):
 
@@ -99,7 +89,7 @@ class UserView:
         
         try:
             # Select all directory whose not have an account
-            directories = Directory.objects.raw('SELECT d.full_name, d.id , u.directory_id FROM directories d LEFT JOIN users u ON d.id == u.directory_id WHERE u.directory_id IS NULL')
+            directories = Directory.objects.raw('SELECT d.full_name, d.id , u.directory_id FROM directories d LEFT JOIN users u ON d.id = u.directory_id WHERE u.directory_id IS NULL')
             # directories = Directory.objects.raw('SELECT full_name, id FROM directories  WHERE id NOT IN (SELECT directory_id FROM users)')
             
             # display 10 last user order by its creation date

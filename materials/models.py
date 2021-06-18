@@ -61,7 +61,8 @@ class MouvmentHistory(models.Model):
     STATE = (
         ('new','Nouveau'),
         ('occasion','Occasion'),
-        ('hs','Hors service')
+        ('out_of_service','Hors service'),
+        ('out_of_service_reparable','Hors service reparable'),
     )
 
     product_name = models.CharField(max_length=50, null=True)
