@@ -81,7 +81,7 @@ ul.leftmenu {
     padding: 0;
     margin: 0;
     background-color: #1C1D64;
-    box-shadow: 0 0 1.2em rgba(28, 29, 100, .7);
+    /* box-shadow: 0 0 1.2em rgba(28, 29, 100, .7); */
 }
 
 ul.leftmenu li {
@@ -218,7 +218,7 @@ tr.old_field {
 
 .btn-option {
     background-color: #E74C3C;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white; 
 }
 
