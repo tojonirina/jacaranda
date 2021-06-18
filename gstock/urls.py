@@ -1,10 +1,10 @@
 from django.urls import path, include
-from . import views
+from .views import IndexView
 
 urlpatterns = [
-    path('', views.index, name='login_page'),
-    path('index/', views.index, name='index_page'),
-    path('default/', views.index, name='default_page'),
+    path('', IndexView.index, name='login_page'),
+    path('index/', IndexView.index, name='index_page'),
+    path('default/', IndexView.index, name='default_page'),
     path('users/', include('users.urls')),
     path('materials/', include('materials.urls')),
     path('directories/', include('directories.urls')),
