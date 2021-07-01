@@ -7,9 +7,9 @@ urlpatterns = [
     path('', AbsenceView.index, name="absence_home"),
     path('store/', AbsenceView.store, name="store_absence"),
     path('<int:id>/', AbsenceView.show, name="show_absence"),
-    path('edit/<int:id>/', AbsenceView.edit, name="edit_absence"),
-    path('update/<int:id>/', AbsenceView.update, name="update_absence"),
-    path('cancel/<int:id>/', AbsenceView.revoke, name="revoke_absence"),
+    path('<int:id>/edit/', AbsenceView.edit, name="edit_absence"),
+    path('<int:id>/update/', AbsenceView.update, name="update_absence"),
+    path('<int:id>/cancel/', AbsenceView.revoke, name="revoke_absence"),
     path('reportings/', AbsenceView.reporting, name="reporting_absence"),
 ]
 

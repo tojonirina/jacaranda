@@ -23,7 +23,7 @@ class Directory(models.Model):
         (0, "Hors service")
     )
 
-    full_name = models.CharField(max_length=30)
+    full_name = models.CharField(max_length=50)
     gender = models.CharField(choices = GENDER, max_length=10)
     date_of_birth = models.DateField()
     place_of_birth = models.CharField(max_length=50)
@@ -38,6 +38,7 @@ class Directory(models.Model):
     departement = models.CharField(max_length=20)
     date_of_service = models.DateField()
     end_of_service = models.DateField(null=True)
+    soldes = models.IntegerField(default=30, help_text="Total solde of the year")
     matricule_number = models.CharField(max_length=10)
     state = models.IntegerField(default = 1, choices = STATE)
     avatar = models.CharField(max_length=100, blank=True)

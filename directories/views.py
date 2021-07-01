@@ -27,7 +27,7 @@ class DirectoryView:
         if request.session.get('current_user_login') is None and request.session.get('current_user_id') is None and request.session.get('current_user_type') is None :
             messages.error(request, 'Sorry, you are not connected, if you do not have an account please contact an administrator')
             return redirect('login_page')
-
+         
         try:
             if request.method == 'POST':
 
