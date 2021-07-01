@@ -240,7 +240,7 @@ class MaterialView:
             return redirect('login_page')
 
         try:
-            history = MouvmentHistory.objects.raw('SELECT * FROM mouvment_history h LEFT JOIN materials m ON h.product_id == m.id ORDER BY created_at DESC')
+            history = MouvmentHistory.objects.raw('SELECT * FROM mouvment_history h LEFT JOIN materials m ON h.product_id = m.id ORDER BY h.created_at DESC')
         except:
             return HttpResponse('Server or DB error', status=500)
             

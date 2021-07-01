@@ -130,7 +130,7 @@ class ComputerView:
 
         try:
             computer = Computers.objects.get(id=int(id))
-            directories = Directory.objects.raw('SELECT d.id, d.full_name FROM directories d LEFT JOIN computers c ON d.full_name == c.assigned_to WHERE c.assigned_to IS NULL')
+            directories = Directory.objects.raw('SELECT d.id, d.full_name FROM directories d LEFT JOIN computers c ON d.full_name = c.assigned_to WHERE c.assigned_to IS NULL')
         except Computers.DoesNotExist:
             return HttpResponse('Computer not found', status=404)
 
@@ -168,22 +168,23 @@ class ComputerView:
                     computer.state = request.POST['state']
                     computer.status = request.POST['status']
                     computer.category = request.POST['category']
-                    computer.assigned_to = request.POST['assigned_to']
-                    computer.assigned_at = timezone.now()
                     computer.fournissor = request.POST['fournissor']
                     computer.fournissor_contact = request.POST['fournissor_contact']
                     computer.description = request.POST['description']
-                    computer.save()
 
                     if computer.assigned_to != request.POST['assigned_to']:
 
+                        computer.assigned_to = request.POST['assigned_to']
+                        computer.assigned_at = timezone.now()
+                        
                         allocate = AllocationHistory()
                         allocate.name = request.POST['name']
                         allocate.assigned_to = request.POST['assigned_to']
                         allocate.assigned_by = request.session.get('current_user_login')
                         allocate.save()
 
-
+                    computer.save()
+                    
                     messages.success(request, 'Computer information updated successfully')
                 
                 else:

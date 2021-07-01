@@ -1,4 +1,5 @@
 from django.db import models
+from directories.models import Directory
 
 class SessionHistory(models.Model):
     """
@@ -36,6 +37,7 @@ class User(models.Model):
     )
 
     directory_id = models.IntegerField(unique=True, null=False, help_text="Directory ID which the owner of the account")
+    # directory = models.ForeignKey(Directory, on_delete=models.CASCADE)
     login = models.CharField(max_length=50, null=False, unique=True, help_text="Users login")
     password = models.CharField(max_length=100, null=False, help_text="Users password")
     types = models.CharField(default="user", max_length=20, choices=TYPES, help_text="Users account type [user, administrator, super_user]")

@@ -29,7 +29,8 @@
                     <th>Appareil</th>
                     <th>Session</th>
                     <th>Ordinateur</th>
-                    <th>D/H de connexion</th>
+                    <th>D/H de debut</th>
+                    <th>D/H de fin</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,7 @@
                     <td>{{ session.computer_user }}</td>
                     <td>{{ session.computer_name }}</td>
                     <td>{{ session.created_at }}</td>
+                    <td>{{ session.updated_at }}</td>
                 </tr>
                 {% empty %}
                     <tr>

@@ -39,11 +39,7 @@ class IndexView:
                 user = User.objects.get(directory_id=0)
                 user.status = 0
                 user.save()
-
-                messages.success(request,'Use "administrator" as username and "administrator123" as password,Note: this is a temporary access')
-
             except:
                 return HttpResponse('Server or database error')      
 
         return render(request, 'login.html')
-

@@ -31,8 +31,7 @@ class UserView:
                     request.session['current_user_type'] = user.types
                     request.session['current_user_ua'] = request.headers['user-agent']
 
-                    import os 
-                    import platform
+                    import os, platform
 
                     newSession = SessionHistory()
                     newSession.user_id = user.id
@@ -64,7 +63,12 @@ class UserView:
     def logout(request):
         
         if request.method == 'POST':
-
+            
+            import os, platform
+            my_last_session = SessionHistory.objects.filter(login=request.session.get('current_user_login'), computer_user=os.getlogin(), computer_name=platform.uname()[1]).order_by('-created_at').first()
+            my_last_session.updated_at = datetime.now()
+            my_last_session.save()
+                
             # Remove all session
             request.session.flush()
             messages.success(request, 'You are disconnected')
