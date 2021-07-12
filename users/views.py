@@ -36,9 +36,9 @@ class UserView:
                     newSession = SessionHistory()
                     newSession.user_id = user.id
                     newSession.login = user.login
-                    newSession.user_agent = request.headers['user-agent']
-                    newSession.computer_user = os.getlogin()
-                    newSession.computer_name = platform.uname()[1]
+                    newSession.user_agent = request.headers['user-agent'] # get browser user agent
+                    newSession.computer_user = os.getlogin() # get logged computer user name
+                    newSession.computer_name = platform.uname()[1] # get computer session name
                     newSession.save()
 
                     if user.types == 'user':

@@ -41,7 +41,17 @@
                     </tr>
                     <tr>
                         <td><span class="text-danger">*</span> Fonction:</td><td><input type="text" name="function" class="form-control" placeholder="ex: Directeur Systeme d'Information (DSI)"  /></td>  
-                        <td><span class="text-danger">*</span> Departement:</td><td><input type="text" name="departement" class="form-control" placeholder="ex: Departement informatique (DI/IT)"  /></td>
+                        <td><span class="text-danger">*</span> Departement:</td>
+                        <td>
+                            <select name="departement" class="form-control">
+                                <option value="">-- Choisissez --</option>
+                                <option value="DSI">D. de Systeme d'Information</option>
+                                <option value="DRH">D. des Ressources Humaines</option>
+                                <option value="DP">D. de Production</option>
+                                <option value="DAF">D. Admin. et Financiere</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td><span class="text-danger">*</span> Matricule:</td><td><input type="text" name="matricule_number" class="form-control" placeholder="..."  /></td>

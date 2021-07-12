@@ -28,7 +28,7 @@
     {% endif %}
 
 
-    {% if absence.updated_at == None %}
+    {% if absence.updated_at == None and absence.status == 0 %}
         <div class="container alert alert-warning mt-2">
             Vous pouvez encore modifier "une seule fois" la demande tant que ce n'est pas encore valid&eacute;e par votre responsable
         </div>

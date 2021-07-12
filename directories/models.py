@@ -22,6 +22,15 @@ class Directory(models.Model):
         (4, "En conge"),
         (0, "Hors service")
     )
+    
+    DEPARTEMENT = (
+        ('DSI', 'D. de Systeme d\'Information'),
+        ('DRH', 'D. des Ressources Humaines'),
+        ('DAF', 'D. Admin. et Financiere'),
+        ('DL', 'D. de Logistique'),
+        ('DP', 'D. de Production'),
+        ('other', 'Autre')
+    )
 
     full_name = models.CharField(max_length=50)
     gender = models.CharField(choices = GENDER, max_length=10)
@@ -35,7 +44,7 @@ class Directory(models.Model):
     email = models.EmailField()
     address = models.CharField(max_length=100)
     function = models.CharField(max_length=100)
-    departement = models.CharField(max_length=20)
+    departement = models.CharField(choices = DEPARTEMENT, max_length=20)
     date_of_service = models.DateField()
     end_of_service = models.DateField(null=True)
     soldes = models.IntegerField(default=30, help_text="Total solde of the year")
