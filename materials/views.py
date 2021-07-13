@@ -256,5 +256,7 @@ class MaterialView:
 
         # entryEveryMonth = Materials.objects.raw("SELECT DISTINCT SUM(quantity) FROM materials WHERE created_at BETWEEN '01/01/2021' AND '31/01/2021' GROUP BY title")
         values = [12, 43, 22, 52, 13, 65, 12, 43, 22, 52, 13, 65]
+        values2 = [9, 45, 12, 22, 18, 55, 12, 40, 22, 62, 13, 25]
+        values3 = [1, 23, 27, 32, 10, 68, 7, 49, 20, 50, 10, 60]
 
-        return render(request, 'material/reporting.html', {'values':values})
+        return render(request, 'material/reporting.html', {'values':values, 'values2':values2, 'values3':values3})
