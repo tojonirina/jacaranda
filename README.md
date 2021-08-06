@@ -1,15 +1,13 @@
 # jacarandaV0.1
 
-A simple web application to manage stock, staff, absence, computer with Django 2.2 and Mysql
+A simple web application to manage stock, staff, absence, computer with Django and MariaDB
 
 # Technos
-Framework: 
-Django 2.2
-Database:
-Mysql
+Framework: Django 2.2
+Database: MariaDB 10.4.17
 
 # Features
-- Application user management
+- Application admin management
 - Stock management
 - Staff management
 - Absences management
@@ -21,18 +19,18 @@ Mysql
 - Checking management 
 
 # Installation
-- Install python 3.7 or more, get the python installer here (https://www.python.org/)
+Make sure that you have python 3.7 or later in you computer or get the python installer here (https://www.python.org/)
 
 - After installing python, create a virtual environement with:
- 'python3 -m venv myvirtualenv'
+ ```sh python3 -m venv myvirtualenv```
 - Activate your virtual environement with:
- '. myvirtualenv/bin/activate'
+ ```sh . myvirtualenv/bin/activate```
 - Install django 2.2:
- 'python3 -m pip install django=2.2'
-- Move to the project directory:
- 'cd jacaranda'
+ ```sh python3 -m pip install django=2.2```
+- Get source code of project:
+```sh
+git clone https://github.com/tojonirina/jacaranda.git 
+cd jacaranda/
+```
 - Run django server:
- 'python3 manage.py runserver'
-
-
-
+ ```sh python3 manage.py runserver```
