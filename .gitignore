@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 *.sqlite3
-__pycache__
 *.pyc
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -132,4 +129,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> 8debfb708a2ec1d6672f169460f12e00c5ecce00
