@@ -1,4 +1,4 @@
-# jacarandaV0.1
+# jacarandaV1
 
 A simple web application to manage stock, staff, absence, computer with Django and MariaDB
 
